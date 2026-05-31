@@ -1,0 +1,195 @@
+/* Dialogs */
+.migration-dialog {
+  width: min(420px, calc(100vw - 32px));
+  max-height: min(90vh, 90dvh);
+  overflow-y: auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 48px rgba(30, 34, 39, 0.18);
+  animation: dialogIn 0.25s ease;
+}
+
+.migration-dialog::backdrop {
+  background: rgba(26, 31, 44, 0.42);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.migration-dialog form {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.dialog-heading,
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dialog-heading h2 {
+  font-size: 18px;
+}
+
+#migrationPreview {
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.dialog-list {
+  display: grid;
+  gap: 8px;
+  max-height: 220px;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.dialog-list li {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+.sync-dialog {
+  width: min(520px, calc(100vw - 32px));
+}
+
+.migration-dialog.entry-dialog {
+  width: min(560px, calc(100vw - 24px));
+}
+
+.settings-section {
+  display: grid;
+  gap: 12px;
+  padding: 12px 0 4px;
+}
+
+.settings-section + .settings-section {
+  border-top: 1px solid var(--line);
+}
+
+.settings-section h3 {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.language-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f5f2e9;
+}
+
+.language-picker button {
+  min-height: 42px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.language-picker button.active {
+  background: var(--ink);
+  color: var(--surface);
+  box-shadow: 0 8px 18px rgba(26, 31, 44, 0.12);
+}
+
+.sync-fields {
+  display: grid;
+  gap: 12px;
+}
+
+.sync-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sync-secondary-actions {
+  justify-content: flex-start;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.date-field {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.date-field input,
+.date-field textarea {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+  color: var(--ink);
+  font: inherit;
+}
+
+.date-field textarea {
+  min-height: 120px;
+  padding: 12px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.primary-button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.primary-button:hover {
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.danger-button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--warning);
+  border-radius: var(--radius);
+  background: var(--warning);
+  color: #fff;
+  font-weight: 800;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.danger-button:hover {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+}
+
+.danger-button:active {
+  transform: translateY(0);
+}

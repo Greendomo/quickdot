@@ -1,0 +1,151 @@
+/* Responsive layout */
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    align-items: flex-end;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 620px) {
+  .sidebar {
+    padding: 18px;
+  }
+
+  .main {
+    padding: 18px 18px 126px;
+  }
+
+  .composer-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .entry-dialog {
+    width: calc(100vw - 16px);
+  }
+
+  .entry-dialog form {
+    padding: 20px;
+  }
+
+  .entry-dialog .composer-row {
+    grid-template-columns: 1fr;
+  }
+
+  .composer-row select,
+  .composer-row input,
+  .composer-row textarea,
+  .toolbar input {
+    width: 100%;
+  }
+
+  #entryDate {
+    flex-basis: auto;
+  }
+
+  .log-switch {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: 12px;
+    width: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .log-switch button {
+    min-height: 52px;
+    padding: 0 8px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .log-switch button:last-child {
+    border-right: 0;
+  }
+
+  .entry-item {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .entry-menu {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .entry-actions {
+    right: 0;
+    min-width: min(190px, calc(100vw - 64px));
+  }
+
+  .migration-dialog {
+    width: 100vw;
+    max-width: none;
+    max-height: min(86vh, 86dvh);
+    margin: auto 0 0;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .migration-dialog form {
+    padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Animations */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dialogIn {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--view-accent);
+  outline-offset: 2px;
+}
+
+/* Ensure touch devices always show actions */
+@media (hover: none) {
+  .entry-actions {
+    opacity: 1;
+  }
+}
