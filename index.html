@@ -52,7 +52,11 @@
         <header class="topbar">
           <div>
             <p class="eyebrow" id="viewEyebrow">Weekly log</p>
-            <h2 id="viewTitle"></h2>
+            <div class="view-title-row">
+              <button class="icon-button period-date-nav" id="prevDailyDate" type="button" data-period-shift="-1" aria-label="前一天">‹</button>
+              <h2 id="viewTitle"></h2>
+              <button class="icon-button period-date-nav" id="nextDailyDate" type="button" data-period-shift="1" aria-label="後一天">›</button>
+            </div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button search-button" id="searchButton" type="button" aria-label="開啟搜尋" title="搜尋筆記" aria-expanded="false" aria-controls="searchPanel">

@@ -8,6 +8,8 @@ const els = {
   nextMonth: document.querySelector("#nextMonth"),
   viewEyebrow: document.querySelector("#viewEyebrow"),
   viewTitle: document.querySelector("#viewTitle"),
+  prevDailyDate: document.querySelector("#prevDailyDate"),
+  nextDailyDate: document.querySelector("#nextDailyDate"),
   searchButton: document.querySelector("#searchButton"),
   searchPanel: document.querySelector("#searchPanel"),
   legendButton: document.querySelector("#legendButton"),

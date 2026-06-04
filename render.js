@@ -11,6 +11,14 @@ function render() {
   renderActiveView();
 }
 
+function renderPreservingScroll() {
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+  render();
+  window.scrollTo(scrollX, scrollY);
+  window.requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
+}
+
 function renderActiveView() {
   if (state.view === "daily") {
     renderEntries();

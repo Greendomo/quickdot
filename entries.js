@@ -113,7 +113,7 @@ function confirmDelete(event) {
   }
 }
 
-function updateEntry(id, mutator) {
+function updateEntry(id, mutator, options = {}) {
   const entry = state.entries.find((item) => item.id === id);
   if (!entry) return;
   ensureSubitems(entry);
@@ -121,7 +121,11 @@ function updateEntry(id, mutator) {
   entry.updatedAt = new Date().toISOString();
   queueEntryUpsert(entry);
   saveEntries();
-  render();
+  if (options.preserveScroll) {
+    renderPreservingScroll();
+  } else {
+    render();
+  }
 }
 
 function openSubitemDialog(id) {
@@ -199,7 +203,7 @@ function toggleSubitem(entryId, subitemId) {
   updateEntry(entryId, (entry) => {
     const subitem = ensureSubitems(entry).find((item) => item.id === subitemId);
     if (subitem) subitem.done = !subitem.done;
-  });
+  }, { preserveScroll: true });
 }
 
 function toggleSubitemPanel(entryId) {
@@ -208,14 +212,14 @@ function toggleSubitemPanel(entryId) {
   } else {
     state.expandedSubitems.add(entryId);
   }
-  render();
+  renderPreservingScroll();
 }
 
 function deleteSubitem(entryId, subitemId) {
   if (!subitemId) return;
   updateEntry(entryId, (entry) => {
     entry.subitems = ensureSubitems(entry).filter((item) => item.id !== subitemId);
-  });
+  }, { preserveScroll: true });
 }
 
 function startDragHold(event) {

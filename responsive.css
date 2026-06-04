@@ -28,6 +28,16 @@
     padding: 18px 18px 126px;
   }
 
+  .view-title-row {
+    gap: 6px;
+  }
+
+  .period-date-nav {
+    width: 32px;
+    min-height: 32px;
+    font-size: 24px;
+  }
+
   .composer-row {
     align-items: stretch;
     flex-direction: column;

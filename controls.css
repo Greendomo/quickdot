@@ -47,6 +47,39 @@
   letter-spacing: 0;
 }
 
+.view-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.view-title-row h2 {
+  min-width: 0;
+}
+
+.period-date-nav {
+  flex: 0 0 auto;
+  display: none;
+  width: 38px;
+  min-height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+  font-size: 28px;
+  line-height: 1;
+}
+
+body[data-view="daily"] .period-date-nav,
+body[data-view="weekly"] .period-date-nav,
+body[data-view="monthly"] .period-date-nav {
+  display: inline-flex;
+}
+
+.period-date-nav:hover {
+  color: var(--view-accent-strong);
+}
+
 .topbar-actions {
   display: flex;
   flex: 0 0 auto;

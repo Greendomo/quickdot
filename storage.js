@@ -295,6 +295,39 @@ function saveCollapseState() {
   localStorage.setItem(COLLAPSE_STATE_KEY, JSON.stringify(state.collapseState));
 }
 
+function removeSeedEntriesIfUntouched() {
+  const meta = loadSyncMeta();
+  if (!meta.seedOnly) return;
+  if (meta.localDirty || state.syncQueue.length > 0) return;
+  if (!state.entries.length) return;
+  if (!state.entries.every(isSeedEntry)) return;
+
+  state.suppressDirty = true;
+  state.entries = [];
+  state.deletedEntries = [];
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      schemaVersion: CURRENT_SCHEMA_VERSION,
+      entries: [],
+      deletedEntries: [],
+      updatedAt: new Date().toISOString(),
+    }),
+  );
+  state.suppressDirty = false;
+  saveSyncMeta({ localDirty: false, seedOnly: false });
+}
+
+function isSeedEntry(entry) {
+  const seedTexts = new Set([
+    "規劃這週最重要的三件事",
+    "下午和設計討論首頁流程",
+    "新增筆記時先追求低摩擦，再補整理工具",
+    "整理閱讀清單",
+  ]);
+  return seedTexts.has(entry.text);
+}
+
 function seedEntries() {
   const today = toDateKey(new Date());
   const yesterday = toDateKey(addDays(new Date(), -1));

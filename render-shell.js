@@ -29,6 +29,7 @@ function renderStaticText() {
   setText('.log-switch button[data-view="future"] .nav-label', t("navFuture"));
   els.searchInput.placeholder = t("search");
   els.searchInput.setAttribute("aria-label", t("search"));
+  updatePeriodNavLabels();
 
   setText('[data-view-panel="daily"] .section-heading h3', state.language === "en" ? "Daily Entries" : state.language === "zh-Hans" ? "每日记录" : "每日記錄");
   setText("#emptyState strong", t("emptyDailyTitle"));
@@ -206,7 +207,7 @@ function renderViewShell() {
   }
 
   if (state.view === "weekly") {
-    els.viewTitle.textContent = state.language === "en" ? "This Week" : state.language === "zh-Hans" ? "本周" : "本週";
+    els.viewTitle.textContent = formatWeekTitle(parseDateKey(state.selectedDate));
     els.entryDate.value = state.selectedDate;
   }
 
@@ -221,8 +222,36 @@ function renderViewShell() {
   }
 }
 
+function updatePeriodNavLabels() {
+  const previousLabel = state.view === "monthly" ? t("previousMonth") : state.view === "weekly" ? t("previousWeek") : t("previousDay");
+  const nextLabel = state.view === "monthly" ? t("nextMonth") : state.view === "weekly" ? t("nextWeek") : t("nextDay");
+  els.prevDailyDate.setAttribute("aria-label", previousLabel);
+  els.prevDailyDate.title = previousLabel;
+  els.nextDailyDate.setAttribute("aria-label", nextLabel);
+  els.nextDailyDate.title = nextLabel;
+}
+
 function formatV0DayTitle(date) {
   return date.toLocaleDateString(getLanguageLocale(), { month: "short", day: "numeric" });
+}
+
+function formatWeekTitle(date) {
+  const start = startOfWeek(date);
+  const end = endOfWeek(date);
+  const sameMonth = start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth();
+  if (state.language === "en") {
+    const startLabel = start.toLocaleDateString(getLanguageLocale(), { month: "short", day: "numeric" });
+    const endLabel = sameMonth
+      ? end.toLocaleDateString(getLanguageLocale(), { day: "numeric" })
+      : end.toLocaleDateString(getLanguageLocale(), { month: "short", day: "numeric" });
+    return `${startLabel} - ${endLabel}`;
+  }
+
+  const startLabel = start.toLocaleDateString(getLanguageLocale(), { month: "numeric", day: "numeric" });
+  const endLabel = sameMonth
+    ? String(end.getDate())
+    : end.toLocaleDateString(getLanguageLocale(), { month: "numeric", day: "numeric" });
+  return `${startLabel} - ${endLabel}`;
 }
 
 function renderCalendar() {

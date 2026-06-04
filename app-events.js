@@ -37,7 +37,7 @@ function bindEvents() {
   els.syncButton.addEventListener("click", openSyncDialog);
   els.legendButton.addEventListener("click", openSymbolSettings);
   els.searchButton.addEventListener("click", toggleSearchPanel);
-  document.addEventListener("click", closeSymbolSettingsOnOutsideClick);
+  document.addEventListener("click", handleDocumentClick);
 
   els.searchInput.addEventListener("input", (event) => {
     state.search = event.target.value.trim().toLowerCase();
@@ -110,6 +110,17 @@ function bindEvents() {
       setLanguage(button.dataset.language);
     });
   });
+}
+
+function handleDocumentClick(event) {
+  const periodShiftButton = event.target.closest("[data-period-shift]");
+  if (periodShiftButton) {
+    event.preventDefault();
+    window.quickDotShiftVisiblePeriod(Number(periodShiftButton.dataset.periodShift));
+    return;
+  }
+
+  closeSymbolSettingsOnOutsideClick(event);
 }
 
 function closeOpenEntryMenus(exceptMenu = null) {

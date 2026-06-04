@@ -5,7 +5,6 @@ async function boot() {
     removeClearLocalQuery();
   }
 
-  const hasStoredEntries = hasStoredEntriesPayload();
   state.language = loadLanguage();
   state.entries = loadEntries();
   state.deletedEntries = loadDeletedEntries();
@@ -13,13 +12,7 @@ async function boot() {
   state.syncErrorQueue = loadSyncErrorQueue();
   state.symbolMeanings = loadSymbolMeanings();
   state.collapseState = loadCollapseState();
-  if (!hasStoredEntries && state.entries.length === 0) {
-    state.entries = seedEntries();
-    state.suppressDirty = true;
-    saveEntries();
-    state.suppressDirty = false;
-    saveSyncMeta({ localDirty: false, seedOnly: true });
-  }
+  removeSeedEntriesIfUntouched();
   bindEvents();
   render();
   registerServiceWorker();
@@ -85,6 +78,28 @@ function setView(view) {
 
   render();
 }
+
+function shiftVisiblePeriod(direction) {
+  closeOpenEntryMenus();
+
+  if (state.view === "monthly") {
+    const nextMonth = addMonths(state.calendarMonth, direction);
+    state.calendarMonth = startOfMonth(nextMonth);
+    state.selectedDate = toDateKey(state.calendarMonth);
+    render();
+    return;
+  }
+
+  if (state.view !== "daily" && state.view !== "weekly") return;
+
+  const dayOffset = state.view === "weekly" ? direction * 7 : direction;
+  const nextDate = addDays(parseDateKey(state.selectedDate), dayOffset);
+  state.selectedDate = toDateKey(nextDate);
+  state.calendarMonth = startOfMonth(nextDate);
+  render();
+}
+
+window.quickDotShiftVisiblePeriod = shiftVisiblePeriod;
 
 function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;

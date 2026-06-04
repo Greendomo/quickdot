@@ -278,3 +278,5 @@ $$;
 grant execute on function public.quickdot_is_admin() to authenticated;
 grant execute on function public.quickdot_admin_overview() to authenticated;
 grant execute on function public.quickdot_admin_recent_sync_errors(integer) to authenticated;
+
+notify pgrst, 'reload schema';
