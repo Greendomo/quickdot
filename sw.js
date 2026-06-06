@@ -1,4 +1,4 @@
-const CACHE_NAME = "quickdot-cache-v60";
+const CACHE_NAME = "quickdot-cache-v68";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -20,11 +20,17 @@ const APP_SHELL = [
   "./dom.js",
   "./core.js",
   "./storage.js",
+  "./sync-ui.js",
+  "./sync-auth.js",
   "./sync.js",
+  "./entry-store.js",
+  "./entry-drag.js",
   "./entries.js",
+  "./render-static.js",
   "./render-shell.js",
   "./render-entries.js",
   "./render-logs.js",
+  "./render-calendar.js",
   "./render.js",
   "./app-events.js",
   "./app.js",

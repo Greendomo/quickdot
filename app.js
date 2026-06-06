@@ -45,7 +45,13 @@ function openSymbolSettings() {
   state.collapseState.symbols = true;
   saveCollapseState();
   renderCollapseState();
-  document.querySelector(".symbol-footer")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  requestAnimationFrame(() => els.symbolSheetClose?.focus());
+}
+
+function closeSymbolSettings() {
+  state.collapseState.symbols = false;
+  saveCollapseState();
+  renderCollapseState();
 }
 
 function setView(view) {

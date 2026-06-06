@@ -1,12 +1,4 @@
-// QuickDot sync module. Loaded by index.html.
-function openSyncDialog() {
-  updateSyncStatus();
-  showDialog(els.syncDialog);
-}
-
-function closeSyncDialog() {
-  hideDialog(els.syncDialog);
-}
+// QuickDot sync engine module. Loaded by index.html.
 
 async function initSync() {
   const config = window.QUICKDOT_SUPABASE || {};
@@ -48,142 +40,9 @@ async function initSync() {
   }
 }
 
-async function requestPasswordReset() {
-  const email = els.syncEmail.value.trim();
-  if (!email) {
-    updateSyncStatus(t("passwordResetEmailRequired"));
-    return;
-  }
-  if (!state.supabaseClient) {
-    updateSyncStatus(t("syncSupabaseMissing"));
-    return;
-  }
-
-  beginSyncTask(t("passwordResetSending"));
-  try {
-    const { error } = await state.supabaseClient.auth.resetPasswordForEmail(email, {
-      redirectTo: getPasswordResetRedirectUrl(),
-    });
-    if (error) {
-      await recordSyncError("auth.resetPasswordForEmail", error, { code: error.code || null });
-      updateSyncStatus(t("passwordResetSendFailed", { message: error.message }));
-      return;
-    }
-    updateSyncStatus(t("passwordResetSent"));
-  } finally {
-    endSyncTask();
-  }
-}
-
-function getPasswordResetRedirectUrl() {
-  if (window.location.protocol === "file:") return undefined;
-  const url = new URL(window.location.href);
-  url.hash = "";
-  url.search = "";
-  return url.toString();
-}
-
-function openPasswordResetDialog() {
-  closeSyncDialog();
-  els.newPassword.value = "";
-  els.passwordResetStatus.textContent = "";
-  showDialog(els.passwordResetDialog);
-  window.setTimeout(() => els.newPassword.focus(), 50);
-}
-
-function closePasswordResetDialog() {
-  hideDialog(els.passwordResetDialog);
-}
-
-async function confirmPasswordReset(event) {
-  event.preventDefault();
-  if (!state.supabaseClient) return;
-
-  const password = els.newPassword.value;
-  if (!password || password.length < 6) {
-    els.passwordResetStatus.textContent = t("passwordResetTooShort");
-    return;
-  }
-
-  els.passwordResetStatus.textContent = t("passwordResetUpdating");
-  const { error } = await state.supabaseClient.auth.updateUser({ password });
-  if (error) {
-    await recordSyncError("auth.updateUserPassword", error, { code: error.code || null });
-    els.passwordResetStatus.textContent = t("passwordResetFailed", { message: error.message });
-    return;
-  }
-
-  els.newPassword.value = "";
-  closePasswordResetDialog();
-  updateSyncStatus(t("passwordResetSuccess"));
-}
-
 async function syncLatestThenPrompt() {
   await syncLatest();
   openYesterdayMigrationPrompt();
-}
-
-async function signUpSyncAccount() {
-  const credentials = getSyncCredentials();
-  if (!credentials) return;
-  if (!state.supabaseClient) {
-    updateSyncStatus(t("syncSupabaseMissing"));
-    return;
-  }
-
-  beginSyncTask(t("syncSignUpProgress"));
-  try {
-    const { error } = await state.supabaseClient.auth.signUp(credentials);
-    if (error) {
-      await recordSyncError("auth.signUp", error, { code: error.code || null });
-      updateSyncStatus(t("syncSignUpFailed", { message: error.message }));
-      return;
-    }
-    updateSyncStatus(t("syncSignUpSuccess"));
-  } finally {
-    endSyncTask();
-  }
-}
-
-async function signInSyncAccount() {
-  const credentials = getSyncCredentials();
-  if (!credentials) return;
-  if (!state.supabaseClient) {
-    updateSyncStatus(t("syncSupabaseMissing"));
-    return;
-  }
-
-  beginSyncTask(t("syncSignInProgress"));
-  try {
-    const { data, error } = await state.supabaseClient.auth.signInWithPassword(credentials);
-    if (error) {
-      await recordSyncError("auth.signIn", error, { code: error.code || null });
-      updateSyncStatus(t("syncSignInFailed", { message: error.message }));
-      return;
-    }
-    state.syncSession = data.session;
-    updateSyncStatus(t("syncSignInSuccess"));
-    await syncLatest();
-  } finally {
-    endSyncTask();
-  }
-}
-
-async function signOutSyncAccount() {
-  if (!state.supabaseClient) return;
-  beginSyncTask(t("syncSignOutProgress"));
-  try {
-    const { error } = await state.supabaseClient.auth.signOut();
-    if (error) {
-      await recordSyncError("auth.signOut", error, { code: error.code || null });
-      updateSyncStatus(t("syncCloudReadFailed", { message: error.message }));
-      return;
-    }
-    state.syncSession = null;
-    updateSyncStatus(t("syncSignedOut"));
-  } finally {
-    endSyncTask();
-  }
 }
 
 async function syncLatest() {
@@ -633,94 +492,10 @@ function canAttemptSyncNow() {
   return true;
 }
 
-function beginSyncTask(message) {
-  state.syncBusyCount += 1;
-  setSyncControlsDisabled(true);
-  if (message) updateSyncStatus(message);
-}
-
-function endSyncTask() {
-  state.syncBusyCount = Math.max(0, state.syncBusyCount - 1);
-  if (state.syncBusyCount === 0) setSyncControlsDisabled(false);
-}
-
 function noteSyncSuccess() {
   state.syncBackoffMs = 0;
 }
 
 function noteSyncFailure() {
   state.syncBackoffMs = state.syncBackoffMs ? Math.min(state.syncBackoffMs * 2, 60000) : 5000;
-}
-
-function setSyncControlsDisabled(disabled) {
-  [
-    els.syncSignUp,
-    els.syncSignIn,
-    els.syncSignOut,
-    els.syncForgotPassword,
-    els.syncPull,
-    els.syncPush,
-    els.syncNow,
-  ].forEach((button) => {
-    button.disabled = disabled;
-  });
-}
-
-function ensureSyncReady() {
-  if (!state.supabaseClient) {
-    updateSyncStatus(t("syncSupabaseMissing"));
-    return false;
-  }
-  if (!state.syncSession) {
-    updateSyncStatus(t("syncLoginRequired"));
-    return false;
-  }
-  return true;
-}
-
-function getSyncCredentials() {
-  const email = els.syncEmail.value.trim();
-  const password = els.syncPassword.value;
-  if (!email || !password) {
-    updateSyncStatus(t("syncCredentialsRequired"));
-    return null;
-  }
-  return { email, password };
-}
-
-function updateSyncStatus(message) {
-  if (!els.syncStatus) return;
-  if (!message && !state.supabaseClient) {
-    els.syncStatus.textContent = t("syncNotConfigured");
-    updateSyncButtonState("error", t("syncNotConfigured"));
-    return;
-  }
-
-  const meta = loadSyncMeta();
-  const account = state.syncSession?.user?.email ? t("syncAccount", { email: state.syncSession.user.email }) : t("syncSignedOutStatus");
-  const dirty = meta.localDirty && !navigator.onLine ? t("syncOfflineQueued") : meta.localDirty ? t("syncLocalDirty") : t("syncLocalClean");
-  els.syncStatus.textContent = message || `${account}。${dirty}。`;
-  updateSyncButtonState(getSyncButtonState(message, meta), els.syncStatus.textContent);
-}
-
-function getSyncButtonState(message, meta) {
-  if (state.syncBusyCount > 0 || (message && /正在|同步中|正在|Syncing|Signing|Creating|Uploading|Downloading/.test(message))) return "syncing";
-  if (message && /失敗|失败|錯誤|错误|不正確|不正确|尚未設定|尚未设置|請先|请先|請輸入|请输入|failed|invalid|not configured|Sign in first|Enter/i.test(message)) return "error";
-  if (!state.syncSession) return "signed-out";
-  if (meta.localDirty) return "dirty";
-  return "synced";
-}
-
-function updateSyncButtonState(syncState, label) {
-  if (!els.syncButton) return;
-  els.syncButton.dataset.syncState = syncState;
-  const statusLabel = {
-    synced: t("syncStateSynced"),
-    dirty: t("syncStateDirty"),
-    syncing: t("syncStateSyncing"),
-    error: t("syncStateError"),
-    "signed-out": t("syncStateSignedOut"),
-  }[syncState] || t("cloudSync");
-  els.syncButton.title = `${statusLabel}：${label}`;
-  els.syncButton.setAttribute("aria-label", `${t("settings")}，${statusLabel}`);
 }

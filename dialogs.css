@@ -118,6 +118,107 @@
   gap: 12px;
 }
 
+.sync-fields[hidden],
+.sync-action-group[hidden],
+.sync-account-panel[hidden] {
+  display: none !important;
+}
+
+.sync-account-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+}
+
+.sync-account-copy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.sync-account-copy span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sync-account-copy strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sync-logout-button {
+  min-width: 82px;
+}
+
+.sync-action-group {
+  display: grid;
+  gap: 10px;
+}
+
+.sync-auth-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+}
+
+.sync-auth-actions .primary-button,
+.sync-auth-actions .ghost-button {
+  width: 100%;
+}
+
+.sync-link-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+}
+
+.sync-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  color: var(--view-accent-strong);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.sync-link-button:hover,
+.sync-link-button:focus-visible {
+  color: var(--accent-strong);
+}
+
+.sync-data-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: 4px;
+}
+
+.sync-now-button {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 48px;
+  border-color: var(--warning);
+  background: var(--warning);
+  font-size: 16px;
+}
+
 .sync-actions {
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -192,4 +293,11 @@
 
 .danger-button:active {
   transform: translateY(0);
+}
+
+.sync-now-button {
+  min-height: 48px;
+  border-color: var(--warning);
+  background: var(--warning);
+  font-size: 16px;
 }

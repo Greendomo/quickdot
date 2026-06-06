@@ -31,6 +31,16 @@
           </div>
         </div>
 
+        <div class="topbar-actions">
+          <button class="icon-button search-button" id="searchButton" type="button" aria-label="開啟搜尋" title="搜尋筆記" aria-expanded="false" aria-controls="searchPanel">
+            <span class="search-glyph" aria-hidden="true"></span>
+          </button>
+          <button class="icon-button info-button" id="legendButton" type="button" aria-label="開啟符號說明" title="符號說明">ⓘ</button>
+          <button class="icon-button brand-sync-button" id="syncButton" type="button" aria-label="開啟同步設定" title="同步設定">
+            <span aria-hidden="true">⚙</span>
+          </button>
+        </div>
+
         <section class="panel month-panel collapsible-panel" aria-label="月份導覽" data-collapsible="calendar">
           <button class="collapsible-header" type="button" aria-expanded="false">
             <span>月曆</span>
@@ -57,15 +67,6 @@
               <h2 id="viewTitle"></h2>
               <button class="icon-button period-date-nav" id="nextDailyDate" type="button" data-period-shift="1" aria-label="後一天">›</button>
             </div>
-          </div>
-          <div class="topbar-actions">
-            <button class="icon-button search-button" id="searchButton" type="button" aria-label="開啟搜尋" title="搜尋筆記" aria-expanded="false" aria-controls="searchPanel">
-              <span class="search-glyph" aria-hidden="true"></span>
-            </button>
-            <button class="icon-button info-button" id="legendButton" type="button" aria-label="開啟符號說明" title="符號說明">ⓘ</button>
-            <button class="icon-button brand-sync-button" id="syncButton" type="button" aria-label="開啟同步設定" title="同步設定">
-              <span aria-hidden="true">⚙</span>
-            </button>
           </div>
         </header>
 
@@ -209,12 +210,12 @@
           </aside>
         </section>
 
-        <section class="panel legend-panel collapsible-panel symbol-footer" aria-label="符號說明" data-collapsible="symbols">
-          <button class="collapsible-header" type="button" aria-expanded="false">
-            <span>符號</span>
-            <span class="collapse-icon" aria-hidden="true">⌄</span>
-          </button>
-          <div class="collapsible-content">
+        <section class="symbol-sheet-overlay" id="symbolSheet" aria-label="符號說明" hidden>
+          <div class="symbol-footer" role="dialog" aria-modal="true" aria-labelledby="symbolSheetTitle">
+            <div class="symbol-sheet-header">
+              <h2 id="symbolSheetTitle">符號說明</h2>
+              <button class="icon-button small" id="symbolSheetClose" type="button" aria-label="關閉">×</button>
+            </div>
             <div class="legend">
               <div class="symbol-editor">
                 <span class="symbol-glyph">•</span>
@@ -404,16 +405,24 @@
             <input id="syncPassword" type="password" autocomplete="current-password" />
           </label>
         </div>
-        <div class="dialog-actions sync-actions">
-          <button class="ghost-button" type="button" id="syncSignUp">註冊</button>
-          <button class="primary-button" type="button" id="syncSignIn">登入</button>
-          <button class="ghost-button" type="button" id="syncSignOut">登出</button>
-          <button class="ghost-button" type="button" id="syncForgotPassword">忘記密碼</button>
+        <div class="sync-account-panel" id="syncAccountPanel" hidden>
+          <div class="sync-account-copy">
+            <span id="syncLoggedInLabel">已登入帳號</span>
+            <strong id="syncAccountEmail"></strong>
+          </div>
+          <button class="ghost-button sync-logout-button" type="button" id="syncSignOut">登出</button>
         </div>
-        <div class="dialog-actions sync-actions">
+        <div class="sync-action-group sync-auth-actions">
+          <button class="primary-button" type="button" id="syncSignIn">登入</button>
+          <div class="sync-link-actions">
+            <button class="sync-link-button" type="button" id="syncSignUp">註冊</button>
+            <button class="sync-link-button" type="button" id="syncForgotPassword">忘記密碼</button>
+          </div>
+        </div>
+        <div class="sync-action-group sync-data-actions">
+          <button class="primary-button sync-now-button" type="button" id="syncNow">同步最新</button>
           <button class="ghost-button" type="button" id="syncPull">下載雲端</button>
           <button class="ghost-button" type="button" id="syncPush">上傳本機</button>
-          <button class="primary-button" type="button" id="syncNow">同步最新</button>
         </div>
         </section>
         <section class="settings-section" aria-labelledby="dataSettingsTitle">
@@ -484,11 +493,17 @@
     <script src="./dom.js"></script>
     <script src="./core.js"></script>
     <script src="./storage.js"></script>
+    <script src="./sync-ui.js"></script>
+    <script src="./sync-auth.js"></script>
     <script src="./sync.js"></script>
+    <script src="./entry-store.js"></script>
+    <script src="./entry-drag.js"></script>
     <script src="./entries.js"></script>
+    <script src="./render-static.js"></script>
     <script src="./render-shell.js"></script>
     <script src="./render-entries.js"></script>
     <script src="./render-logs.js"></script>
+    <script src="./render-calendar.js"></script>
     <script src="./render.js"></script>
     <script src="./app-events.js"></script>
     <script src="./app.js"></script>

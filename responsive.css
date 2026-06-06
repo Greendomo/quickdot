@@ -9,6 +9,10 @@
     border-bottom: 1px solid var(--line);
   }
 
+  .app-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
   .content-grid {
     grid-template-columns: 1fr;
   }
@@ -26,6 +30,13 @@
 
   .main {
     padding: 18px 18px 126px;
+  }
+
+  .topbar {
+    min-height: 96px;
+    margin-bottom: 24px;
+    padding-top: 26px;
+    padding-bottom: 18px;
   }
 
   .view-title-row {
@@ -151,6 +162,54 @@
 :focus-visible {
   outline: 2px solid var(--view-accent);
   outline-offset: 2px;
+}
+
+/* Normalize interactive controls */
+button,
+input,
+select,
+textarea,
+.icon-button,
+.ghost-button,
+.text-button,
+.primary-button,
+.danger-button,
+.search-button,
+.info-button,
+.brand-sync-button,
+.period-date-nav,
+.log-switch,
+.log-switch button,
+.log-switch .add-entry-button,
+.language-picker,
+.language-picker button,
+.composer-row select,
+.composer-row input,
+.composer-row textarea,
+.toolbar input,
+.date-field input,
+.date-field textarea,
+#entryText,
+#entryDate,
+.entry-symbol,
+.entry-action-button,
+.subitem-toggle,
+.subitem-symbol,
+.subitem-delete,
+.more-count button,
+.compact-item button,
+.collapsible-header,
+.collapse-icon,
+.day-button,
+.month-date-cell,
+.month-date-cell span {
+  border-radius: var(--radius);
+}
+
+.entry-dialog #entryText,
+.entry-dialog #entryDate,
+.entry-dialog .primary-button {
+  border-radius: var(--radius);
 }
 
 /* Ensure touch devices always show actions */

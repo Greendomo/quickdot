@@ -36,6 +36,10 @@ function bindEvents() {
 
   els.syncButton.addEventListener("click", openSyncDialog);
   els.legendButton.addEventListener("click", openSymbolSettings);
+  els.symbolSheetClose.addEventListener("click", closeSymbolSettings);
+  els.symbolSheet.addEventListener("click", (event) => {
+    if (!event.target.closest(".symbol-footer")) closeSymbolSettings();
+  });
   els.searchButton.addEventListener("click", toggleSearchPanel);
   document.addEventListener("click", handleDocumentClick);
 
@@ -244,22 +248,8 @@ function closeSymbolSettingsOnOutsideClick(event) {
   if (!state.collapseState.symbols) return;
   if (event.target.closest("#legendButton")) return;
 
-  const footer = document.querySelector(".symbol-footer");
-  if (!footer) return;
-
-  const rect = footer.getBoundingClientRect();
-  const clickedInsideFooter =
-    footer.contains(event.target) &&
-    event.clientX >= rect.left &&
-    event.clientX <= rect.right &&
-    event.clientY >= rect.top &&
-    event.clientY <= rect.bottom;
-
-  if (clickedInsideFooter) return;
-
-  state.collapseState.symbols = false;
-  saveCollapseState();
-  renderCollapseState();
+  if (event.target.closest(".symbol-footer")) return;
+  closeSymbolSettings();
 }
 
 function toggleSearchPanel() {

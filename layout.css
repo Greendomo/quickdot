@@ -24,6 +24,19 @@
   backdrop-filter: blur(12px);
 }
 
+.app-header {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.app-header .month-panel {
+  grid-column: 1 / -1;
+}
+
+.app-header .topbar-actions {
+  justify-self: end;
+}
+
 .brand {
   display: flex;
   gap: 14px;

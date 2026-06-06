@@ -15,17 +15,18 @@
   z-index: 10;
   display: flex;
   gap: 16px;
-  min-height: 124px;
+  min-height: 108px;
   align-items: center;
-  justify-content: space-between;
-  margin: 0 calc(clamp(28px, 5vw, 52px) * -1) 34px;
-  padding: 34px clamp(28px, 5vw, 52px) 24px;
+  justify-content: center;
+  margin: 0 calc(clamp(28px, 5vw, 52px) * -1) 30px;
+  padding: 30px clamp(28px, 5vw, 52px) 22px;
   border-bottom: 1px solid var(--line);
   background: rgba(253, 251, 247, 0.94);
   backdrop-filter: blur(16px);
 }
 
 .topbar > div:first-child {
+  width: 100%;
   min-width: 0;
 }
 
@@ -50,6 +51,7 @@
 .view-title-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   min-width: 0;
 }
