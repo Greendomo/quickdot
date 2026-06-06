@@ -21,9 +21,7 @@ function renderSymbolMeanings() {
     label.textContent = getMeaning(label.dataset.symbolMeaning);
   });
 
-  Array.from(els.entryType.options).forEach((option) => {
-    option.textContent = `${getTypeLabel(option.value)} ${typeSymbol[option.value]}`;
-  });
+  renderEntryTypeTabs();
 
   els.priorityLabel.textContent = getMeaning("important");
 }

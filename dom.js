@@ -20,6 +20,8 @@ const els = {
   entryDialog: document.querySelector("#entryDialog"),
   entryForm: document.querySelector("#entryForm"),
   entryType: document.querySelector("#entryType"),
+  entryTypeTabs: document.querySelector(".entry-type-tabs"),
+  entryTypeOptions: Array.from(document.querySelectorAll("[data-entry-type]")),
   entryText: document.querySelector("#entryText"),
   entryDate: document.querySelector("#entryDate"),
   entryCancel: document.querySelector("#entryCancel"),

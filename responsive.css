@@ -66,6 +66,15 @@
     grid-template-columns: 1fr;
   }
 
+  .entry-type-tabs {
+    width: 100%;
+  }
+
+  .entry-type-option {
+    flex: 1;
+    justify-content: center;
+  }
+
   .composer-row select,
   .composer-row input,
   .composer-row textarea,
@@ -75,6 +84,7 @@
 
   #entryDate {
     flex-basis: auto;
+    justify-self: stretch;
   }
 
   .log-switch {
@@ -183,6 +193,8 @@ textarea,
 .log-switch .add-entry-button,
 .language-picker,
 .language-picker button,
+.entry-type-tabs,
+.entry-type-option,
 .composer-row select,
 .composer-row input,
 .composer-row textarea,

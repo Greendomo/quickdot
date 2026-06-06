@@ -7,6 +7,9 @@ function bindEvents() {
   els.addEntryButton.addEventListener("click", openEntryDialog);
   els.entryCancel.addEventListener("click", closeEntryDialog);
   els.entryClose.addEventListener("click", closeEntryDialog);
+  els.entryTypeOptions.forEach((button) => {
+    button.addEventListener("click", () => setEntryType(button.dataset.entryType));
+  });
 
   els.collapsiblePanels.forEach((panel) => {
     const header = panel.querySelector(".collapsible-header");

@@ -254,11 +254,21 @@
           <button class="icon-button small" type="button" id="entryClose" aria-label="關閉">×</button>
         </div>
         <div class="composer-row">
-          <select id="entryType" aria-label="項目類型">
-            <option value="task">任務 •</option>
-            <option value="event">事件 ○</option>
-            <option value="note">筆記 ◇</option>
-          </select>
+          <input id="entryType" type="hidden" value="task" />
+          <div class="entry-type-tabs" role="radiogroup" aria-label="項目類型">
+            <button class="entry-type-option active" type="button" data-entry-type="task" role="radio" aria-checked="true">
+              <span class="entry-type-symbol">•</span>
+              <span class="entry-type-label">任務</span>
+            </button>
+            <button class="entry-type-option" type="button" data-entry-type="event" role="radio" aria-checked="false">
+              <span class="entry-type-symbol">◦</span>
+              <span class="entry-type-label">事件</span>
+            </button>
+            <button class="entry-type-option" type="button" data-entry-type="note" role="radio" aria-checked="false">
+              <span class="entry-type-symbol">–</span>
+              <span class="entry-type-label">筆記</span>
+            </button>
+          </div>
           <textarea
             id="entryText"
             placeholder="What's on your mind?"

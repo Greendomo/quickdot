@@ -14,6 +14,7 @@ function hideDialog(dialog) {
 
 function openEntryDialog() {
   els.entryDate.value = getDefaultEntryDate();
+  renderEntryTypeTabs();
   showDialog(els.entryDialog, els.entryText);
 }
 
@@ -55,6 +56,30 @@ function addEntry() {
   saveEntries();
   render();
   closeEntryDialog();
+}
+
+function setEntryType(type) {
+  if (!["task", "event", "note"].includes(type)) return;
+  els.entryType.value = type;
+  renderEntryTypeTabs();
+}
+
+function renderEntryTypeTabs() {
+  const pickerSymbols = {
+    task: "•",
+    event: "◦",
+    note: "–",
+  };
+  const currentType = els.entryType.value || "task";
+
+  els.entryTypeOptions.forEach((button) => {
+    const type = button.dataset.entryType;
+    const isActive = type === currentType;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-checked", String(isActive));
+    button.querySelector(".entry-type-symbol").textContent = pickerSymbols[type] || typeSymbol[type] || "";
+    button.querySelector(".entry-type-label").textContent = getTypeLabel(type);
+  });
 }
 
 function openDeleteDialog(entryId, subitemId = null) {

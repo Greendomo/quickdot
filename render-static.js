@@ -53,7 +53,7 @@ function renderStaticText() {
   els.symbolSheetClose?.setAttribute("aria-label", t("close"));
   setText("#entryDialogTitle", t("addRecord"));
   els.entryClose.setAttribute("aria-label", t("close"));
-  els.entryType.setAttribute("aria-label", t("entryType"));
+  els.entryTypeTabs?.setAttribute("aria-label", t("entryType"));
   els.entryText.placeholder = state.language === "en" ? "What's on your mind?" : state.language === "zh-Hans" ? "写下任务、事件或想法..." : "寫下任務、事件或想法...";
   els.entryDate.setAttribute("aria-label", t("dateField"));
   setText("#entryDialog .primary-button", t("saveEntry"));
