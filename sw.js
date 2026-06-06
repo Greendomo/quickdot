@@ -1,45 +1,7 @@
-const CACHE_NAME = "quickdot-cache-v69";
-const APP_SHELL = [
-  "./",
-  "./index.html",
-  "./admin.html",
-  "./health.html",
-  "./styles.css",
-  "./base.css",
-  "./layout.css",
-  "./panels.css",
-  "./controls.css",
-  "./entries.css",
-  "./dialogs.css",
-  "./responsive.css",
-  "./constants.js",
-  "./dates.js",
-  "./i18n.js",
-  "./migrations.js",
-  "./state.js",
-  "./dom.js",
-  "./core.js",
-  "./storage.js",
-  "./sync-ui.js",
-  "./sync-auth.js",
-  "./sync.js",
-  "./entry-store.js",
-  "./entry-drag.js",
-  "./entries.js",
-  "./render-static.js",
-  "./render-shell.js",
-  "./render-entries.js",
-  "./render-logs.js",
-  "./render-calendar.js",
-  "./render.js",
-  "./app-events.js",
-  "./app.js",
-  "./supabase-config.js",
-  "./manifest.webmanifest",
-  "./icons/icon.svg",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png",
-];
+importScripts("./quickdot-files.js");
+
+const CACHE_NAME = "quickdot-cache-v75";
+const APP_SHELL = self.QUICKDOT_APP_SHELL;
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

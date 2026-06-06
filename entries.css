@@ -75,11 +75,10 @@
 }
 
 .entry-item {
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: start;
-  padding: 8px 10px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0;
   border: 1px solid transparent;
   border-radius: var(--radius);
   background: transparent;
@@ -87,6 +86,93 @@
   user-select: none;
   animation: slideIn 0.2s ease;
   transition: border-color 0.15s ease, box-shadow 0.2s ease;
+}
+
+.entry-swipe-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: transform 0.22s ease;
+}
+
+.entry-item.swiping .entry-swipe-content {
+  transition: none;
+}
+
+.entry-swipe-actions {
+  position: absolute;
+  inset-block: 0;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: var(--radius);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.entry-swipe-start {
+  left: 0;
+  width: 332px;
+  justify-content: flex-start;
+  background: var(--view-accent-soft);
+}
+
+.entry-swipe-end {
+  right: 0;
+  width: 94px;
+  justify-content: flex-end;
+  background: var(--warning);
+}
+
+.entry-item.swiping .entry-swipe-actions,
+.entry-item.swipe-open-start .entry-swipe-start,
+.entry-item.swipe-open-end .entry-swipe-end {
+  opacity: 1;
+}
+
+.entry-item.swipe-open-start .entry-swipe-start,
+.entry-item.swipe-open-end .entry-swipe-end {
+  pointer-events: auto;
+}
+
+.swipe-action-button {
+  display: inline-grid;
+  min-width: 64px;
+  min-height: 100%;
+  padding: 6px 8px;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--view-accent-strong);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.swipe-action-button .entry-action-icon {
+  min-width: auto;
+  font-size: 18px;
+}
+
+.swipe-action-button .entry-action-label {
+  max-width: 54px;
+  line-height: 1.15;
+}
+
+.swipe-action-button.danger {
+  min-width: 94px;
+  background: var(--warning);
+  color: #fff;
 }
 
 .entry-item:hover {
@@ -109,6 +195,10 @@
   box-shadow: var(--shadow);
   cursor: grabbing;
   opacity: 0.92;
+}
+
+.entry-item.dragging .entry-swipe-content {
+  background: transparent;
 }
 
 .entry-item.done .entry-text {
@@ -274,66 +364,6 @@
   display: grid;
 }
 
-.entry-menu {
-  position: relative;
-  z-index: 30;
-  grid-column: 3;
-  justify-self: end;
-}
-
-.entry-item.menu-open,
-.date-group:has(.entry-menu[open]) {
-  position: relative;
-  z-index: 90;
-}
-
-.entry-menu[open] {
-  z-index: 100;
-}
-
-.entry-menu summary {
-  list-style: none;
-}
-
-.entry-menu summary::-webkit-details-marker {
-  display: none;
-}
-
-.entry-menu-button {
-  color: var(--muted);
-  border-color: transparent;
-  background: transparent;
-}
-
-.entry-actions {
-  position: absolute;
-  z-index: 110;
-  right: 0;
-  bottom: calc(100% + 6px);
-  display: grid;
-  min-width: 168px;
-  gap: 4px;
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface-strong);
-  box-shadow: var(--shadow);
-}
-
-.entry-action-button {
-  display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
-  align-items: center;
-  gap: 8px;
-  min-height: 36px;
-  padding: 0 10px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--ink);
-  text-align: left;
-}
-
 .entry-action-icon {
   display: grid;
   min-width: 26px;
@@ -345,18 +375,6 @@
 
 .entry-action-label {
   min-width: 0;
-}
-
-.entry-action-button:hover,
-.entry-action-button:focus-visible {
-  background: var(--view-accent-soft);
-  color: var(--view-accent-strong);
-}
-
-.entry-action-button.danger:hover,
-.entry-action-button.danger:focus-visible {
-  background: var(--warning-soft);
-  color: var(--warning);
 }
 
 .icon-button {
@@ -477,7 +495,11 @@ body[data-view="daily"] .entry-list {
 
 body[data-view="daily"] .entry-item {
   position: relative;
-  padding: 15px 10px;
+  padding: 0;
+}
+
+body[data-view="daily"] .entry-swipe-content {
+  padding: 23px 20px;
 }
 
 body[data-view="daily"] .entry-item+.entry-item {

@@ -111,16 +111,6 @@
     grid-template-columns: 28px minmax(0, 1fr);
   }
 
-  .entry-menu {
-    grid-column: 2;
-    justify-self: end;
-  }
-
-  .entry-actions {
-    right: 0;
-    min-width: min(190px, calc(100vw - 64px));
-  }
-
   .migration-dialog {
     width: 100vw;
     max-width: none;
@@ -222,11 +212,4 @@ textarea,
 .entry-dialog #entryDate,
 .entry-dialog .primary-button {
   border-radius: var(--radius);
-}
-
-/* Ensure touch devices always show actions */
-@media (hover: none) {
-  .entry-actions {
-    opacity: 1;
-  }
 }

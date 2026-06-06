@@ -115,7 +115,6 @@ function renderStaticText() {
   const template = els.entryTemplate.content;
   template.querySelector(".entry-symbol")?.setAttribute("aria-label", t("doneToggle"));
   template.querySelector(".priority-badge")?.setAttribute("aria-label", t("important"));
-  template.querySelector(".entry-menu-button")?.setAttribute("aria-label", t("moreActions"));
   setActionText(template, '[data-action="edit"]', "✎", t("edit"));
   setActionText(template, '[data-action="subitem"]', "＋", t("subitem"));
   setActionText(template, '[data-action="priority"]', "!", t("important"));
@@ -148,11 +147,11 @@ function setTextIn(root, selector, text) {
 }
 
 function setActionText(root, selector, icon, label) {
-  const element = root.querySelector(selector);
-  if (!element) return;
-  const iconElement = element.querySelector(".entry-action-icon");
-  const labelElement = element.querySelector(".entry-action-label");
-  if (iconElement) iconElement.textContent = icon;
-  if (labelElement) labelElement.textContent = label;
-  element.setAttribute("aria-label", label);
+  root.querySelectorAll(selector).forEach((element) => {
+    const iconElement = element.querySelector(".entry-action-icon");
+    const labelElement = element.querySelector(".entry-action-label");
+    if (iconElement) iconElement.textContent = icon;
+    if (labelElement) labelElement.textContent = label;
+    element.setAttribute("aria-label", label);
+  });
 }

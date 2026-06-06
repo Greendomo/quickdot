@@ -469,27 +469,28 @@
 
     <template id="entryTemplate">
       <li class="entry-item">
-        <button class="entry-symbol" type="button" aria-label="切換完成狀態"></button>
-        <div class="entry-body">
-          <div class="entry-main">
-            <span class="entry-text"></span>
-            <span class="priority-badge" aria-label="重要">!</span>
-          </div>
-          <div class="entry-meta"></div>
-          <button class="subitem-toggle" type="button" data-subitem-action="expand" hidden></button>
-          <ul class="subitem-list"></ul>
+        <div class="entry-swipe-actions entry-swipe-start" aria-hidden="true">
+          <button class="swipe-action-button" type="button" data-action="edit" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">✎</span><span class="entry-action-label">編輯</span></button>
+          <button class="swipe-action-button" type="button" data-action="subitem" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">＋</span><span class="entry-action-label">子項目</span></button>
+          <button class="swipe-action-button" type="button" data-action="priority" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">!</span><span class="entry-action-label">重要</span></button>
+          <button class="swipe-action-button" type="button" data-action="copy" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">⧉</span><span class="entry-action-label">複製到日期</span></button>
+          <button class="swipe-action-button" type="button" data-action="migrate" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">›</span><span class="entry-action-label">遷移</span></button>
         </div>
-        <details class="entry-menu">
-          <summary class="icon-button small entry-menu-button" aria-label="更多操作">⋯</summary>
-          <div class="entry-actions">
-            <button class="entry-action-button" type="button" data-action="edit"><span class="entry-action-icon" aria-hidden="true">✎</span><span class="entry-action-label">編輯</span></button>
-            <button class="entry-action-button" type="button" data-action="subitem"><span class="entry-action-icon" aria-hidden="true">＋</span><span class="entry-action-label">子項目</span></button>
-            <button class="entry-action-button" type="button" data-action="priority"><span class="entry-action-icon" aria-hidden="true">!</span><span class="entry-action-label">重要</span></button>
-            <button class="entry-action-button" type="button" data-action="copy"><span class="entry-action-icon" aria-hidden="true">⧉</span><span class="entry-action-label">複製到日期</span></button>
-            <button class="entry-action-button" type="button" data-action="migrate"><span class="entry-action-icon" aria-hidden="true">›</span><span class="entry-action-label">遷移</span></button>
-            <button class="entry-action-button danger" type="button" data-action="delete"><span class="entry-action-icon" aria-hidden="true">×</span><span class="entry-action-label">刪除</span></button>
+        <div class="entry-swipe-actions entry-swipe-end" aria-hidden="true">
+          <button class="swipe-action-button danger" type="button" data-action="delete" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">×</span><span class="entry-action-label">刪除</span></button>
+        </div>
+        <div class="entry-swipe-content">
+          <button class="entry-symbol" type="button" aria-label="切換完成狀態"></button>
+          <div class="entry-body">
+            <div class="entry-main">
+              <span class="entry-text"></span>
+              <span class="priority-badge" aria-label="重要">!</span>
+            </div>
+            <div class="entry-meta"></div>
+            <button class="subitem-toggle" type="button" data-subitem-action="expand" hidden></button>
+            <ul class="subitem-list"></ul>
           </div>
-        </details>
+        </div>
       </li>
     </template>
 
@@ -502,11 +503,18 @@
     <script src="./state.js"></script>
     <script src="./dom.js"></script>
     <script src="./core.js"></script>
+    <script src="./entry-normalize.js"></script>
+    <script src="./sync-store.js"></script>
     <script src="./storage.js"></script>
+    <script src="./preferences-store.js"></script>
     <script src="./sync-ui.js"></script>
     <script src="./sync-auth.js"></script>
+    <script src="./sync-diagnostics.js"></script>
+    <script src="./sync-payload.js"></script>
+    <script src="./sync-normalized.js"></script>
     <script src="./sync.js"></script>
     <script src="./entry-store.js"></script>
+    <script src="./entry-swipe.js"></script>
     <script src="./entry-drag.js"></script>
     <script src="./entries.js"></script>
     <script src="./render-static.js"></script>
@@ -515,6 +523,8 @@
     <script src="./render-logs.js"></script>
     <script src="./render-calendar.js"></script>
     <script src="./render.js"></script>
+    <script src="./navigation-events.js"></script>
+    <script src="./entry-events.js"></script>
     <script src="./app-events.js"></script>
     <script src="./app.js"></script>
   </body>

@@ -2,7 +2,7 @@
 function startDragHold(event) {
   if (!canDragSort()) return;
   if (event.button !== undefined && event.button !== 0) return;
-  if (event.target.closest("button, input, select, textarea, a, .entry-menu, .entry-actions, .subitem-list")) return;
+  if (event.target.closest("button, input, select, textarea, a, .subitem-list")) return;
 
   const item = event.target.closest(".entry-item");
   if (!item || !els.entryList.contains(item)) return;

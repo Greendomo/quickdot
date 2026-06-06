@@ -20,6 +20,7 @@ const state = {
   pendingSubitemId: null,
   pendingEditId: null,
   pendingDelete: null,
+  entrySwipe: null,
   dragSort: null,
   supabaseClient: null,
   syncSession: null,

@@ -59,6 +59,11 @@ function bindEvents() {
     els.searchButton.focus();
   });
 
+  els.entryList.addEventListener("pointerdown", startEntrySwipe);
+  els.entryList.addEventListener("pointermove", moveEntrySwipe);
+  els.entryList.addEventListener("pointerup", finishEntrySwipe);
+  els.entryList.addEventListener("pointercancel", cancelEntrySwipe);
+  els.entryList.addEventListener("lostpointercapture", cancelEntrySwipe);
   els.entryList.addEventListener("pointerdown", startDragHold);
   els.entryList.addEventListener("pointermove", moveDragSort);
   els.entryList.addEventListener("pointerup", finishDragSort);
@@ -117,149 +122,4 @@ function bindEvents() {
       setLanguage(button.dataset.language);
     });
   });
-}
-
-function handleDocumentClick(event) {
-  const periodShiftButton = event.target.closest("[data-period-shift]");
-  if (periodShiftButton) {
-    event.preventDefault();
-    window.quickDotShiftVisiblePeriod(Number(periodShiftButton.dataset.periodShift));
-    return;
-  }
-
-  closeSymbolSettingsOnOutsideClick(event);
-}
-
-function closeOpenEntryMenus(exceptMenu = null) {
-  els.main.querySelectorAll(".entry-menu[open]").forEach((menu) => {
-    if (menu === exceptMenu) return;
-    menu.removeAttribute("open");
-    menu.closest(".entry-item")?.classList.remove("menu-open");
-  });
-}
-
-function handleMainClick(event) {
-  if (state.dragSort?.didDrag) {
-    event.preventDefault();
-    event.stopPropagation();
-    state.dragSort = null;
-    return;
-  }
-
-  if (event.target.closest(".empty-action")) {
-    closeOpenEntryMenus();
-    openEntryDialog();
-    return;
-  }
-
-  if (handleDateCardExpandClick(event)) return;
-  if (handleEntryMenuClick(event)) return;
-  if (handleDateNavigationClick(event)) return;
-  if (handleSubitemActionClick(event)) return;
-  if (handleEntryItemClick(event)) return;
-
-  closeOpenEntryMenus(event.target.closest(".entry-menu"));
-}
-
-function handleDateCardExpandClick(event) {
-  const moreButton = event.target.closest("[data-expand-date]");
-  if (!moreButton) return false;
-
-  closeOpenEntryMenus();
-  const date = moreButton.dataset.expandDate;
-  if (state.expandedDateCards.has(date)) {
-    state.expandedDateCards.delete(date);
-  } else {
-    state.expandedDateCards.add(date);
-  }
-  render();
-  return true;
-}
-
-function handleEntryMenuClick(event) {
-  const menuButton = event.target.closest(".entry-menu-button");
-  if (!menuButton) return false;
-
-  event.preventDefault();
-  const currentMenu = menuButton.closest(".entry-menu");
-  const currentItem = menuButton.closest(".entry-item");
-  const shouldOpen = !currentMenu.open;
-  closeOpenEntryMenus();
-  if (shouldOpen) {
-    currentMenu.setAttribute("open", "");
-    currentItem?.classList.add("menu-open");
-  }
-  return true;
-}
-
-function handleDateNavigationClick(event) {
-  const dateButton = event.target.closest("[data-date]");
-  if (!dateButton || event.target.closest("[data-id]")) return false;
-
-  closeOpenEntryMenus();
-  state.view = "daily";
-  state.selectedDate = dateButton.dataset.date;
-  state.calendarMonth = startOfMonth(parseDateKey(state.selectedDate));
-  render();
-  return true;
-}
-
-function handleSubitemActionClick(event) {
-  const subitemButton = event.target.closest("[data-subitem-action]");
-  if (!subitemButton) return false;
-
-  closeOpenEntryMenus(event.target.closest(".entry-menu"));
-  const item = event.target.closest("[data-id]");
-  if (!item) return true;
-
-  if (subitemButton.dataset.subitemAction === "expand") {
-    toggleSubitemPanel(item.dataset.id);
-    return true;
-  }
-
-  const subitemId = subitemButton.closest("[data-subitem-id]")?.dataset.subitemId;
-  if (subitemButton.dataset.subitemAction === "toggle") toggleSubitem(item.dataset.id, subitemId);
-  if (subitemButton.dataset.subitemAction === "delete") openDeleteDialog(item.dataset.id, subitemId);
-  return true;
-}
-
-function handleEntryItemClick(event) {
-  const item = event.target.closest("[data-id]");
-  if (!item) return false;
-
-  if (event.target.closest(".entry-symbol")) {
-    closeOpenEntryMenus();
-    toggleDone(item.dataset.id);
-    return true;
-  }
-
-  const actionButton = event.target.closest("[data-action]");
-  if (!actionButton) return false;
-
-  closeOpenEntryMenus();
-  const action = actionButton.dataset.action;
-  if (action === "edit") openEditDialog(item.dataset.id);
-  if (action === "subitem") openSubitemDialog(item.dataset.id);
-  if (action === "priority") togglePriority(item.dataset.id);
-  if (action === "copy") openCopyDialog(item.dataset.id);
-  if (action === "migrate") openMigrationDialog(item.dataset.id);
-  if (action === "delete") openDeleteDialog(item.dataset.id);
-  return true;
-}
-
-function closeSymbolSettingsOnOutsideClick(event) {
-  if (!state.collapseState.symbols) return;
-  if (event.target.closest("#legendButton")) return;
-
-  if (event.target.closest(".symbol-footer")) return;
-  closeSymbolSettings();
-}
-
-function toggleSearchPanel() {
-  state.searchOpen = !state.searchOpen;
-  if (!state.searchOpen) state.search = "";
-  render();
-  if (state.searchOpen) {
-    requestAnimationFrame(() => els.searchInput.focus());
-  }
 }
