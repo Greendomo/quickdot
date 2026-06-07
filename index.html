@@ -15,9 +15,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=77" />
+    <link rel="stylesheet" href="./styles.css?v=91" />
   </head>
   <body>
+    <svg class="notekun-symbols" aria-hidden="true" focusable="false">
+      <symbol id="notekunMascot" viewBox="0 0 120 120">
+        <rect x="28" y="14" width="68" height="86" rx="14" fill="#fff7df" stroke="#1a1f2c" stroke-width="4" />
+        <path d="M36 20h56c8 0 14 6 14 14v62" fill="none" stroke="#d9b777" stroke-width="4" stroke-linecap="round" />
+        <path d="M28 28H18m10 14H18m10 14H18m10 14H18m10 14H18" stroke="#1a1f2c" stroke-width="4" stroke-linecap="round" />
+        <circle cx="52" cy="56" r="5" fill="#1a1f2c" />
+        <circle cx="78" cy="56" r="5" fill="#1a1f2c" />
+        <path d="M56 70c5 5 13 5 18 0" fill="none" stroke="#1a1f2c" stroke-width="4" stroke-linecap="round" />
+        <circle cx="43" cy="66" r="6" fill="#f7aaa1" opacity="0.72" />
+        <circle cx="87" cy="66" r="6" fill="#f7aaa1" opacity="0.72" />
+        <path d="M60 88l-9-7v14l9-7 9 7V81z" fill="#e35645" stroke="#1a1f2c" stroke-width="3" stroke-linejoin="round" />
+        <path class="notekun-arm-left" d="M33 72c-12 2-18 9-17 18" fill="none" stroke="#1a1f2c" stroke-width="5" stroke-linecap="round" />
+        <g class="notekun-arm-right">
+          <path d="M94 76l11 8" fill="none" stroke="#1a1f2c" stroke-width="5" stroke-linecap="round" />
+        </g>
+        <path d="M99 83l-10 18" stroke="#1a1f2c" stroke-width="5" stroke-linecap="round" />
+        <path d="M94 99l10-18 10 6-10 18z" fill="#f6d87f" stroke="#1a1f2c" stroke-width="3" stroke-linejoin="round" />
+        <path class="notekun-spark spark-one" d="M104 24l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ffd86b" stroke="#1a1f2c" stroke-width="2" stroke-linejoin="round" />
+        <path class="notekun-spark spark-two" d="M18 18l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#9bd8c8" stroke="#1a1f2c" stroke-width="1.8" stroke-linejoin="round" />
+      </symbol>
+    </svg>
     <a class="skip-link" href="#mainContent">跳到主要內容</a>
     <div class="app-shell">
       <header class="sidebar app-header" aria-label="筆記導覽">
@@ -102,6 +123,10 @@
             </div>
             <ul class="entry-list" id="entryList" aria-live="polite"></ul>
             <div class="empty-state" id="emptyState">
+              <div class="notekun-empty">
+                <svg class="notekun-face" aria-hidden="true"><use href="#notekunMascot"></use></svg>
+                <span class="notekun-speech" data-notekun-empty-message="noteKunEmptyDaily">筆記君陪你從第一筆開始。</span>
+              </div>
               <strong>今天還很安靜</strong>
               <p>新增一則任務、事件或筆記，讓這一天開始有脈絡。</p>
               <button class="primary-button empty-action" type="button">新增第一筆</button>
@@ -127,6 +152,10 @@
             </div>
             <ul class="entry-list" id="weeklyList" aria-live="polite"></ul>
             <div class="empty-state" id="weeklyEmpty">
+              <div class="notekun-empty">
+                <svg class="notekun-face" aria-hidden="true"><use href="#notekunMascot"></use></svg>
+                <span class="notekun-speech" data-notekun-empty-message="noteKunEmptyWeekly">筆記君先幫你留好這週的位置。</span>
+              </div>
               <strong>這週還很安靜</strong>
               <p>新增一則任務、事件或筆記，讓這週開始有脈絡。</p>
               <button class="primary-button empty-action" type="button">新增第一筆</button>
@@ -152,6 +181,10 @@
             </div>
             <ul class="entry-list monthly-list" id="monthlyList" aria-live="polite"></ul>
             <div class="empty-state" id="monthlyEmpty">
+              <div class="notekun-empty">
+                <svg class="notekun-face" aria-hidden="true"><use href="#notekunMascot"></use></svg>
+                <span class="notekun-speech" data-notekun-empty-message="noteKunEmptyMonthly">這個月也可以慢慢整理。</span>
+              </div>
               <strong>這個月尚無紀錄</strong>
               <p>月任務、事件與筆記會集中在這裡。</p>
               <button class="primary-button empty-action" type="button">新增第一筆</button>
@@ -185,6 +218,10 @@
             </div>
             <div class="future-log" id="futureLog" aria-live="polite"></div>
             <div class="empty-state" id="futureEmpty">
+              <div class="notekun-empty">
+                <svg class="notekun-face" aria-hidden="true"><use href="#notekunMascot"></use></svg>
+                <span class="notekun-speech" data-notekun-empty-message="noteKunEmptyFuture">想到未來的事，先交給筆記君保管。</span>
+              </div>
               <strong>未來還沒有安排</strong>
               <p>後續月份的任務與事件會集中在這裡。</p>
               <button class="primary-button empty-action" type="button">新增第一筆</button>
@@ -209,6 +246,13 @@
             </section>
           </aside>
         </section>
+
+        <div class="notekun-toast" id="noteKunToast" role="status" aria-live="polite" hidden>
+          <svg class="notekun-toast-face" aria-hidden="true"><use href="#notekunMascot"></use></svg>
+          <div class="notekun-bubble">
+            <span id="noteKunToastMessage">筆記君：做得好！</span>
+          </div>
+        </div>
 
         <section class="symbol-sheet-overlay" id="symbolSheet" aria-label="符號說明" hidden>
           <div class="symbol-footer" role="dialog" aria-modal="true" aria-labelledby="symbolSheetTitle">
@@ -311,7 +355,10 @@
           <h2 id="yesterdayTitle">遷移昨日未完成紀錄</h2>
           <button class="icon-button small" type="button" id="yesterdayClose" aria-label="關閉">×</button>
         </div>
-        <p id="yesterdayPreview"></p>
+        <div class="notekun-dialog-callout">
+          <svg class="notekun-dialog-face" aria-hidden="true"><use href="#notekunMascot"></use></svg>
+          <p id="yesterdayPreview"></p>
+        </div>
         <ul class="dialog-list" id="yesterdayList"></ul>
         <div class="dialog-actions">
           <button class="ghost-button" type="button" id="yesterdayLater">稍後</button>

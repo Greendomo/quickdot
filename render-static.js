@@ -47,6 +47,12 @@ function renderStaticText() {
   setText("#futureEmpty strong", t("emptyFutureTitle"));
   setText("#futureEmpty p", t("emptyFutureBody"));
   setText("#futureEmpty .empty-action", t("addFirst"));
+  els.noteKunEmptyMessages.forEach((element) => {
+    element.textContent = t(element.dataset.notekunEmptyMessage);
+  });
+  if (els.noteKunToastMessage && els.noteKunToast.hidden) {
+    els.noteKunToastMessage.textContent = t("noteKunDoneToast");
+  }
 
   setText("#symbolSheetTitle", t("legendSettings"));
   els.symbolSheet?.setAttribute("aria-label", t("legendSettings"));

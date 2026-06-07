@@ -1,8 +1,9 @@
 /* Calendar and symbol panels */
 .panel {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(253, 251, 247, 0.92);
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
 }
 
 .sidebar .panel {
@@ -52,8 +53,8 @@
   width: 26px;
   height: 26px;
   place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
+  border: 0;
+  border-radius: 0;
   color: var(--accent-strong);
   font-size: 16px;
   transition: transform 0.18s ease;
@@ -124,8 +125,9 @@
 }
 
 .day-button:hover {
-  border-color: var(--accent);
-  transform: scale(1.1);
+  border-color: transparent;
+  color: var(--accent);
+  transform: none;
 }
 
 .day-button:focus-visible {
@@ -135,8 +137,9 @@
 }
 
 .day-button.active {
-  background: var(--accent);
-  color: #fff;
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
 }
 
 .day-button.today:not(.active) {
@@ -174,9 +177,10 @@
   max-height: min(78vh, 720px);
   overflow: auto;
   padding: 26px 28px calc(28px + env(safe-area-inset-bottom));
-  border-radius: 24px 24px 0 0;
-  background: #faf9f6;
-  box-shadow: 0 -24px 60px rgba(26, 31, 44, 0.22);
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  box-shadow: none;
   animation: symbolSheetIn 0.22s ease;
 }
 
@@ -196,7 +200,7 @@
 
 .symbol-sheet-header .icon-button {
   flex: 0 0 auto;
-  background: #fff;
+  background: transparent;
 }
 
 .legend {
@@ -217,9 +221,9 @@
   width: 44px;
   height: 44px;
   place-items: center;
-  border: 1px solid rgba(26, 31, 44, 0.08);
-  border-radius: var(--radius);
-  background: #f5f2e9;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: var(--ink);
   font-size: 20px;
   font-weight: 800;

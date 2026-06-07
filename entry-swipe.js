@@ -69,14 +69,16 @@ function finishEntrySwipe(event) {
 
 function cancelEntrySwipe() {
   if (!state.entrySwipe) return;
-  state.entrySwipe.item?.classList.remove("swiping");
+  if (state.entrySwipe.item) resetSwipeRow(state.entrySwipe.item);
   state.entrySwipe = null;
 }
 
 function closeOpenSwipeRows(exceptItem = null) {
-  els.entryList.querySelectorAll(".entry-item.swipe-open-start, .entry-item.swipe-open-end").forEach((item) => {
+  els.entryList.querySelectorAll(".entry-item").forEach((item) => {
     if (item === exceptItem) return;
-    resetSwipeRow(item);
+    if (item.classList.contains("swipe-open-start") || item.classList.contains("swipe-open-end") || getEntrySwipeOffset(item) !== 0) {
+      resetSwipeRow(item);
+    }
   });
 }
 

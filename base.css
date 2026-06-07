@@ -1,22 +1,28 @@
-/* Base tokens */
+/* Base tokens: restrained Japanese stationery palette, no card shadows. */
 :root {
   color-scheme: light;
-  --bg: #fdfbf7;
-  --surface: #fdfbf7;
-  --surface-strong: #ffffff;
-  --ink: #1a1f2c;
-  --muted: #6e6e6e;
-  --line: rgba(26, 31, 44, 0.12);
-  --accent: #d94a38;
-  --accent-strong: #a93528;
-  --accent-soft: #f8ded9;
-  --view-accent: #d94a38;
-  --view-accent-strong: #a93528;
-  --view-accent-soft: #f8ded9;
-  --warning: #d94a38;
-  --warning-soft: #f8ded9;
-  --success: #2f8f67;
-  --shadow: 0 18px 42px rgba(26, 31, 44, 0.1);
+  --bg: #fbf9f4;
+  --surface: #fbf9f4;
+  --surface-strong: #fbf9f4;
+  --paper: #fbf9f4;
+  --ink: #2c2c2c;
+  --muted: #77736d;
+  --line: rgba(44, 44, 44, 0.12);
+  --line-soft: rgba(44, 44, 44, 0.075);
+  --accent: #3a473c;
+  --accent-strong: #2f392f;
+  --accent-soft: rgba(58, 71, 60, 0.1);
+  --tea: #4a3b32;
+  --oat: #ebe4d8;
+  --paper-line: #dfd8cc;
+  --view-accent: #3a473c;
+  --view-accent-strong: #2f392f;
+  --view-accent-soft: rgba(58, 71, 60, 0.1);
+  --warning: #4a3b32;
+  --warning-soft: rgba(74, 59, 50, 0.11);
+  --success: #3a473c;
+  --shadow: none;
+  --soft-shadow: none;
   --radius: 8px;
   --sidebar-width: 320px;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -25,27 +31,27 @@
 }
 
 body[data-view="daily"] {
-  --view-accent: #d94a38;
-  --view-accent-strong: #a93528;
-  --view-accent-soft: #f8ded9;
+  --view-accent: #3a473c;
+  --view-accent-strong: #2f392f;
+  --view-accent-soft: rgba(58, 71, 60, 0.1);
 }
 
 body[data-view="weekly"] {
-  --view-accent: #313b55;
-  --view-accent-strong: #1a1f2c;
-  --view-accent-soft: #e7e9ef;
+  --view-accent: #4a3b32;
+  --view-accent-strong: #372b24;
+  --view-accent-soft: rgba(74, 59, 50, 0.1);
 }
 
 body[data-view="monthly"] {
-  --view-accent: #b86f2e;
-  --view-accent-strong: #814617;
-  --view-accent-soft: #f3e2d2;
+  --view-accent: #5f6658;
+  --view-accent-strong: #3f453b;
+  --view-accent-soft: rgba(95, 102, 88, 0.1);
 }
 
 body[data-view="future"] {
-  --view-accent: #5d4b8c;
-  --view-accent-strong: #3f3165;
-  --view-accent-soft: #e8e2f5;
+  --view-accent: #675c4f;
+  --view-accent-strong: #4a3b32;
+  --view-accent-soft: rgba(103, 92, 79, 0.1);
 }
 
 * {
@@ -62,7 +68,9 @@ body {
   margin: 0;
   color: var(--ink);
   line-height: 1.6;
-  background: #f8f7f4;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(251, 249, 244, 0.72)),
+    var(--bg);
   background-attachment: fixed;
 }
 

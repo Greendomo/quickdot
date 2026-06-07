@@ -5,10 +5,10 @@
   overflow-y: auto;
   padding: 0;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 24px 48px rgba(30, 34, 39, 0.18);
+  box-shadow: none;
   animation: dialogIn 0.25s ease;
 }
 
@@ -21,7 +21,7 @@
 .migration-dialog form {
   display: grid;
   gap: 16px;
-  padding: 18px;
+  padding: 20px;
 }
 
 .dialog-heading,
@@ -33,11 +33,39 @@
 }
 
 .dialog-heading h2 {
+  font-family: var(--display-font);
   font-size: 18px;
+  font-weight: 600;
 }
 
 #migrationPreview {
   color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.notekun-dialog-callout {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.notekun-dialog-face {
+  width: 48px;
+  height: 48px;
+}
+
+.notekun-dialog-callout p {
+  margin: 0;
+  color: var(--ink);
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
@@ -54,9 +82,10 @@
 
 .dialog-list li {
   padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface-strong);
+  border: 0;
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
   overflow-wrap: anywhere;
   line-height: 1.4;
 }
@@ -93,8 +122,8 @@
   gap: 6px;
   padding: 4px;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #f5f2e9;
+  border-radius: 0;
+  background: transparent;
 }
 
 .language-picker button {
@@ -108,9 +137,9 @@
 }
 
 .language-picker button.active {
-  background: var(--ink);
-  color: var(--surface);
-  box-shadow: 0 8px 18px rgba(26, 31, 44, 0.12);
+  background: transparent;
+  color: var(--accent);
+  box-shadow: none;
 }
 
 .sync-fields {
@@ -131,8 +160,8 @@
   gap: 12px;
   padding: 12px;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface-strong);
+  border-radius: 0;
+  background: transparent;
 }
 
 .sync-account-copy {
@@ -242,8 +271,8 @@
   min-height: 44px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface-strong);
+  border-radius: 0;
+  background: transparent;
   color: var(--ink);
   font: inherit;
 }
@@ -259,7 +288,7 @@
   min-height: 38px;
   padding: 0 14px;
   border: 1px solid var(--accent);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: var(--accent);
   color: #fff;
   font-weight: 800;
@@ -268,7 +297,7 @@
 
 .primary-button:hover {
   background: var(--accent-strong);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .primary-button:active {
@@ -279,7 +308,7 @@
   min-height: 38px;
   padding: 0 14px;
   border: 1px solid var(--warning);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: var(--warning);
   color: #fff;
   font-weight: 800;
@@ -288,7 +317,7 @@
 
 .danger-button:hover {
   filter: brightness(0.92);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .danger-button:active {

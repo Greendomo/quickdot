@@ -31,6 +31,7 @@ const state = {
   syncBusyCount: 0,
   syncBackoffMs: 0,
   lastSyncAttemptAt: 0,
+  noteKunToastTimer: null,
   normalizedSyncAvailable: null,
   suppressDirty: false,
 };

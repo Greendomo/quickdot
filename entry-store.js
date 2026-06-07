@@ -1,8 +1,11 @@
 // QuickDot entry data operations. Loaded by index.html before entries.js.
 function toggleDone(id) {
+  const entry = state.entries.find((item) => item.id === id);
+  const shouldCelebrate = entry && !entry.done;
   updateEntry(id, (entry) => {
     entry.done = !entry.done;
   });
+  if (shouldCelebrate) showNoteKunToast(t("noteKunDoneToast"));
 }
 
 function togglePriority(id) {

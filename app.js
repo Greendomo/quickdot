@@ -1,4 +1,6 @@
 // QuickDot app module. Loaded by index.html.
+const NOTEKUN_WELCOME_STORAGE_KEY = "quickdot_notekun_welcome_date";
+
 async function boot() {
   if (shouldClearLocalEntries()) {
     clearLocalEntriesPayload();
@@ -17,7 +19,30 @@ async function boot() {
   render();
   registerServiceWorker();
   await initSync();
-  setTimeout(openYesterdayMigrationPrompt, 250);
+  scheduleStartupNoteKun();
+}
+
+function scheduleStartupNoteKun() {
+  setTimeout(() => {
+    openYesterdayMigrationPrompt();
+    if (!els.yesterdayDialog?.open) {
+      setTimeout(showNoteKunWelcomeOnce, 450);
+    }
+  }, 250);
+}
+
+function showNoteKunWelcomeOnce() {
+  if (!els.noteKunToast || els.yesterdayDialog?.open) return;
+
+  const todayKey = toDateKey(new Date());
+  try {
+    if (localStorage.getItem(NOTEKUN_WELCOME_STORAGE_KEY) === todayKey) return;
+    localStorage.setItem(NOTEKUN_WELCOME_STORAGE_KEY, todayKey);
+  } catch (_) {
+    // The greeting is optional; storage errors should never block the app.
+  }
+
+  showNoteKunToast(t("noteKunWelcomeToast"));
 }
 
 function shouldClearLocalEntries() {
@@ -119,5 +144,5 @@ function registerServiceWorker() {
 }
 
 boot().catch(() => {
-  setTimeout(openYesterdayMigrationPrompt, 250);
+  scheduleStartupNoteKun();
 });

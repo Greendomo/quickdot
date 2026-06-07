@@ -24,6 +24,22 @@ function closeEntryDialog() {
   hideDialog(els.entryDialog);
 }
 
+function showNoteKunToast(message) {
+  if (!els.noteKunToast || !els.noteKunToastMessage) return;
+  window.clearTimeout(state.noteKunToastTimer);
+  els.noteKunToastMessage.textContent = message;
+  els.noteKunToast.hidden = false;
+  els.noteKunToast.classList.remove("visible");
+  requestAnimationFrame(() => els.noteKunToast.classList.add("visible"));
+  state.noteKunToastTimer = window.setTimeout(() => {
+    els.noteKunToast.classList.remove("visible");
+    state.noteKunToastTimer = window.setTimeout(() => {
+      els.noteKunToast.hidden = true;
+      state.noteKunToastTimer = null;
+    }, 220);
+  }, 2200);
+}
+
 function addEntry() {
   const text = els.entryText.value.trim();
   if (!text) {
@@ -33,6 +49,7 @@ function addEntry() {
 
   const entryDate = els.entryDate.value || getDefaultEntryDate();
   const now = new Date().toISOString();
+  const isFirstEntryForDate = !state.entries.some((entry) => entry.date === entryDate);
 
   state.entries.unshift({
     id: crypto.randomUUID(),
@@ -56,6 +73,7 @@ function addEntry() {
   saveEntries();
   render();
   closeEntryDialog();
+  if (isFirstEntryForDate) showNoteKunToast(t("noteKunFirstEntryToast"));
 }
 
 function setEntryType(type) {

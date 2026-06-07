@@ -96,6 +96,11 @@
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
   }
 
+  .log-switch .add-entry-button {
+    right: 24px;
+    bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+
   .log-switch button {
     min-height: 52px;
     padding: 0 8px;
@@ -116,7 +121,7 @@
     max-width: none;
     max-height: min(86vh, 86dvh);
     margin: auto 0 0;
-    border-radius: 16px 16px 0 0;
+    border-radius: 0;
   }
 
   .migration-dialog form {
@@ -169,18 +174,10 @@ button,
 input,
 select,
 textarea,
-.icon-button,
 .ghost-button,
 .text-button,
 .primary-button,
 .danger-button,
-.search-button,
-.info-button,
-.brand-sync-button,
-.period-date-nav,
-.log-switch,
-.log-switch button,
-.log-switch .add-entry-button,
 .language-picker,
 .language-picker button,
 .entry-type-tabs,
@@ -193,15 +190,11 @@ textarea,
 .date-field textarea,
 #entryText,
 #entryDate,
-.entry-symbol,
-.entry-action-button,
 .subitem-toggle,
-.subitem-symbol,
 .subitem-delete,
 .more-count button,
 .compact-item button,
 .collapsible-header,
-.collapse-icon,
 .day-button,
 .month-date-cell,
 .month-date-cell span {
@@ -211,5 +204,5 @@ textarea,
 .entry-dialog #entryText,
 .entry-dialog #entryDate,
 .entry-dialog .primary-button {
-  border-radius: var(--radius);
+  border-radius: 0;
 }
