@@ -1,5 +1,6 @@
 // QuickDot app module. Loaded by index.html.
 const NOTEKUN_WELCOME_STORAGE_KEY = "quickdot_notekun_welcome_date";
+const NOTEKUN_LAST_OPEN_STORAGE_KEY = "quickdot_notekun_last_open_date";
 
 async function boot() {
   if (shouldClearLocalEntries()) {
@@ -35,14 +36,21 @@ function showNoteKunWelcomeOnce() {
   if (!els.noteKunToast || els.yesterdayDialog?.open) return;
 
   const todayKey = toDateKey(new Date());
+  let messageKey = getNoteKunWelcomeKey();
   try {
     if (localStorage.getItem(NOTEKUN_WELCOME_STORAGE_KEY) === todayKey) return;
+    const lastOpenKey = localStorage.getItem(NOTEKUN_LAST_OPEN_STORAGE_KEY);
+    if (lastOpenKey) {
+      const daysAway = Math.floor((parseDateKey(todayKey) - parseDateKey(lastOpenKey)) / (24 * 60 * 60 * 1000));
+      if (daysAway >= 3) messageKey = "noteKunReturnToast";
+    }
     localStorage.setItem(NOTEKUN_WELCOME_STORAGE_KEY, todayKey);
+    localStorage.setItem(NOTEKUN_LAST_OPEN_STORAGE_KEY, todayKey);
   } catch (_) {
     // The greeting is optional; storage errors should never block the app.
   }
 
-  showNoteKunToast(t("noteKunWelcomeToast"));
+  showNoteKunToast(t(messageKey));
 }
 
 function shouldClearLocalEntries() {

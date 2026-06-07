@@ -1,0 +1,83 @@
+/* Log lists and entries */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.view-panel {
+  display: none;
+}
+
+.view-panel.active {
+  display: grid;
+  animation: fadeSlideIn 0.25s ease;
+}
+
+.view-panel.active .section-heading h3 {
+  color: var(--view-accent-strong);
+}
+
+.log-column,
+.focus-column {
+  min-width: 0;
+}
+
+.log-column {
+  padding-bottom: 120px;
+  border-left: 0 !important;
+  box-shadow: none !important;
+}
+
+.section-heading {
+  display: none;
+  margin-bottom: 12px;
+}
+
+.section-heading h3 {
+  font-size: 16px;
+}
+
+.entry-list,
+.compact-list {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  border-left: 0 !important;
+  box-shadow: none !important;
+  list-style: none;
+}
+
+.date-group,
+.future-month {
+  display: grid;
+  gap: 10px;
+}
+
+.date-group+.date-group,
+.future-month+.future-month {
+  margin-top: 28px;
+}
+
+.group-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.group-heading strong {
+  font-family: var(--display-font);
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.group-heading span {
+  color: var(--muted);
+  font-size: 16px;
+  letter-spacing: 0.18em;
+}

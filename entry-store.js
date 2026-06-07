@@ -5,7 +5,7 @@ function toggleDone(id) {
   updateEntry(id, (entry) => {
     entry.done = !entry.done;
   });
-  if (shouldCelebrate) showNoteKunToast(t("noteKunDoneToast"));
+  if (shouldCelebrate) showDoneNoteKunToast();
 }
 
 function togglePriority(id) {

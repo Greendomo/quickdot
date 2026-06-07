@@ -1,0 +1,140 @@
+.empty-state {
+  display: none;
+  padding: 56px 0;
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+}
+
+.empty-state p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.empty-action {
+  margin-top: 18px;
+}
+
+.empty-state.visible {
+  display: block;
+}
+
+.notekun-symbols {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.notekun-empty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin: 0 auto 18px;
+}
+
+.notekun-face {
+  width: 104px;
+  height: 104px;
+  filter: none;
+  animation: noteKunSoftBreathe 4.8s ease-in-out infinite;
+}
+
+.notekun-speech {
+  max-width: min(320px, 100%);
+  padding: 9px 13px;
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.notekun-toast {
+  position: fixed;
+  right: max(12px, calc((100vw - 760px) / 2 + 14px));
+  bottom: calc(98px + env(safe-area-inset-bottom));
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(320px, calc(100vw - 24px));
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: rgba(251, 249, 244, 0.97);
+  box-shadow: none;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.notekun-toast[hidden] {
+  display: none;
+}
+
+.notekun-toast.visible {
+  opacity: 1;
+  animation: noteKunToastArrive 0.26s ease both;
+  transform: translateY(0);
+}
+
+.notekun-toast-face {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  filter: none;
+}
+
+.notekun-bubble {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notekun-face,
+  .notekun-toast,
+  .notekun-toast.visible {
+    animation: none;
+    transition: opacity 0.12s ease;
+  }
+
+  .notekun-toast {
+    transform: translateY(0);
+  }
+}
+
+@keyframes noteKunSoftBreathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(-1deg);
+  }
+}
+
+@keyframes noteKunToastArrive {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

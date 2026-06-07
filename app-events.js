@@ -91,7 +91,7 @@ function bindEvents() {
   els.migrationCancel.addEventListener("click", closeMigrationDialog);
   els.migrationClose.addEventListener("click", closeMigrationDialog);
   els.yesterdayForm.addEventListener("submit", confirmYesterdayMigration);
-  els.yesterdayLater.addEventListener("click", closeYesterdayDialog);
+  els.yesterdayLater.addEventListener("click", deferYesterdayMigration);
   els.yesterdayClose.addEventListener("click", closeYesterdayDialog);
   els.copyForm.addEventListener("submit", confirmCopy);
   els.copyCancel.addEventListener("click", closeCopyDialog);

@@ -1,0 +1,262 @@
+.focus-column {
+  display: none;
+  gap: 16px;
+}
+
+.focus-panel {
+  padding: 16px;
+}
+
+.future-log {
+  display: grid;
+  gap: 34px;
+}
+
+.date-group {
+  min-height: 128px;
+  padding: 34px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.date-group.active-day .group-heading strong {
+  color: var(--view-accent-strong);
+}
+
+body[data-view="weekly"] .date-group.active-day .group-heading,
+body[data-view="monthly"] .date-group.active-day .group-heading {
+  position: relative;
+  padding-left: 14px;
+}
+
+body[data-view="weekly"] .date-group.active-day .group-heading::before,
+body[data-view="monthly"] .date-group.active-day .group-heading::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 3px;
+  height: 1.1em;
+  border-radius: 999px;
+  background: var(--accent);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.date-group .entry-list {
+  gap: 4px;
+}
+
+.date-group .entry-item {
+  padding: 0;
+}
+
+body[data-view="weekly"] .date-group .entry-item,
+body[data-view="monthly"] .date-group .entry-item,
+body[data-view="future"] .future-month .entry-item {
+  border-bottom: 0;
+}
+
+body[data-view="weekly"] .date-group .entry-list,
+body[data-view="monthly"] .date-group .entry-list,
+body[data-view="future"] .future-month .entry-list {
+  gap: 8px;
+}
+
+.date-group .entry-text {
+  font-size: 17px;
+}
+
+.more-count {
+  padding-left: 46px;
+}
+
+.more-count button {
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-align: left;
+}
+
+.more-count button:hover,
+.more-count button:focus-visible {
+  color: var(--ink);
+}
+
+body[data-view="daily"] .date-group,
+body[data-view="daily"] .entry-item,
+body[data-view="future"] .date-group {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+body[data-view="daily"] .entry-list {
+  gap: 0;
+}
+
+body[data-view="daily"] .entry-item {
+  position: relative;
+  padding: 0;
+}
+
+body[data-view="daily"] .entry-swipe-content {
+  padding: 26px 0;
+}
+
+body[data-view="daily"] .entry-item+.entry-item {
+  border-top: 0;
+}
+
+body[data-view="daily"] .entry-item:hover {
+  background: transparent;
+}
+
+body[data-view="daily"] .entry-text {
+  font-size: 17px;
+}
+
+body[data-view="daily"] .empty-state.visible {
+  margin-top: 34px;
+}
+
+.month-calendar-card {
+  list-style: none;
+}
+
+.month-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 34px 22px;
+  padding: 12px 4px 38px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.month-weekday {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.month-date-cell {
+  position: relative;
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.month-date-cell span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.month-date-cell.active span {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
+.month-date-cell i {
+  position: absolute;
+  bottom: -7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.monthly-goals {
+  display: grid;
+  gap: 20px;
+  padding-top: 34px;
+}
+
+.monthly-goals h3 {
+  font-family: var(--display-font);
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.future-month {
+  grid-template-columns: 1fr;
+  gap: 12px;
+  min-height: 96px;
+}
+
+.future-month .group-heading {
+  display: block;
+  padding-bottom: 2px;
+}
+
+.future-month .entry-list {
+  min-height: 72px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.future-month .entry-item {
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  padding: 0;
+}
+
+.future-month .entry-symbol {
+  justify-self: start;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.future-month .entry-text {
+  font-size: 18px;
+}
+
+.compact-item {
+  display: grid;
+  gap: 3px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.compact-item:last-child {
+  border-bottom: 0;
+}
+
+.compact-item button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.compact-item button:hover {
+  color: var(--accent-strong);
+}
+
+.compact-meta {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.text-button {
+  min-height: 32px;
+  font-size: 13px;
+}

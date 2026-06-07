@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=91" />
+    <link rel="stylesheet" href="./styles.css?v=102" />
   </head>
   <body>
     <svg class="notekun-symbols" aria-hidden="true" focusable="false">
@@ -43,7 +43,6 @@
     <div class="app-shell">
       <header class="sidebar app-header" aria-label="筆記導覽">
         <div class="brand">
-          <div class="brand-mark" aria-hidden="true">•</div>
           <div class="brand-copy">
             <div class="brand-title-row">
               <h1>ＱuickDot</h1>
@@ -321,10 +320,10 @@
           ></textarea>
           <input id="entryDate" type="date" aria-label="紀錄日期" />
         </div>
-        <div class="composer-options">
-          <label><input id="priorityInput" type="checkbox" /> <span id="priorityLabel">重要</span></label>
-        </div>
         <div class="dialog-actions">
+          <div class="composer-options">
+            <label><input id="priorityInput" type="checkbox" /> <span id="priorityLabel">重要</span></label>
+          </div>
           <button class="primary-button" type="submit">Save Entry →</button>
           <button class="ghost-button" type="button" id="entryCancel">取消</button>
         </div>

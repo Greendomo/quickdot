@@ -1,4 +1,11 @@
 // QuickDot entries module. Loaded by index.html.
+const NOTEKUN_DONE_TOAST_KEYS = [
+  "noteKunDoneToast",
+  "noteKunDoneToastAlt1",
+  "noteKunDoneToastAlt2",
+  "noteKunDoneToastAlt3",
+];
+
 function showDialog(dialog, focusTarget = null) {
   if (typeof dialog.showModal === "function") {
     dialog.showModal();
@@ -40,6 +47,31 @@ function showNoteKunToast(message) {
   }, 2200);
 }
 
+function showRandomNoteKunToast(keys) {
+  if (!keys.length) return;
+  const key = keys[Math.floor(Math.random() * keys.length)];
+  showNoteKunToast(t(key));
+}
+
+function showDoneNoteKunToast() {
+  showRandomNoteKunToast(NOTEKUN_DONE_TOAST_KEYS);
+}
+
+function getNoteKunWelcomeKey() {
+  const hour = new Date().getHours();
+  if (hour < 11) return "noteKunWelcomeMorning";
+  if (hour < 17) return "noteKunWelcomeAfternoon";
+  return "noteKunWelcomeEvening";
+}
+
+function getEntryNoteKunToastKey(type, isImportant, isFirstEntryForDate) {
+  if (isFirstEntryForDate) return "noteKunFirstEntryToast";
+  if (isImportant) return "noteKunImportantEntryToast";
+  if (type === "event") return "noteKunEntryEventToast";
+  if (type === "note") return "noteKunEntryNoteToast";
+  return "noteKunEntryTaskToast";
+}
+
 function addEntry() {
   const text = els.entryText.value.trim();
   if (!text) {
@@ -50,14 +82,16 @@ function addEntry() {
   const entryDate = els.entryDate.value || getDefaultEntryDate();
   const now = new Date().toISOString();
   const isFirstEntryForDate = !state.entries.some((entry) => entry.date === entryDate);
+  const entryType = els.entryType.value;
+  const isImportant = els.priorityInput.checked;
 
   state.entries.unshift({
     id: crypto.randomUUID(),
     date: entryDate,
     text,
-    type: els.entryType.value,
+    type: entryType,
     done: false,
-    important: els.priorityInput.checked,
+    important: isImportant,
     migrated: false,
     subitems: [],
     sortOrder: getTopSortOrder(entryDate),
@@ -73,7 +107,7 @@ function addEntry() {
   saveEntries();
   render();
   closeEntryDialog();
-  if (isFirstEntryForDate) showNoteKunToast(t("noteKunFirstEntryToast"));
+  showNoteKunToast(t(getEntryNoteKunToastKey(entryType, isImportant, isFirstEntryForDate)));
 }
 
 function setEntryType(type) {
@@ -171,6 +205,7 @@ function confirmSubitem(event) {
     });
   });
   closeSubitemDialog();
+  showNoteKunToast(t("noteKunSubitemToast"));
 }
 
 function openEditDialog(id) {
@@ -244,6 +279,7 @@ function confirmCopy(event) {
   closeCopyDialog();
   saveEntries();
   render();
+  showNoteKunToast(t("noteKunCopiedToast"));
 }
 
 function openMigrationDialog(id) {
@@ -283,6 +319,11 @@ function closeYesterdayDialog() {
   hideDialog(els.yesterdayDialog);
 }
 
+function deferYesterdayMigration() {
+  closeYesterdayDialog();
+  showNoteKunToast(t("noteKunYesterdayLaterToast"));
+}
+
 function confirmYesterdayMigration(event) {
   event.preventDefault();
   const today = toDateKey(new Date());
@@ -299,6 +340,7 @@ function confirmYesterdayMigration(event) {
   closeYesterdayDialog();
   saveEntries();
   render();
+  showNoteKunToast(t("noteKunYesterdayMigratedToast", { count: entries.length }));
 }
 
 function confirmMigration(event) {
@@ -324,4 +366,5 @@ function confirmMigration(event) {
   closeMigrationDialog();
   saveEntries();
   render();
+  showNoteKunToast(t("noteKunMigratedToast"));
 }

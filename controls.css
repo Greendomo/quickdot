@@ -1,7 +1,7 @@
 /* Top controls and composer */
 .main {
   min-width: 0;
-  padding: 0 clamp(30px, 6vw, 64px) 136px;
+  padding: 0 var(--page-gutter) 136px;
   background: var(--surface);
   background-size: 100% 100%;
   background-position: 0 0;
@@ -16,8 +16,8 @@
   min-height: 108px;
   align-items: center;
   justify-content: center;
-  margin: 0 calc(clamp(30px, 6vw, 64px) * -1) 42px;
-  padding: 34px clamp(30px, 6vw, 64px) 26px;
+  margin: 0 calc(var(--page-gutter) * -1) 42px;
+  padding: 34px var(--page-gutter) 26px;
   border-bottom: 1px solid var(--line);
   background: rgba(251, 249, 244, 0.96);
   backdrop-filter: blur(10px);
@@ -169,11 +169,12 @@ body[data-view="monthly"] .period-date-nav {
   margin: 0 auto;
   padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
   border: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(44, 44, 44, 0.08);
   border-radius: 0;
-  background: rgba(251, 249, 244, 0.96);
+  background: rgba(251, 249, 244, 0.78);
   box-shadow: none;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px) saturate(112%);
+  -webkit-backdrop-filter: blur(8px) saturate(112%);
 }
 
 .log-switch button {
@@ -277,32 +278,28 @@ body[data-view="monthly"] .period-date-nav {
 
 .entry-dialog {
   width: min(560px, calc(100vw - 24px));
-  border-radius: 0;
+  border: 1px solid rgba(44, 44, 44, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.entry-dialog::backdrop {
+  background: rgba(44, 44, 44, 0.22);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .entry-dialog form {
   position: relative;
   display: grid;
-  gap: 20px;
-  padding: 40px 28px 28px;
-}
-
-.entry-dialog form::before {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  width: 54px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--line);
-  content: "";
-  transform: translateX(-50%);
+  gap: 22px;
+  padding: 30px 30px 28px;
 }
 
 .entry-dialog .dialog-heading {
   position: absolute;
-  top: 16px;
-  right: 18px;
+  top: 18px;
+  right: 20px;
 }
 
 .entry-dialog .dialog-heading h2 {
@@ -313,12 +310,26 @@ body[data-view="monthly"] .period-date-nav {
   clip: rect(0 0 0 0);
 }
 
+.entry-dialog #entryClose {
+  width: 30px;
+  min-height: 30px;
+  border: 0;
+  color: rgba(44, 44, 44, 0.44);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.entry-dialog #entryClose:hover {
+  color: var(--ink);
+}
+
 .entry-dialog .composer-row {
   display: grid;
   width: 100%;
   min-width: 0;
-  grid-template-columns: 1fr minmax(120px, auto);
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 20px;
   align-items: start;
 }
 
@@ -386,20 +397,22 @@ body[data-view="monthly"] .period-date-nav {
   min-width: 0;
   max-width: 100%;
   min-height: 154px;
-  padding: 14px 0;
+  padding: 12px 0 14px;
   border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0;
   background: transparent;
   color: var(--ink);
   font-family: var(--display-font);
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 400;
   line-height: 1.35;
   resize: vertical;
 }
 
 .entry-dialog #entryText::placeholder {
-  color: rgba(44, 44, 44, 0.3);
+  color: rgba(44, 44, 44, 0.2);
+  font-weight: 300;
 }
 
 .entry-dialog #entryText:focus {
@@ -407,22 +420,31 @@ body[data-view="monthly"] .period-date-nav {
 }
 
 .entry-dialog .dialog-actions {
+  display: flex;
+  align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 2px;
 }
 
 .entry-dialog .primary-button {
   width: auto;
-  min-width: 168px;
-  min-height: 56px;
+  min-width: 150px;
+  min-height: 48px;
   border-color: var(--accent);
-  border-radius: 0;
+  border-radius: 8px;
   background: var(--accent);
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .entry-dialog #entryCancel {
   display: inline-flex;
+  min-height: 48px;
+  padding: 0 18px;
+  border-color: rgba(44, 44, 44, 0.1);
+  border-radius: 8px;
+  color: var(--muted);
 }
 
 .composer-row {
@@ -470,12 +492,31 @@ body[data-view="monthly"] .period-date-nav {
 }
 
 .entry-dialog #entryDate {
-  justify-self: end;
-  min-height: 58px;
-  padding: 0 16px;
+  grid-column: 1 / -1;
+  justify-self: stretch;
+  width: 100%;
+  min-height: 46px;
+  padding: 8px 0;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(44, 44, 44, 0.1) !important;
   border-radius: 0;
   background: transparent;
-  font-weight: 800;
+  color: var(--muted);
+  font-weight: 500;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+.entry-dialog #entryDate:focus {
+  border-bottom-color: var(--view-accent) !important;
+  outline: 0;
+}
+
+.entry-dialog #entryDate::-webkit-calendar-picker-indicator {
+  margin-inline-start: 8px;
+  opacity: 0.46;
+  transform: translateY(-1px);
+  vertical-align: middle;
 }
 
 .composer-options {
@@ -490,6 +531,22 @@ body[data-view="monthly"] .period-date-nav {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+}
+
+.entry-dialog .composer-options {
+  margin: 0 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.entry-dialog .composer-options label {
+  align-items: center;
+  min-height: 48px;
+}
+
+.entry-dialog .composer-options input {
+  margin: 0;
+  transform: translateY(-1px);
 }
 
 .toolbar {

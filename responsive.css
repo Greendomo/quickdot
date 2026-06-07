@@ -24,12 +24,16 @@
 }
 
 @media (max-width: 620px) {
+  :root {
+    --page-gutter: 18px;
+  }
+
   .sidebar {
-    padding: 18px;
+    padding: 18px var(--page-gutter);
   }
 
   .main {
-    padding: 18px 18px 126px;
+    padding: 18px var(--page-gutter) 126px;
   }
 
   .topbar {
@@ -202,7 +206,6 @@ textarea,
 }
 
 .entry-dialog #entryText,
-.entry-dialog #entryDate,
-.entry-dialog .primary-button {
+.entry-dialog #entryDate {
   border-radius: 0;
 }
