@@ -14,7 +14,7 @@ function handleDateNavigationClick(event) {
   const dateButton = event.target.closest("[data-date]");
   if (!dateButton || event.target.closest("[data-id]")) return false;
 
-  closeOpenEntryMenus();
+  closeOpenSwipeRows();
   state.view = "daily";
   state.selectedDate = dateButton.dataset.date;
   state.calendarMonth = startOfMonth(parseDateKey(state.selectedDate));

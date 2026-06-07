@@ -1,6 +1,8 @@
 // QuickDot entry list interaction handlers. Loaded before app-events.js.
 
 function handleMainClick(event) {
+  if (shouldIgnoreClickAfterSwipe(event)) return;
+
   if (state.dragSort?.didDrag) {
     event.preventDefault();
     event.stopPropagation();

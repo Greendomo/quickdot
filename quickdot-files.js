@@ -94,6 +94,7 @@ const QUICKDOT_TEST_FILES = [
   "tests/data-logic-test.js",
   "tests/seed-cleanup-test.js",
   "tests/entry-actions-test.js",
+  "tests/entry-swipe-test.js",
   "tests/sync-maintenance-test.js",
   "tests/scroll-preservation-test.js",
   "tests/sync-auth-ui-test.js",

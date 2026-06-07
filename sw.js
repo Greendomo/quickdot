@@ -1,6 +1,6 @@
 importScripts("./quickdot-files.js");
 
-const CACHE_NAME = "quickdot-cache-v75";
+const CACHE_NAME = "quickdot-cache-v77";
 const APP_SHELL = self.QUICKDOT_APP_SHELL;
 
 self.addEventListener("install", (event) => {
@@ -41,7 +41,7 @@ self.addEventListener("fetch", (event) => {
             : requestUrl.pathname.endsWith("/health.html")
               ? "./health.html"
               : "./index.html";
-          return caches.match(fallback);
+          return caches.match(fallback, { ignoreSearch: true });
         }),
     );
     return;
@@ -55,6 +55,6 @@ self.addEventListener("fetch", (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         return response;
       })
-      .catch(() => caches.match(event.request)),
+      .catch(() => caches.match(event.request, { ignoreSearch: true })),
   );
 });

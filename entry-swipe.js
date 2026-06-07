@@ -51,12 +51,15 @@ function finishEntrySwipe(event) {
 
   const item = swipe.item;
   const offset = getEntrySwipeOffset(item);
+  const openedBySwipe = swipe.active && Math.abs(offset) > ENTRY_SWIPE_OPEN_THRESHOLD;
   item.classList.remove("swiping");
 
-  if (swipe.active && offset > ENTRY_SWIPE_OPEN_THRESHOLD) {
+  if (openedBySwipe && offset > 0) {
     openSwipeRow(item, "start");
-  } else if (swipe.active && offset < -ENTRY_SWIPE_OPEN_THRESHOLD) {
+    blockClickAfterSwipe();
+  } else if (openedBySwipe && offset < 0) {
     openSwipeRow(item, "end");
+    blockClickAfterSwipe();
   } else {
     resetSwipeRow(item);
   }
@@ -82,6 +85,25 @@ function closeSwipeRowOnContentClick(event) {
   if (!item || event.target.closest("[data-action]")) return false;
   resetSwipeRow(item);
   return true;
+}
+
+function shouldIgnoreClickAfterSwipe(event) {
+  if (!state.entrySwipeBlockClick) return false;
+  event.preventDefault();
+  event.stopPropagation();
+  window.clearTimeout(state.entrySwipeBlockClickTimer);
+  state.entrySwipeBlockClick = false;
+  state.entrySwipeBlockClickTimer = null;
+  return true;
+}
+
+function blockClickAfterSwipe() {
+  window.clearTimeout(state.entrySwipeBlockClickTimer);
+  state.entrySwipeBlockClick = true;
+  state.entrySwipeBlockClickTimer = window.setTimeout(() => {
+    state.entrySwipeBlockClick = false;
+    state.entrySwipeBlockClickTimer = null;
+  }, 250);
 }
 
 function openSwipeRow(item, side) {

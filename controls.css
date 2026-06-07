@@ -407,10 +407,12 @@ body[data-view="monthly"] .period-date-nav {
 
 .entry-dialog .dialog-actions {
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .entry-dialog .primary-button {
-  width: 100%;
+  width: auto;
+  min-width: 168px;
   min-height: 56px;
   border-color: var(--ink);
   border-radius: 14px;
@@ -419,7 +421,7 @@ body[data-view="monthly"] .period-date-nav {
 }
 
 .entry-dialog #entryCancel {
-  display: none;
+  display: inline-flex;
 }
 
 .composer-row {

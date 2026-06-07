@@ -55,7 +55,7 @@ function closeSymbolSettings() {
 }
 
 function setView(view) {
-  closeOpenEntryMenus();
+  closeOpenSwipeRows();
   state.view = view;
 
   if (view === "daily") {
@@ -86,7 +86,7 @@ function setView(view) {
 }
 
 function shiftVisiblePeriod(direction) {
-  closeOpenEntryMenus();
+  closeOpenSwipeRows();
 
   if (state.view === "monthly") {
     const nextMonth = addMonths(state.calendarMonth, direction);
