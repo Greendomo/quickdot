@@ -1,6 +1,6 @@
 /* Entry UI bundle. Keep this order: layout -> list -> subitems -> Note-kun -> log groups. */
-@import url("./entry-layout.css?v=102");
-@import url("./entry-list.css?v=102");
-@import url("./entry-subitems.css?v=102");
-@import url("./notekun.css?v=102");
-@import url("./log-groups.css?v=102");
+@import url("./entry-layout.css?v=105");
+@import url("./entry-list.css?v=105");
+@import url("./entry-subitems.css?v=105");
+@import url("./notekun.css?v=105");
+@import url("./log-groups.css?v=105");

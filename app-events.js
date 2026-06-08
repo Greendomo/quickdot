@@ -111,8 +111,6 @@ function bindEvents() {
   els.syncSignIn.addEventListener("click", signInSyncAccount);
   els.syncSignOut.addEventListener("click", signOutSyncAccount);
   els.syncForgotPassword.addEventListener("click", requestPasswordReset);
-  els.syncPull.addEventListener("click", pullFromCloud);
-  els.syncPush.addEventListener("click", pushToCloud);
   els.syncNow.addEventListener("click", syncLatest);
   els.passwordResetForm.addEventListener("submit", confirmPasswordReset);
   els.passwordResetCancel.addEventListener("click", closePasswordResetDialog);

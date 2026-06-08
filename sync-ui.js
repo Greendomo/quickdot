@@ -25,11 +25,9 @@ function setSyncControlsDisabled(disabled) {
     els.syncSignIn,
     els.syncSignOut,
     els.syncForgotPassword,
-    els.syncPull,
-    els.syncPush,
     els.syncNow,
   ].forEach((button) => {
-    button.disabled = disabled;
+    if (button) button.disabled = disabled;
   });
 }
 
@@ -57,7 +55,7 @@ function updateSyncStatus(message) {
   const meta = loadSyncMeta();
   const account = state.syncSession?.user?.email ? t("syncAccount", { email: state.syncSession.user.email }) : t("syncSignedOutStatus");
   const dirty = meta.localDirty && !navigator.onLine ? t("syncOfflineQueued") : meta.localDirty ? t("syncLocalDirty") : t("syncLocalClean");
-  els.syncStatus.textContent = message || `${account}。${dirty}。`;
+  els.syncStatus.textContent = message || (state.syncSession ? `${dirty}。` : `${account}。${dirty}。`);
   updateSyncButtonState(getSyncButtonState(message, meta), els.syncStatus.textContent);
 }
 

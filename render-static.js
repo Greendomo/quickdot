@@ -98,7 +98,6 @@ function renderStaticText() {
   setText("#cloudSyncTitle", t("cloudSync"));
   setText("#dataSettingsTitle", t("dataManagement"));
   setText("#dataSettingsDescription", t("dataManagementDescription"));
-  setText("#healthCheckLink", t("healthCheck"));
   setText("#adminDashboardLink", t("adminDashboard"));
   setText("#aboutTitle", t("about"));
   setText("#aboutDescription", t("aboutDescription"));
@@ -109,8 +108,6 @@ function renderStaticText() {
   setText("#syncSignIn", t("signIn"));
   setText("#syncSignOut", t("signOut"));
   setText("#syncForgotPassword", t("forgotPassword"));
-  setText("#syncPull", t("cloudDownload"));
-  setText("#syncPush", t("cloudUpload"));
   setText("#syncNow", t("syncLatest"));
   setText("#passwordResetTitle", t("passwordResetTitle"));
   els.passwordResetClose.setAttribute("aria-label", t("close"));

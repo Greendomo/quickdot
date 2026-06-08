@@ -117,29 +117,46 @@
 }
 
 .language-picker {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  padding: 4px;
-  border: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: center;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 1px solid var(--line-soft);
   border-radius: 0;
   background: transparent;
 }
 
 .language-picker button {
-  min-height: 42px;
-  padding: 0 10px;
+  position: relative;
+  min-height: 32px;
+  padding: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: 0;
   background: transparent;
   color: var(--muted);
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .language-picker button.active {
   background: transparent;
   color: var(--accent);
+  font-weight: 600;
   box-shadow: none;
+}
+
+.language-picker button.active::after {
+  position: absolute;
+  right: 0;
+  bottom: -9px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent);
+  content: "";
 }
 
 .sync-fields {
@@ -158,8 +175,8 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  padding: 12px;
-  border: 1px solid var(--line);
+  padding: 2px 0 4px;
+  border: 0;
   border-radius: 0;
   background: transparent;
 }
@@ -188,7 +205,13 @@
 }
 
 .sync-logout-button {
-  min-width: 82px;
+  min-width: 74px;
+  min-height: 34px;
+  border-color: rgba(44, 44, 44, 0.12);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .sync-action-group {
@@ -235,17 +258,27 @@
 }
 
 .sync-data-actions {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  padding-top: 4px;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding-top: 6px;
 }
 
 .sync-now-button {
   grid-column: 1 / -1;
   width: 100%;
-  min-height: 48px;
-  border-color: var(--warning);
-  background: var(--warning);
-  font-size: 16px;
+  min-height: 44px;
+  border-color: var(--accent) !important;
+  border-radius: 8px;
+  background: transparent !important;
+  color: var(--accent) !important;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sync-now-button:hover,
+.sync-now-button:focus-visible {
+  background: var(--accent-soft) !important;
+  color: var(--accent-strong) !important;
 }
 
 .sync-actions {
@@ -257,6 +290,33 @@
   justify-content: flex-start;
   padding-top: 4px;
   border-top: 1px solid var(--line);
+}
+
+.setting-link-item {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+}
+
+.setting-link-item::after {
+  color: var(--muted);
+  content: "›";
+  font-size: 20px;
+  line-height: 1;
+}
+
+.setting-link-item:hover,
+.setting-link-item:focus-visible {
+  color: var(--accent);
 }
 
 .date-field {

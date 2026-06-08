@@ -106,8 +106,6 @@ const els = {
   syncSignIn: document.querySelector("#syncSignIn"),
   syncSignOut: document.querySelector("#syncSignOut"),
   syncForgotPassword: document.querySelector("#syncForgotPassword"),
-  syncPull: document.querySelector("#syncPull"),
-  syncPush: document.querySelector("#syncPush"),
   syncNow: document.querySelector("#syncNow"),
   syncClose: document.querySelector("#syncClose"),
   passwordResetDialog: document.querySelector("#passwordResetDialog"),

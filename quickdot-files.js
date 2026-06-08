@@ -2,7 +2,6 @@ const QUICKDOT_APP_SHELL = [
   "./",
   "./index.html",
   "./admin.html",
-  "./health.html",
   "./admin.css",
   "./styles.css",
   "./base.css",

@@ -1,6 +1,6 @@
 importScripts("./quickdot-files.js");
 
-const CACHE_NAME = "quickdot-cache-v102";
+const CACHE_NAME = "quickdot-cache-v105";
 const APP_SHELL = self.QUICKDOT_APP_SHELL;
 
 self.addEventListener("install", (event) => {
@@ -38,9 +38,7 @@ self.addEventListener("fetch", (event) => {
         .catch(() => {
           const fallback = requestUrl.pathname.endsWith("/admin.html")
             ? "./admin.html"
-            : requestUrl.pathname.endsWith("/health.html")
-              ? "./health.html"
-              : "./index.html";
+            : "./index.html";
           return caches.match(fallback, { ignoreSearch: true });
         }),
     );
