@@ -69,6 +69,8 @@ function bindEvents() {
   els.entryList.addEventListener("pointerup", finishDragSort);
   els.entryList.addEventListener("pointercancel", cancelDragSort);
   els.entryList.addEventListener("lostpointercapture", cancelDragSort);
+  document.addEventListener("selectstart", blockDragNativeSelection);
+  document.addEventListener("contextmenu", blockDragNativeSelection);
 
   els.main.addEventListener("click", handleMainClick);
 
@@ -111,7 +113,6 @@ function bindEvents() {
   els.syncSignIn.addEventListener("click", signInSyncAccount);
   els.syncSignOut.addEventListener("click", signOutSyncAccount);
   els.syncForgotPassword.addEventListener("click", requestPasswordReset);
-  els.syncNow.addEventListener("click", syncLatest);
   els.passwordResetForm.addEventListener("submit", confirmPasswordReset);
   els.passwordResetCancel.addEventListener("click", closePasswordResetDialog);
   els.passwordResetClose.addEventListener("click", closePasswordResetDialog);

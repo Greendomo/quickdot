@@ -108,7 +108,6 @@ function renderStaticText() {
   setText("#syncSignIn", t("signIn"));
   setText("#syncSignOut", t("signOut"));
   setText("#syncForgotPassword", t("forgotPassword"));
-  setText("#syncNow", t("syncLatest"));
   setText("#passwordResetTitle", t("passwordResetTitle"));
   els.passwordResetClose.setAttribute("aria-label", t("close"));
   setText("#passwordResetDescription", t("passwordResetDescription"));

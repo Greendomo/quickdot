@@ -9,6 +9,9 @@
   background: transparent;
   touch-action: pan-y;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
   animation: slideIn 0.2s ease;
   box-shadow: none !important;
   transition:
@@ -28,6 +31,9 @@
   padding: 26px 0;
   border-radius: 0;
   background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   transition: transform 0.22s ease;
 }
 
@@ -121,10 +127,16 @@
 
 .entry-list.sorting {
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .entry-item.drag-armed {
   border-color: var(--accent);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .entry-item.dragging {
@@ -133,6 +145,9 @@
   box-shadow: var(--shadow);
   cursor: grabbing;
   opacity: 0.92;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .entry-item.dragging .entry-swipe-content {
@@ -185,6 +200,8 @@
   line-height: 1.55;
   font-size: 18px;
   letter-spacing: 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .entry-meta {

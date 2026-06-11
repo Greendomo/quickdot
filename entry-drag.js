@@ -11,6 +11,7 @@ function startDragHold(event) {
   state.dragSort = {
     item,
     pointerId,
+    startX: event.clientX,
     startY: event.clientY,
     dragging: false,
     didDrag: false,
@@ -23,6 +24,7 @@ function startDragHold(event) {
 
 function beginDragSort(pointerId) {
   if (!state.dragSort || state.dragSort.pointerId !== pointerId) return;
+  clearDragTextSelection();
   state.dragSort.dragging = true;
   state.dragSort.didDrag = true;
   state.dragSort.item.classList.remove("drag-armed");
@@ -34,7 +36,7 @@ function moveDragSort(event) {
   const drag = state.dragSort;
   if (!drag || drag.pointerId !== event.pointerId) return;
 
-  if (!drag.dragging && Math.abs(event.clientY - drag.startY) > 10) {
+  if (!drag.dragging && Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) > 10) {
     cancelDragSort();
     return;
   }
@@ -58,6 +60,7 @@ function finishDragSort(event) {
   drag.item.classList.remove("drag-armed");
 
   if (drag.dragging) {
+    clearDragTextSelection();
     drag.item.classList.remove("dragging");
     els.entryList.classList.remove("sorting");
     persistVisibleEntryOrder();
@@ -79,7 +82,22 @@ function cancelDragSort() {
   window.clearTimeout(state.dragSort.timer);
   state.dragSort.item?.classList.remove("drag-armed", "dragging");
   els.entryList.classList.remove("sorting");
+  clearDragTextSelection();
   state.dragSort = null;
+}
+
+function blockDragNativeSelection(event) {
+  const drag = state.dragSort;
+  if (!drag?.item) return;
+  if (!drag.dragging && !drag.item.classList.contains("drag-armed")) return;
+  if (!drag.item.contains(event.target)) return;
+  event.preventDefault();
+  clearDragTextSelection();
+}
+
+function clearDragTextSelection() {
+  const selection = document.getSelection?.();
+  if (selection?.rangeCount) selection.removeAllRanges();
 }
 
 function canDragSort() {

@@ -25,7 +25,6 @@ function setSyncControlsDisabled(disabled) {
     els.syncSignIn,
     els.syncSignOut,
     els.syncForgotPassword,
-    els.syncNow,
   ].forEach((button) => {
     if (button) button.disabled = disabled;
   });
