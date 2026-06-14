@@ -5,6 +5,8 @@ function bindEvents() {
     addEntry();
   });
   els.addEntryButton.addEventListener("click", openEntryDialog);
+  els.desktopAddEntryButton.addEventListener("click", openEntryDialog);
+  els.sortModeButton.addEventListener("click", toggleSortMode);
   els.entryCancel.addEventListener("click", closeEntryDialog);
   els.entryClose.addEventListener("click", closeEntryDialog);
   els.entryTypeOptions.forEach((button) => {
@@ -48,6 +50,7 @@ function bindEvents() {
 
   els.searchInput.addEventListener("input", (event) => {
     state.search = event.target.value.trim().toLowerCase();
+    if (state.search) exitSortMode();
     render();
   });
 
@@ -55,6 +58,7 @@ function bindEvents() {
     if (event.key !== "Escape") return;
     state.search = "";
     state.searchOpen = false;
+    exitSortMode();
     render();
     els.searchButton.focus();
   });

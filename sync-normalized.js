@@ -1,5 +1,6 @@
 // QuickDot normalized row sync helpers. Loaded by index.html before sync.js.
-async function fetchNormalizedEntries() {
+async function fetchNormalizedEntries(options = {}) {
+  const { incremental = false } = options;
   const meta = loadSyncMeta();
   let query = state.supabaseClient
     .from("quickdot_entries")
@@ -7,7 +8,7 @@ async function fetchNormalizedEntries() {
     .eq("user_id", state.syncSession.user.id)
     .order("updated_at", { ascending: true });
 
-  if (meta.lastSyncAt) {
+  if (incremental && meta.lastSyncAt) {
     query = query.or(`updated_at.gt.${meta.lastSyncAt},deleted_at.gt.${meta.lastSyncAt}`);
   }
 

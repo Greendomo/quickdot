@@ -38,7 +38,9 @@ function renderSearchPanel() {
 }
 
 function renderViewShell() {
+  if (state.view !== "daily" || state.search) state.sortMode = false;
   document.body.dataset.view = state.view;
+  document.body.classList.toggle("sort-mode-active", state.sortMode);
   els.viewEyebrow.textContent = t("navDaily");
 
   els.viewButtons.forEach((button) => {
@@ -68,6 +70,18 @@ function renderViewShell() {
     els.viewTitle.textContent = state.language === "en" ? "Future Log" : t("futureLog");
     els.entryDate.value = getDefaultEntryDate();
   }
+
+  renderSortModeControl();
+}
+
+function renderSortModeControl() {
+  const canSort = state.view === "daily" && !state.search && filteredEntries().length > 1;
+  els.sortModeButton.hidden = state.view !== "daily";
+  els.sortModeButton.disabled = !canSort;
+  els.sortModeButton.classList.toggle("active", state.sortMode);
+  els.sortModeButton.textContent = state.sortMode ? t("sortDone") : t("sortMode");
+  els.sortModeButton.setAttribute("aria-pressed", String(state.sortMode));
+  els.sortModeButton.setAttribute("aria-label", state.sortMode ? t("sortDone") : t("sortMode"));
 }
 
 function updatePeriodNavLabels() {

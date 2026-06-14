@@ -21,6 +21,8 @@ function renderStaticText() {
   els.searchButton.setAttribute("aria-label", t("search"));
   els.searchButton.title = t("search");
   els.addEntryButton.setAttribute("aria-label", t("addRecord"));
+  els.desktopAddEntryButton.textContent = `＋ ${t("addRecord")}`;
+  els.desktopAddEntryButton.setAttribute("aria-label", t("addRecord"));
   document.querySelector(".log-switch")?.setAttribute("aria-label", state.language === "en" ? "Journal views" : state.language === "zh-Hans" ? "笔记视图" : "筆記視圖");
   setText('.log-switch button[data-view="daily"] .nav-icon', t("todayIcon"));
   setText('.log-switch button[data-view="daily"] .nav-label', t("navDaily"));
@@ -116,6 +118,7 @@ function renderStaticText() {
   setText("#passwordResetDialog .primary-button", t("passwordResetSubmit"));
   const template = els.entryTemplate.content;
   template.querySelector(".entry-symbol")?.setAttribute("aria-label", t("doneToggle"));
+  template.querySelector(".entry-drag-handle")?.setAttribute("aria-label", t("dragToSort"));
   template.querySelector(".priority-badge")?.setAttribute("aria-label", t("important"));
   setActionText(template, '[data-action="edit"]', "✎", t("edit"));
   setActionText(template, '[data-action="subitem"]', "＋", t("subitem"));

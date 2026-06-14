@@ -2,6 +2,7 @@
 function renderEntries() {
   const entries = filteredEntries();
   els.entryList.replaceChildren();
+  els.entryList.classList.toggle("sort-mode", state.sortMode);
   els.emptyState.classList.toggle("visible", entries.length === 0);
   els.visibleCount.textContent = t("entriesCount", { count: entries.length });
 
@@ -42,12 +43,12 @@ function renderMonthlyLog() {
     els.monthlyList.append(makeDateCard(parseDateKey(date), items));
   });
 
+  const taskEntries = getOpenTaskEntries(entries);
   renderCompactEntries(
     els.monthlyTasks,
-    entries.filter((entry) => entry.type === "task"),
+    taskEntries,
     t("noMonthTasks"),
   );
-  const taskEntries = entries.filter((entry) => entry.type === "task");
   els.monthlyTaskCount.textContent = t("entriesCount", { count: taskEntries.length });
 
   renderCompactEntries(
@@ -99,7 +100,8 @@ function formatDateCardTitle(dateObject) {
 }
 
 function renderFutureLog() {
-  const futureStartKey = toMonthKey(addMonths(startOfMonth(new Date()), 1));
+  const futureAnchor = new Date();
+  const futureStartKey = toMonthKey(addMonths(startOfMonth(futureAnchor), 1));
   const entries = state.entries
     .filter((entry) => toMonthKey(parseDateKey(entry.date)) >= futureStartKey)
     .filter(entryMatchesActiveControls)
@@ -109,7 +111,7 @@ function renderFutureLog() {
   els.futureEmpty.classList.remove("visible");
   els.futureCount.textContent = t("entriesCount", { count: entries.length });
 
-  const months = Array.from({ length: 6 }, (_, index) => toMonthKey(addMonths(startOfMonth(new Date()), index + 1)));
+  const months = getFutureLogMonths(entries, futureAnchor);
   const grouped = groupEntriesBy(entries, (entry) => toMonthKey(parseDateKey(entry.date)));
 
   months.forEach((month) => {
@@ -136,9 +138,23 @@ function renderFutureLog() {
   renderCompactEntries(els.nextMonthList, nextMonthEntries, t("noNextMonth"));
   els.nextMonthCount.textContent = t("entriesCount", { count: nextMonthEntries.length });
 
-  const futureTasks = entries.filter((entry) => entry.type === "task" && !entry.done && !entry.migrated);
+  const futureTasks = getOpenTaskEntries(entries);
   renderCompactEntries(els.futureTasks, futureTasks, t("noFutureTasks"));
   els.futureTaskCount.textContent = t("entriesCount", { count: futureTasks.length });
+}
+
+function getOpenTaskEntries(entries) {
+  return entries.filter((entry) => entry.type === "task" && !entry.done && !entry.migrated);
+}
+
+function getFutureLogMonths(entries, anchorDate = new Date(), minimumMonthCount = 6) {
+  const futureStart = addMonths(startOfMonth(anchorDate), 1);
+  const futureStartKey = toMonthKey(futureStart);
+  const baseMonths = Array.from({ length: minimumMonthCount }, (_, index) => toMonthKey(addMonths(futureStart, index)));
+  const dataMonths = entries
+    .map((entry) => toMonthKey(parseDateKey(entry.date)))
+    .filter((month) => month >= futureStartKey);
+  return Array.from(new Set([...baseMonths, ...dataMonths])).sort();
 }
 
 function makeEntryDots(items) {

@@ -137,5 +137,5 @@ function clampSwipeOffset(offset) {
 }
 
 function canSwipeEntry() {
-  return state.view === "daily" && !state.search && !state.dragSort?.dragging;
+  return state.view === "daily" && !state.search && !state.sortMode && !state.dragSort?.dragging;
 }

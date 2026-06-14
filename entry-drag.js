@@ -2,10 +2,15 @@
 function startDragHold(event) {
   if (!canDragSort()) return;
   if (event.button !== undefined && event.button !== 0) return;
-  if (event.target.closest("button, input, select, textarea, a, .subitem-list")) return;
+  const handle = event.target.closest(".entry-drag-handle");
+  if (!handle) return;
 
-  const item = event.target.closest(".entry-item");
+  const item = handle.closest(".entry-item");
   if (!item || !els.entryList.contains(item)) return;
+
+  event.preventDefault();
+  closeOpenSwipeRows();
+  clearDragTextSelection();
 
   const pointerId = event.pointerId;
   state.dragSort = {
@@ -13,12 +18,13 @@ function startDragHold(event) {
     pointerId,
     startX: event.clientX,
     startY: event.clientY,
-    dragging: false,
-    didDrag: false,
-    timer: window.setTimeout(() => beginDragSort(pointerId), 450),
+    dragging: true,
+    didDrag: true,
+    timer: null,
   };
 
-  item.classList.add("drag-armed");
+  item.classList.add("dragging");
+  els.entryList.classList.add("sorting");
   item.setPointerCapture?.(pointerId);
 }
 
@@ -35,11 +41,6 @@ function beginDragSort(pointerId) {
 function moveDragSort(event) {
   const drag = state.dragSort;
   if (!drag || drag.pointerId !== event.pointerId) return;
-
-  if (!drag.dragging && Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) > 10) {
-    cancelDragSort();
-    return;
-  }
 
   if (!drag.dragging) return;
   event.preventDefault();
@@ -101,7 +102,21 @@ function clearDragTextSelection() {
 }
 
 function canDragSort() {
-  return state.view === "daily" && state.search === "";
+  return state.view === "daily" && state.sortMode && state.search === "";
+}
+
+function toggleSortMode() {
+  state.sortMode = !state.sortMode;
+  cancelDragSort();
+  closeOpenSwipeRows();
+  render();
+}
+
+function exitSortMode() {
+  if (!state.sortMode) return;
+  state.sortMode = false;
+  cancelDragSort();
+  closeOpenSwipeRows();
 }
 
 function getDragAfterElement(y) {

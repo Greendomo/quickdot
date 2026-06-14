@@ -88,6 +88,7 @@ function closeSymbolSettings() {
 }
 
 function setView(view) {
+  exitSortMode();
   closeOpenSwipeRows();
   state.view = view;
 
@@ -119,6 +120,7 @@ function setView(view) {
 }
 
 function shiftVisiblePeriod(direction) {
+  exitSortMode();
   closeOpenSwipeRows();
 
   if (state.view === "monthly") {

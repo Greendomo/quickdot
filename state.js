@@ -22,6 +22,7 @@ const state = {
   pendingDelete: null,
   entrySwipe: null,
   dragSort: null,
+  sortMode: false,
   supabaseClient: null,
   syncSession: null,
   syncQueue: [],

@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=107" />
+    <link rel="stylesheet" href="./styles.css?v=115" />
   </head>
   <body>
     <svg class="notekun-symbols" aria-hidden="true" focusable="false">
@@ -61,6 +61,26 @@
           </button>
         </div>
 
+        <nav class="log-switch" aria-label="筆記視圖">
+          <button class="active" type="button" data-view="daily">
+            <span class="nav-icon nav-day" aria-hidden="true">今</span>
+            <span class="nav-label">每日</span>
+          </button>
+          <button type="button" data-view="weekly">
+            <span class="nav-icon" aria-hidden="true">⋯</span>
+            <span class="nav-label">週誌</span>
+          </button>
+          <button type="button" data-view="monthly">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span class="nav-label">月誌</span>
+          </button>
+          <button type="button" data-view="future">
+            <span class="nav-icon" aria-hidden="true">↗</span>
+            <span class="nav-label">未來</span>
+          </button>
+          <button class="add-entry-button" id="addEntryButton" type="button" aria-label="新增紀錄">＋</button>
+        </nav>
+
         <section class="panel month-panel collapsible-panel" aria-label="月份導覽" data-collapsible="calendar">
           <button class="collapsible-header" type="button" aria-expanded="false">
             <span>月曆</span>
@@ -86,29 +106,11 @@
               <button class="icon-button period-date-nav" id="prevDailyDate" type="button" data-period-shift="-1" aria-label="前一天">‹</button>
               <h2 id="viewTitle"></h2>
               <button class="icon-button period-date-nav" id="nextDailyDate" type="button" data-period-shift="1" aria-label="後一天">›</button>
+              <button class="desktop-add-entry-button" id="desktopAddEntryButton" type="button">＋ 新增紀錄</button>
+              <button class="sort-mode-button" id="sortModeButton" type="button" aria-pressed="false">排序</button>
             </div>
           </div>
         </header>
-
-        <nav class="log-switch" aria-label="筆記視圖">
-          <button class="active" type="button" data-view="daily">
-            <span class="nav-icon nav-day" aria-hidden="true">今</span>
-            <span class="nav-label">每日</span>
-          </button>
-          <button type="button" data-view="weekly">
-            <span class="nav-icon" aria-hidden="true">⋯</span>
-            <span class="nav-label">週誌</span>
-          </button>
-          <button type="button" data-view="monthly">
-            <span class="nav-icon" aria-hidden="true">▦</span>
-            <span class="nav-label">月誌</span>
-          </button>
-          <button type="button" data-view="future">
-            <span class="nav-icon" aria-hidden="true">↗</span>
-            <span class="nav-label">未來</span>
-          </button>
-          <button class="add-entry-button" id="addEntryButton" type="button" aria-label="新增紀錄">＋</button>
-        </nav>
 
         <section class="toolbar search-panel" id="searchPanel" aria-label="搜尋工具" hidden>
           <input id="searchInput" type="search" placeholder="搜尋筆記" aria-label="搜尋筆記" />
@@ -223,7 +225,6 @@
               </div>
               <strong>未來還沒有安排</strong>
               <p>後續月份的任務與事件會集中在這裡。</p>
-              <button class="primary-button empty-action" type="button">新增第一筆</button>
             </div>
           </div>
 
@@ -520,6 +521,7 @@
           <button class="swipe-action-button danger" type="button" data-action="delete" tabindex="-1"><span class="entry-action-icon" aria-hidden="true">×</span><span class="entry-action-label">刪除</span></button>
         </div>
         <div class="entry-swipe-content">
+          <button class="entry-drag-handle" type="button" aria-label="拖曳排序" tabindex="-1">≡</button>
           <button class="entry-symbol" type="button" aria-label="切換完成狀態"></button>
           <div class="entry-body">
             <div class="entry-main">
@@ -535,37 +537,37 @@
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./supabase-config.js"></script>
-    <script src="./constants.js"></script>
-    <script src="./dates.js"></script>
-    <script src="./i18n.js"></script>
-    <script src="./migrations.js"></script>
-    <script src="./state.js"></script>
-    <script src="./dom.js"></script>
-    <script src="./core.js"></script>
-    <script src="./entry-normalize.js"></script>
-    <script src="./sync-store.js"></script>
-    <script src="./storage.js"></script>
-    <script src="./preferences-store.js"></script>
-    <script src="./sync-ui.js"></script>
-    <script src="./sync-auth.js"></script>
-    <script src="./sync-diagnostics.js"></script>
-    <script src="./sync-payload.js"></script>
-    <script src="./sync-normalized.js"></script>
-    <script src="./sync.js"></script>
-    <script src="./entry-store.js"></script>
-    <script src="./entry-swipe.js"></script>
-    <script src="./entry-drag.js"></script>
-    <script src="./entries.js"></script>
-    <script src="./render-static.js"></script>
-    <script src="./render-shell.js"></script>
-    <script src="./render-entries.js"></script>
-    <script src="./render-logs.js"></script>
-    <script src="./render-calendar.js"></script>
-    <script src="./render.js"></script>
-    <script src="./navigation-events.js"></script>
-    <script src="./entry-events.js"></script>
-    <script src="./app-events.js"></script>
-    <script src="./app.js"></script>
+    <script src="./supabase-config.js?v=115"></script>
+    <script src="./constants.js?v=115"></script>
+    <script src="./dates.js?v=115"></script>
+    <script src="./i18n.js?v=115"></script>
+    <script src="./migrations.js?v=115"></script>
+    <script src="./state.js?v=115"></script>
+    <script src="./dom.js?v=115"></script>
+    <script src="./core.js?v=115"></script>
+    <script src="./entry-normalize.js?v=115"></script>
+    <script src="./sync-store.js?v=115"></script>
+    <script src="./storage.js?v=115"></script>
+    <script src="./preferences-store.js?v=115"></script>
+    <script src="./sync-ui.js?v=115"></script>
+    <script src="./sync-auth.js?v=115"></script>
+    <script src="./sync-diagnostics.js?v=115"></script>
+    <script src="./sync-payload.js?v=115"></script>
+    <script src="./sync-normalized.js?v=115"></script>
+    <script src="./sync.js?v=115"></script>
+    <script src="./entry-store.js?v=115"></script>
+    <script src="./entry-swipe.js?v=115"></script>
+    <script src="./entry-drag.js?v=115"></script>
+    <script src="./entries.js?v=115"></script>
+    <script src="./render-static.js?v=115"></script>
+    <script src="./render-shell.js?v=115"></script>
+    <script src="./render-entries.js?v=115"></script>
+    <script src="./render-logs.js?v=115"></script>
+    <script src="./render-calendar.js?v=115"></script>
+    <script src="./render.js?v=115"></script>
+    <script src="./navigation-events.js?v=115"></script>
+    <script src="./entry-events.js?v=115"></script>
+    <script src="./app-events.js?v=115"></script>
+    <script src="./app.js?v=115"></script>
   </body>
 </html>
