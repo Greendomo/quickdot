@@ -274,7 +274,7 @@ body[data-view="monthly"] .period-date-nav {
 }
 
 .log-switch .add-entry-button {
-  display: none;
+  display: grid;
   position: fixed;
   right: 24px;
   bottom: calc(96px + env(safe-area-inset-bottom));
