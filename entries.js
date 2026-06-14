@@ -31,6 +31,42 @@ function closeEntryDialog() {
   hideDialog(els.entryDialog);
 }
 
+function openEntryActionsDialog(entryId) {
+  const entry = state.entries.find((item) => item.id === entryId);
+  if (!entry) return;
+
+  closeOpenSwipeRows();
+  state.pendingActionEntryId = entryId;
+  els.entryActionsPreview.textContent = entry.text;
+  updateEntryActionsLabels(entry);
+  showDialog(els.entryActionsDialog);
+}
+
+function closeEntryActionsDialog() {
+  state.pendingActionEntryId = null;
+  hideDialog(els.entryActionsDialog);
+}
+
+function updateEntryActionsLabels(entry) {
+  const priorityButton = els.entryActionButtons.find((button) => button.dataset.entryMenuAction === "priority");
+  if (!priorityButton) return;
+  const label = priorityButton.querySelector("span:last-child");
+  if (label) label.textContent = getMeaning("important");
+}
+
+function runEntryActionFromMenu(action) {
+  const entryId = state.pendingActionEntryId;
+  if (!entryId) return;
+
+  closeEntryActionsDialog();
+  if (action === "edit") openEditDialog(entryId);
+  if (action === "subitem") openSubitemDialog(entryId);
+  if (action === "priority") togglePriority(entryId);
+  if (action === "copy") openCopyDialog(entryId);
+  if (action === "migrate") openMigrationDialog(entryId);
+  if (action === "delete") openDeleteDialog(entryId);
+}
+
 function showNoteKunToast(message) {
   if (!els.noteKunToast || !els.noteKunToastMessage) return;
   window.clearTimeout(state.noteKunToastTimer);

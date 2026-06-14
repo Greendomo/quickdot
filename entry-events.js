@@ -68,6 +68,11 @@ function handleEntryItemClick(event) {
     return true;
   }
 
+  if (event.target.closest(".entry-menu-button")) {
+    openEntryActionsDialog(item.dataset.id);
+    return true;
+  }
+
   const actionButton = event.target.closest("[data-action]");
   if (!actionButton) return false;
 

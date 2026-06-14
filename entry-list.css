@@ -24,8 +24,8 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 0 24px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 0 24px minmax(0, 1fr) 34px;
+  gap: 18px;
   align-items: start;
   min-width: 0;
   padding: 26px 0;
@@ -61,7 +61,7 @@
 
 body.sort-mode-active #entryList .entry-swipe-content,
 .entry-list.sort-mode .entry-swipe-content {
-  grid-template-columns: 28px 24px minmax(0, 1fr);
+  grid-template-columns: 28px 24px minmax(0, 1fr) 34px;
   gap: 16px;
 }
 
@@ -232,6 +232,29 @@ body.sort-mode-active #entryList .entry-item,
   font-weight: 800;
   line-height: 1;
   opacity: 0.66;
+}
+
+.entry-menu-button {
+  display: grid;
+  width: 34px;
+  min-height: 30px;
+  margin-top: -2px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.58;
+}
+
+.entry-menu-button:hover,
+.entry-menu-button:focus-visible {
+  color: var(--view-accent-strong);
+  opacity: 1;
 }
 
 .entry-main {

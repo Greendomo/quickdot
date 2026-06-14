@@ -20,6 +20,7 @@ const state = {
   pendingSubitemId: null,
   pendingEditId: null,
   pendingDelete: null,
+  pendingActionEntryId: null,
   entrySwipe: null,
   dragSort: null,
   sortMode: false,

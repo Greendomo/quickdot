@@ -89,6 +89,14 @@ function renderStaticText() {
   setFieldLabel("#editDialog .date-field", t("entryContent"));
   setText("#editCancel", state.language === "en" ? "Cancel" : "取消");
   setText("#editDialog .primary-button", t("save"));
+  setText("#entryActionsTitle", t("moreActions"));
+  els.entryActionsClose?.setAttribute("aria-label", t("close"));
+  setEntryMenuActionText("edit", "✎", t("edit"));
+  setEntryMenuActionText("subitem", "＋", t("subitem"));
+  setEntryMenuActionText("priority", "!", t("important"));
+  setEntryMenuActionText("copy", "⧉", t("copyToDate"));
+  setEntryMenuActionText("migrate", "›", t("migrate"));
+  setEntryMenuActionText("delete", "×", t("delete"));
 
   setText("#syncTitle", t("settings"));
   els.syncClose.setAttribute("aria-label", t("close"));
@@ -119,6 +127,7 @@ function renderStaticText() {
   const template = els.entryTemplate.content;
   template.querySelector(".entry-symbol")?.setAttribute("aria-label", t("doneToggle"));
   template.querySelector(".entry-drag-handle")?.setAttribute("aria-label", t("dragToSort"));
+  template.querySelector(".entry-menu-button")?.setAttribute("aria-label", t("moreActions"));
   template.querySelector(".priority-badge")?.setAttribute("aria-label", t("important"));
   setActionText(template, '[data-action="edit"]', "✎", t("edit"));
   setActionText(template, '[data-action="subitem"]', "＋", t("subitem"));
@@ -126,6 +135,16 @@ function renderStaticText() {
   setActionText(template, '[data-action="copy"]', "⧉", t("copyToDate"));
   setActionText(template, '[data-action="migrate"]', "›", t("migrate"));
   setActionText(template, '[data-action="delete"]', "×", t("delete"));
+}
+
+function setEntryMenuActionText(action, icon, label) {
+  const button = document.querySelector(`[data-entry-menu-action="${action}"]`);
+  if (!button) return;
+  const iconElement = button.querySelector("span:first-child");
+  const labelElement = button.querySelector("span:last-child");
+  if (iconElement) iconElement.textContent = icon;
+  if (labelElement) labelElement.textContent = label;
+  button.setAttribute("aria-label", label);
 }
 
 function setDialogText(prefix, titleId, closeId, cancelId, labelKey, submitKey) {

@@ -63,11 +63,6 @@ function bindEvents() {
     els.searchButton.focus();
   });
 
-  els.entryList.addEventListener("pointerdown", startEntrySwipe);
-  els.entryList.addEventListener("pointermove", moveEntrySwipe);
-  els.entryList.addEventListener("pointerup", finishEntrySwipe);
-  els.entryList.addEventListener("pointercancel", cancelEntrySwipe);
-  els.entryList.addEventListener("lostpointercapture", cancelEntrySwipe);
   els.entryList.addEventListener("pointerdown", startDragHold);
   els.entryList.addEventListener("pointermove", moveDragSort);
   els.entryList.addEventListener("pointerup", finishDragSort);
@@ -108,6 +103,14 @@ function bindEvents() {
   els.editForm.addEventListener("submit", confirmEdit);
   els.editCancel.addEventListener("click", closeEditDialog);
   els.editClose.addEventListener("click", closeEditDialog);
+  els.entryActionsForm.addEventListener("submit", (event) => event.preventDefault());
+  els.entryActionsClose.addEventListener("click", closeEntryActionsDialog);
+  els.entryActionsDialog.addEventListener("click", (event) => {
+    if (event.target === els.entryActionsDialog) closeEntryActionsDialog();
+  });
+  els.entryActionButtons.forEach((button) => {
+    button.addEventListener("click", () => runEntryActionFromMenu(button.dataset.entryMenuAction));
+  });
   els.deleteForm.addEventListener("submit", confirmDelete);
   els.deleteCancel.addEventListener("click", closeDeleteDialog);
   els.deleteClose.addEventListener("click", closeDeleteDialog);

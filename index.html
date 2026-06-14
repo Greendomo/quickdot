@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=115" />
+    <link rel="stylesheet" href="./styles.css?v=116" />
   </head>
   <body>
     <svg class="notekun-symbols" aria-hidden="true" focusable="false">
@@ -435,6 +435,24 @@
       </form>
     </dialog>
 
+    <dialog class="migration-dialog entry-actions-dialog" id="entryActionsDialog" aria-labelledby="entryActionsTitle">
+      <form method="dialog" id="entryActionsForm">
+        <div class="dialog-heading">
+          <h2 id="entryActionsTitle">紀錄操作</h2>
+          <button class="icon-button small" type="button" id="entryActionsClose" aria-label="關閉">×</button>
+        </div>
+        <p class="entry-actions-preview" id="entryActionsPreview"></p>
+        <div class="entry-actions-list">
+          <button type="button" data-entry-menu-action="edit"><span aria-hidden="true">✎</span><span>編輯</span></button>
+          <button type="button" data-entry-menu-action="subitem"><span aria-hidden="true">＋</span><span>子項目</span></button>
+          <button type="button" data-entry-menu-action="priority"><span aria-hidden="true">!</span><span>重要</span></button>
+          <button type="button" data-entry-menu-action="copy"><span aria-hidden="true">⧉</span><span>複製到日期</span></button>
+          <button type="button" data-entry-menu-action="migrate"><span aria-hidden="true">›</span><span>遷移</span></button>
+          <button class="danger" type="button" data-entry-menu-action="delete"><span aria-hidden="true">×</span><span>刪除</span></button>
+        </div>
+      </form>
+    </dialog>
+
     <dialog class="migration-dialog sync-dialog" id="syncDialog" aria-labelledby="syncTitle">
       <form method="dialog" id="syncForm">
         <div class="dialog-heading">
@@ -532,42 +550,43 @@
             <button class="subitem-toggle" type="button" data-subitem-action="expand" hidden></button>
             <ul class="subitem-list"></ul>
           </div>
+          <button class="entry-menu-button" type="button" aria-label="開啟紀錄操作">⋯</button>
         </div>
       </li>
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./supabase-config.js?v=115"></script>
-    <script src="./constants.js?v=115"></script>
-    <script src="./dates.js?v=115"></script>
-    <script src="./i18n.js?v=115"></script>
-    <script src="./migrations.js?v=115"></script>
-    <script src="./state.js?v=115"></script>
-    <script src="./dom.js?v=115"></script>
-    <script src="./core.js?v=115"></script>
-    <script src="./entry-normalize.js?v=115"></script>
-    <script src="./sync-store.js?v=115"></script>
-    <script src="./storage.js?v=115"></script>
-    <script src="./preferences-store.js?v=115"></script>
-    <script src="./sync-ui.js?v=115"></script>
-    <script src="./sync-auth.js?v=115"></script>
-    <script src="./sync-diagnostics.js?v=115"></script>
-    <script src="./sync-payload.js?v=115"></script>
-    <script src="./sync-normalized.js?v=115"></script>
-    <script src="./sync.js?v=115"></script>
-    <script src="./entry-store.js?v=115"></script>
-    <script src="./entry-swipe.js?v=115"></script>
-    <script src="./entry-drag.js?v=115"></script>
-    <script src="./entries.js?v=115"></script>
-    <script src="./render-static.js?v=115"></script>
-    <script src="./render-shell.js?v=115"></script>
-    <script src="./render-entries.js?v=115"></script>
-    <script src="./render-logs.js?v=115"></script>
-    <script src="./render-calendar.js?v=115"></script>
-    <script src="./render.js?v=115"></script>
-    <script src="./navigation-events.js?v=115"></script>
-    <script src="./entry-events.js?v=115"></script>
-    <script src="./app-events.js?v=115"></script>
-    <script src="./app.js?v=115"></script>
+    <script src="./supabase-config.js?v=116"></script>
+    <script src="./constants.js?v=116"></script>
+    <script src="./dates.js?v=116"></script>
+    <script src="./i18n.js?v=116"></script>
+    <script src="./migrations.js?v=116"></script>
+    <script src="./state.js?v=116"></script>
+    <script src="./dom.js?v=116"></script>
+    <script src="./core.js?v=116"></script>
+    <script src="./entry-normalize.js?v=116"></script>
+    <script src="./sync-store.js?v=116"></script>
+    <script src="./storage.js?v=116"></script>
+    <script src="./preferences-store.js?v=116"></script>
+    <script src="./sync-ui.js?v=116"></script>
+    <script src="./sync-auth.js?v=116"></script>
+    <script src="./sync-diagnostics.js?v=116"></script>
+    <script src="./sync-payload.js?v=116"></script>
+    <script src="./sync-normalized.js?v=116"></script>
+    <script src="./sync.js?v=116"></script>
+    <script src="./entry-store.js?v=116"></script>
+    <script src="./entry-swipe.js?v=116"></script>
+    <script src="./entry-drag.js?v=116"></script>
+    <script src="./entries.js?v=116"></script>
+    <script src="./render-static.js?v=116"></script>
+    <script src="./render-shell.js?v=116"></script>
+    <script src="./render-entries.js?v=116"></script>
+    <script src="./render-logs.js?v=116"></script>
+    <script src="./render-calendar.js?v=116"></script>
+    <script src="./render.js?v=116"></script>
+    <script src="./navigation-events.js?v=116"></script>
+    <script src="./entry-events.js?v=116"></script>
+    <script src="./app-events.js?v=116"></script>
+    <script src="./app.js?v=116"></script>
   </body>
 </html>
