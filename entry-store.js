@@ -40,9 +40,13 @@ function updateEntry(id, mutator, options = {}) {
 
 function toggleSubitem(entryId, subitemId) {
   if (!subitemId) return;
+  const now = new Date().toISOString();
   updateEntry(entryId, (entry) => {
     const subitem = ensureSubitems(entry).find((item) => item.id === subitemId);
-    if (subitem) subitem.done = !subitem.done;
+    if (subitem) {
+      subitem.done = !subitem.done;
+      subitem.updatedAt = now;
+    }
   }, { preserveScroll: true });
 }
 
@@ -82,6 +86,7 @@ function copyEntryToDate(entry, targetDate) {
     date: targetDate,
     text: entry.text,
     type: entry.type,
+    symbolId: entry.symbolId || entry.type,
     done: entry.done,
     important: entry.important,
     migrated: false,
@@ -132,6 +137,7 @@ function migrateEntryToDate(entry, targetDate) {
     date: targetDate,
     text: entry.text,
     type: entry.type,
+    symbolId: entry.symbolId || entry.type,
     done: false,
     important: entry.important,
     migrated: false,

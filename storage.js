@@ -37,6 +37,9 @@ function saveEntries() {
       schemaVersion: CURRENT_SCHEMA_VERSION,
       entries: state.entries,
       deletedEntries: state.deletedEntries,
+      symbolDefinitions: normalizeSymbolDefinitions(state.symbolDefinitions),
+      deletedSymbolDefinitions: compactDeletedSymbolDefinitions(state.deletedSymbolDefinitions),
+      symbolMeanings: state.symbolMeanings,
       updatedAt: new Date().toISOString(),
     }),
   );
@@ -45,7 +48,13 @@ function saveEntries() {
 
 function clearLocalEntriesPayload() {
   state.deletedEntries = [];
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ schemaVersion: CURRENT_SCHEMA_VERSION, entries: [], deletedEntries: [] }));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    schemaVersion: CURRENT_SCHEMA_VERSION,
+    entries: [],
+    deletedEntries: [],
+    symbolDefinitions: normalizeSymbolDefinitions(state.symbolDefinitions),
+    deletedSymbolDefinitions: compactDeletedSymbolDefinitions(state.deletedSymbolDefinitions),
+  }));
   localStorage.removeItem(LEGACY_STORAGE_KEY);
   saveSyncMeta({ lastSyncAt: null, localDirty: false, seedOnly: false });
 }
@@ -66,6 +75,7 @@ function removeSeedEntriesIfUntouched() {
       schemaVersion: CURRENT_SCHEMA_VERSION,
       entries: [],
       deletedEntries: [],
+      deletedSymbolDefinitions: compactDeletedSymbolDefinitions(state.deletedSymbolDefinitions),
       updatedAt: new Date().toISOString(),
     }),
   );

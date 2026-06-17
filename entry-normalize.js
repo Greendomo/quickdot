@@ -12,11 +12,13 @@ function normalizeEntries(entries) {
 
 function normalizeEntry(entry) {
   const createdAt = entry.createdAt || new Date().toISOString();
+  const type = ["task", "event", "note"].includes(entry.type) ? entry.type : "note";
   return {
     id: entry.id || crypto.randomUUID(),
     date: entry.date,
     text: String(entry.text),
-    type: ["task", "event", "note"].includes(entry.type) ? entry.type : "note",
+    type,
+    symbolId: String(entry.symbolId || type),
     done: Boolean(entry.done),
     important: Boolean(entry.important),
     migrated: Boolean(entry.migrated),

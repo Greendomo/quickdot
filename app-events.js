@@ -9,8 +9,9 @@ function bindEvents() {
   els.sortModeButton.addEventListener("click", toggleSortMode);
   els.entryCancel.addEventListener("click", closeEntryDialog);
   els.entryClose.addEventListener("click", closeEntryDialog);
-  els.entryTypeOptions.forEach((button) => {
-    button.addEventListener("click", () => setEntryType(button.dataset.entryType));
+  els.entryTypeTabs.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-entry-type]");
+    if (button) setEntryType(button.dataset.entryType);
   });
 
   els.collapsiblePanels.forEach((panel) => {
@@ -43,8 +44,20 @@ function bindEvents() {
   els.legendButton.addEventListener("click", openSymbolSettings);
   els.symbolSheetClose.addEventListener("click", closeSymbolSettings);
   els.symbolSheet.addEventListener("click", (event) => {
-    if (!event.target.closest(".symbol-footer")) closeSymbolSettings();
+    if (event.target === els.symbolSheet) closeSymbolSettings();
   });
+  els.symbolSettingsList.addEventListener("click", (event) => {
+    const row = event.target.closest("[data-symbol-edit]");
+    if (!row) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openSymbolEditor(row.dataset.symbolEdit);
+  });
+  els.addCustomSymbol.addEventListener("click", addCustomSymbolDefinition);
+  els.resetSymbols.addEventListener("click", resetSymbolsToDefault);
+  els.symbolEditorForm.addEventListener("submit", saveSymbolEditor);
+  els.symbolCancelButton.addEventListener("click", closeSymbolEditor);
+  els.symbolDeleteButton.addEventListener("click", deleteCustomSymbolDefinition);
   els.searchButton.addEventListener("click", toggleSearchPanel);
   document.addEventListener("click", handleDocumentClick);
 

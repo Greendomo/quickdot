@@ -3,12 +3,14 @@ const STORAGE_KEY = "quickdot-app-v1";
 const LEGACY_STORAGE_KEY = "bullet-journal-app-v1";
 const SYMBOL_MEANINGS_KEY = "quickdot-symbol-meanings-v1";
 const LEGACY_SYMBOL_MEANINGS_KEY = "bullet-journal-symbol-meanings-v1";
+const SYMBOL_DEFINITIONS_KEY = "quickdot-symbol-definitions-v1";
+const DELETED_SYMBOL_DEFINITIONS_KEY = "quickdot-deleted-symbol-definitions-v1";
 const COLLAPSE_STATE_KEY = "quickdot-collapse-state-v1";
 const SYNC_META_KEY = "quickdot-sync-meta-v1";
 const SYNC_QUEUE_KEY = "quickdot-sync-queue-v1";
 const SYNC_ERROR_QUEUE_KEY = "quickdot-sync-errors-v1";
 const LANGUAGE_KEY = "quickdot-language-v1";
-const CURRENT_SCHEMA_VERSION = 2;
+const CURRENT_SCHEMA_VERSION = 4;
 const TOMBSTONE_RETENTION_DAYS = 90;
 const SYNC_ERROR_RETENTION_LIMIT = 25;
 
@@ -48,3 +50,57 @@ const typeSymbol = {
   event: "○",
   note: "◇",
 };
+
+const builtinSymbolDefinitions = [
+  {
+    id: "task",
+    symbol: "•",
+    role: "entry",
+    type: "task",
+    builtIn: true,
+    enabled: true,
+    quickAdd: true,
+  },
+  {
+    id: "event",
+    symbol: "○",
+    role: "entry",
+    type: "event",
+    builtIn: true,
+    enabled: true,
+    quickAdd: true,
+  },
+  {
+    id: "note",
+    symbol: "◇",
+    role: "entry",
+    type: "note",
+    builtIn: true,
+    enabled: true,
+    quickAdd: true,
+  },
+  {
+    id: "done",
+    symbol: "×",
+    role: "status",
+    builtIn: true,
+    enabled: true,
+    quickAdd: false,
+  },
+  {
+    id: "important",
+    symbol: "!",
+    role: "status",
+    builtIn: true,
+    enabled: true,
+    quickAdd: false,
+  },
+  {
+    id: "migrated",
+    symbol: "›",
+    role: "status",
+    builtIn: true,
+    enabled: true,
+    quickAdd: false,
+  },
+];

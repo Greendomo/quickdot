@@ -118,7 +118,8 @@ function addEntry() {
   const entryDate = els.entryDate.value || getDefaultEntryDate();
   const now = new Date().toISOString();
   const isFirstEntryForDate = !state.entries.some((entry) => entry.date === entryDate);
-  const entryType = els.entryType.value;
+  const selectedSymbol = getEntrySymbolDefinition(els.entryType.value);
+  const entryType = selectedSymbol?.type || "note";
   const isImportant = els.priorityInput.checked;
 
   state.entries.unshift({
@@ -126,6 +127,7 @@ function addEntry() {
     date: entryDate,
     text,
     type: entryType,
+    symbolId: selectedSymbol?.id || entryType,
     done: false,
     important: isImportant,
     migrated: false,
@@ -146,27 +148,39 @@ function addEntry() {
   showNoteKunToast(t(getEntryNoteKunToastKey(entryType, isImportant, isFirstEntryForDate)));
 }
 
-function setEntryType(type) {
-  if (!["task", "event", "note"].includes(type)) return;
-  els.entryType.value = type;
+function setEntryType(symbolId) {
+  if (!getEntrySymbolDefinition(symbolId)) return;
+  els.entryType.value = symbolId;
   renderEntryTypeTabs();
 }
 
 function renderEntryTypeTabs() {
-  const pickerSymbols = {
-    task: "•",
-    event: "◦",
-    note: "–",
-  };
-  const currentType = els.entryType.value || "task";
+  const definitions = getQuickAddSymbolDefinitions();
+  const currentId = getEntrySymbolDefinition(els.entryType.value)?.id || definitions[0]?.id || "task";
+  els.entryType.value = currentId;
+  els.entryTypeTabs.replaceChildren();
 
-  els.entryTypeOptions.forEach((button) => {
-    const type = button.dataset.entryType;
-    const isActive = type === currentType;
+  definitions.forEach((definition) => {
+    const button = document.createElement("button");
+    button.className = "entry-type-option";
+    button.type = "button";
+    button.dataset.entryType = definition.id;
+    button.role = "radio";
+    const isActive = definition.id === currentId;
     button.classList.toggle("active", isActive);
     button.setAttribute("aria-checked", String(isActive));
-    button.querySelector(".entry-type-symbol").textContent = pickerSymbols[type] || typeSymbol[type] || "";
-    button.querySelector(".entry-type-label").textContent = getTypeLabel(type);
+    button.setAttribute("aria-label", definition.label);
+
+    const symbol = document.createElement("span");
+    symbol.className = "entry-type-symbol";
+    symbol.textContent = definition.symbol;
+
+    const label = document.createElement("span");
+    label.className = "entry-type-label";
+    label.textContent = definition.label;
+
+    button.append(symbol, label);
+    els.entryTypeTabs.append(button);
   });
 }
 

@@ -59,6 +59,15 @@ function renderStaticText() {
   setText("#symbolSheetTitle", t("legendSettings"));
   els.symbolSheet?.setAttribute("aria-label", t("legendSettings"));
   els.symbolSheetClose?.setAttribute("aria-label", t("close"));
+  setText("#addCustomSymbol", t("symbolAdd"));
+  setText("#resetSymbols", t("reset"));
+  setText("#symbolGlyphLabel", t("symbolGlyph"));
+  setText("#symbolNameLabel", t("symbolName"));
+  setText("#symbolDescriptionLabel", t("symbolDescription"));
+  setText("#symbolQuickAddLabel", t("symbolQuickAdd"));
+  setText("#symbolSaveButton", t("save"));
+  setText("#symbolCancelButton", state.language === "en" ? "Cancel" : "取消");
+  setText("#symbolDeleteButton", t("symbolDelete"));
   setText("#entryDialogTitle", t("addRecord"));
   els.entryClose.setAttribute("aria-label", t("close"));
   els.entryTypeTabs?.setAttribute("aria-label", t("entryType"));

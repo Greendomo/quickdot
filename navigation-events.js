@@ -26,6 +26,8 @@ function closeSymbolSettingsOnOutsideClick(event) {
   if (!state.collapseState.symbols) return;
   if (event.target.closest("#legendButton")) return;
 
+  const eventPath = typeof event.composedPath === "function" ? event.composedPath() : [];
+  if (eventPath.includes(els.symbolSheet)) return;
   if (event.target.closest(".symbol-footer")) return;
   closeSymbolSettings();
 }

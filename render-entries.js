@@ -39,7 +39,7 @@ function makeEntryNode(entry) {
   node.classList.toggle("subitems-open", isSubitemExpanded);
 
   const symbol = node.querySelector(".entry-symbol");
-  symbol.textContent = entry.done ? "×" : entry.migrated ? "›" : typeSymbol[entry.type];
+  symbol.textContent = getEntrySymbol(entry);
   symbol.title = entry.done ? t("toggleUndone") : t("toggleDone", { meaning: getMeaning("done") });
 
   node.querySelector(".entry-text").textContent = entry.text;
@@ -109,7 +109,7 @@ function renderCompactEntries(container, entries, emptyText) {
 
     const meta = document.createElement("span");
     meta.className = "compact-meta";
-    meta.textContent = `${formatShortDate(parseDateKey(entry.date))} · ${getTypeLabel(entry.type)}${entry.important ? ` · ${getMeaning("important")}` : ""}`;
+    meta.textContent = `${formatShortDate(parseDateKey(entry.date))} · ${getTypeLabel(entry.symbolId || entry.type)}${entry.important ? ` · ${getMeaning("important")}` : ""}`;
 
     li.append(button, meta);
     container.append(li);
@@ -124,14 +124,6 @@ function groupEntriesBy(entries, getKey) {
     grouped.get(key).push(entry);
   });
   return grouped;
-}
-
-function getMeaning(key) {
-  return state.symbolMeanings[key] || getDefaultSymbolMeanings()[key] || key;
-}
-
-function getTypeLabel(type) {
-  return getMeaning(type);
 }
 
 function compareEntriesForDisplay(a, b) {
@@ -174,7 +166,7 @@ function buildMeta(entry) {
   const pieces =
     state.view === "daily" || state.view === "weekly"
       ? []
-      : [getTypeLabel(entry.type), formatShortDate(parseDateKey(entry.date)), formatTime(entry.createdAt)];
+      : [getTypeLabel(entry.symbolId || entry.type), formatShortDate(parseDateKey(entry.date)), formatTime(entry.createdAt)];
   if (subitems.length > 0) {
     pieces.push(t("subitemsProgress", { done: subitems.filter((item) => item.done).length, total: subitems.length }));
   }

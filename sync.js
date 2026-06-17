@@ -94,19 +94,25 @@ async function syncLatestNormalized() {
   if (remote === "fallback") return "fallback";
   if (remote === "error") return "error";
 
+  const cloudSnapshot = await fetchCloudData();
+  if (cloudSnapshot?.payload) {
+    state.suppressDirty = true;
+    applyCloudSymbolDefinitions(cloudSnapshot.payload);
+    state.suppressDirty = false;
+  }
+
   if (remote) {
     const remotePayload = normalizedRowsToPayload(remote);
     const merged = mergeLocalAndCloudPayload(createCloudPayload(), remotePayload);
     state.suppressDirty = true;
-    state.entries = normalizeEntries(merged.entries);
-    state.deletedEntries = normalizeDeletedEntries(merged.deletedEntries);
-    saveEntries();
+    applyPayloadToState(merged);
     state.suppressDirty = false;
   }
 
   const pushResult = await pushNormalizedChanges();
   if (pushResult !== "ok") return pushResult;
-  saveSyncMeta({ lastSyncAt: new Date().toISOString(), localDirty: false, seedOnly: false });
+  const snapshotUpdatedAt = await pushCloudSnapshot();
+  saveSyncMeta({ lastSyncAt: snapshotUpdatedAt || new Date().toISOString(), localDirty: false, seedOnly: false });
   render();
   await flushSyncErrors();
   noteSyncSuccess();
@@ -151,7 +157,8 @@ async function pushToCloud() {
     if (state.normalizedSyncAvailable !== false) {
       const normalizedResult = await pushNormalizedChanges();
       if (normalizedResult === "ok") {
-        saveSyncMeta({ lastSyncAt: new Date().toISOString(), localDirty: false, seedOnly: false });
+        const snapshotUpdatedAt = await pushCloudSnapshot();
+        saveSyncMeta({ lastSyncAt: snapshotUpdatedAt || new Date().toISOString(), localDirty: false, seedOnly: false });
         await flushSyncErrors();
         noteSyncSuccess();
         updateSyncStatus(t("syncUploadSuccess"));

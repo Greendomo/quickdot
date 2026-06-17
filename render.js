@@ -1,7 +1,10 @@
 // QuickDot render module. Loaded by index.html.
 function render() {
-  renderLanguage();
-  renderStaticText();
+  if (state.renderedStaticLanguage !== state.language) {
+    renderLanguage();
+    renderStaticText();
+    state.renderedStaticLanguage = state.language;
+  }
   els.todayLabel.textContent = formatDateLong(new Date());
   renderCollapseState();
   renderSymbolMeanings();

@@ -16,13 +16,9 @@ function renderCollapseState() {
 }
 
 function renderSymbolMeanings() {
-  state.symbolMeanings = { ...getDefaultSymbolMeanings() };
-  els.symbolMeaningLabels.forEach((label) => {
-    label.textContent = getMeaning(label.dataset.symbolMeaning);
-  });
-
+  syncSymbolMeaningsFromDefinitions();
+  renderSymbolSettings();
   renderEntryTypeTabs();
-
   els.priorityLabel.textContent = getMeaning("important");
 }
 
@@ -71,6 +67,7 @@ function renderViewShell() {
     els.entryDate.value = getDefaultEntryDate();
   }
 
+  updatePeriodNavLabels();
   renderSortModeControl();
 }
 

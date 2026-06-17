@@ -2,7 +2,9 @@
 const state = {
   entries: [],
   deletedEntries: [],
+  deletedSymbolDefinitions: [],
   symbolMeanings: { ...defaultSymbolMeanings },
+  symbolDefinitions: getDefaultSymbolDefinitions(defaultLanguage),
   language: defaultLanguage,
   collapseState: {
     calendar: false,
@@ -21,6 +23,9 @@ const state = {
   pendingEditId: null,
   pendingDelete: null,
   pendingActionEntryId: null,
+  pendingSymbolId: null,
+  pendingSymbolIsNew: false,
+  pendingSymbolDraft: null,
   entrySwipe: null,
   dragSort: null,
   sortMode: false,
@@ -35,5 +40,6 @@ const state = {
   lastSyncAttemptAt: 0,
   noteKunToastTimer: null,
   normalizedSyncAvailable: null,
+  renderedStaticLanguage: null,
   suppressDirty: false,
 };
