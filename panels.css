@@ -159,7 +159,7 @@
 .symbol-sheet-overlay {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 240;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -174,7 +174,7 @@
 
 .symbol-footer {
   width: min(100%, 760px);
-  max-height: min(78vh, 720px);
+  max-height: min(82vh, 720px);
   overflow: auto;
   padding: 26px 28px calc(28px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--line);
