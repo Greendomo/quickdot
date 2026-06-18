@@ -310,20 +310,30 @@
   }
 
   .topbar {
-    min-height: 96px;
-    margin-bottom: 24px;
-    padding-top: 26px;
-    padding-bottom: 18px;
+    min-height: 68px;
+    margin-bottom: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .view-title-row {
-    gap: 6px;
+    gap: 4px;
+  }
+
+  .topbar h2 {
+    font-size: 30px;
+    line-height: 1.05;
   }
 
   .period-date-nav {
-    width: 32px;
-    min-height: 32px;
-    font-size: 24px;
+    width: 30px;
+    min-height: 30px;
+    font-size: 22px;
+  }
+
+  .sort-mode-button {
+    min-height: 28px;
+    font-size: 13px;
   }
 
   .composer-row {
