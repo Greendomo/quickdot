@@ -37,7 +37,14 @@ function renderViewShell() {
   if (state.view !== "daily" || state.search) state.sortMode = false;
   document.body.dataset.view = state.view;
   document.body.classList.toggle("sort-mode-active", state.sortMode);
-  els.viewEyebrow.textContent = t("navDaily");
+  
+  const navTitles = {
+    daily: t("navDaily"),
+    weekly: t("navWeekly"),
+    monthly: t("navMonthly"),
+    future: t("navFuture")
+  };
+  els.viewEyebrow.textContent = navTitles[state.view] || t("navDaily");
 
   els.viewButtons.forEach((button) => {
     button.classList.toggle("active", button.dataset.view === state.view);
