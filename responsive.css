@@ -257,6 +257,71 @@
   }
 }
 
+@media (max-width: 767px) {
+  .migration-dialog.entry-dialog[open] {
+    position: fixed;
+    inset-inline: 12px;
+    top: max(12px, env(safe-area-inset-top));
+    bottom: auto;
+    width: calc(100vw - 24px);
+    max-height: calc(var(--keyboard-safe-height, 100dvh) - max(12px, env(safe-area-inset-top)) - 12px);
+    margin: 0 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  body.keyboard-open .migration-dialog.entry-dialog[open] {
+    top: max(8px, env(safe-area-inset-top));
+    max-height: calc(var(--keyboard-safe-height, 100dvh) - max(8px, env(safe-area-inset-top)) - 8px);
+  }
+
+  .entry-dialog form {
+    gap: 14px;
+    padding: 22px 18px 18px;
+  }
+
+  .entry-dialog .dialog-heading {
+    top: 12px;
+    right: 14px;
+  }
+
+  .entry-type-tabs {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 50px;
+    padding-right: 34px;
+  }
+
+  .entry-type-option {
+    min-height: 40px;
+    padding: 0 8px;
+    font-size: 14px;
+  }
+
+  .entry-dialog #entryText {
+    min-height: 92px;
+    max-height: min(132px, 28vh);
+    font-size: 20px;
+  }
+
+  body.keyboard-open .entry-dialog #entryText {
+    min-height: 72px;
+    max-height: 96px;
+  }
+
+  .entry-dialog .dialog-actions {
+    position: sticky;
+    bottom: 0;
+    padding-top: 8px;
+    background: var(--surface);
+  }
+
+  .entry-dialog .primary-button,
+  .entry-dialog #entryCancel {
+    min-height: 44px;
+  }
+}
+
 @media (max-width: 960px) {
   .app-shell {
     grid-template-rows: auto minmax(0, 1fr);

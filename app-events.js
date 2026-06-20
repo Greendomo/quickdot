@@ -1,5 +1,7 @@
 // QuickDot event handling module. Loaded by index.html.
 function bindEvents() {
+  bindViewportKeyboardEvents();
+
   els.entryForm.addEventListener("submit", (event) => {
     event.preventDefault();
     addEntry();
@@ -141,4 +143,22 @@ function bindEvents() {
       setLanguage(button.dataset.language);
     });
   });
+}
+
+function bindViewportKeyboardEvents() {
+  updateKeyboardSafeViewport();
+  window.addEventListener("resize", updateKeyboardSafeViewport);
+  if (!window.visualViewport) return;
+  window.visualViewport.addEventListener("resize", updateKeyboardSafeViewport);
+  window.visualViewport.addEventListener("scroll", updateKeyboardSafeViewport);
+}
+
+function updateKeyboardSafeViewport() {
+  const viewport = window.visualViewport;
+  const height = viewport?.height || window.innerHeight || document.documentElement.clientHeight;
+  document.documentElement.style.setProperty("--keyboard-safe-height", `${Math.max(320, Math.round(height))}px`);
+
+  const layoutHeight = window.innerHeight || height;
+  const keyboardOpen = Boolean(viewport && layoutHeight - viewport.height > 90);
+  document.body.classList.toggle("keyboard-open", keyboardOpen);
 }

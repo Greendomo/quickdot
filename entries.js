@@ -22,7 +22,12 @@ function hideDialog(dialog) {
 function openEntryDialog() {
   els.entryDate.value = getDefaultEntryDate();
   renderEntryTypeTabs();
+  updateKeyboardSafeViewport?.();
   showDialog(els.entryDialog, els.entryText);
+  window.setTimeout(() => {
+    updateKeyboardSafeViewport?.();
+    els.entryText.scrollIntoView({ block: "center", inline: "nearest" });
+  }, 120);
 }
 
 function closeEntryDialog() {
