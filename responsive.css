@@ -435,6 +435,7 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    font-size: 16px;
   }
 }
 
@@ -513,4 +514,10 @@ textarea,
 .entry-dialog #entryText,
 .entry-dialog #entryDate {
   border-radius: 0;
+  font-size: max(16px, 1rem);
+}
+
+.date-field input,
+.date-field textarea {
+  font-size: max(16px, 1rem);
 }
