@@ -411,8 +411,30 @@
     border-radius: 0;
   }
 
+  #editDialog,
+  #subitemDialog {
+    width: min(420px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    max-height: min(82vh, 82dvh);
+    margin: auto;
+    border-radius: 12px;
+  }
+
   .migration-dialog form {
     padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+  }
+
+  #editDialog form,
+  #subitemDialog form {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  #editText,
+  #subitemText {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 

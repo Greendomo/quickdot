@@ -1,5 +1,6 @@
 /* Dialogs */
 .migration-dialog {
+  box-sizing: border-box;
   width: min(420px, calc(100vw - 32px));
   max-height: min(90vh, 90dvh);
   overflow-y: auto;
@@ -363,6 +364,9 @@
 
 .date-field input,
 .date-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   min-height: 44px;
   padding: 0 12px;
   border: 1px solid var(--line);
