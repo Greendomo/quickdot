@@ -275,6 +275,25 @@
     max-height: calc(var(--keyboard-safe-height, 100dvh) - max(8px, env(safe-area-inset-top)) - 8px);
   }
 
+  #editDialog[open],
+  #subitemDialog[open] {
+    position: fixed;
+    inset-inline: 16px;
+    top: max(24px, env(safe-area-inset-top));
+    bottom: auto;
+    width: calc(100vw - 32px);
+    max-height: calc(var(--keyboard-safe-height, 100dvh) - max(24px, env(safe-area-inset-top)) - 24px);
+    margin: 0 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  body.keyboard-open #editDialog[open],
+  body.keyboard-open #subitemDialog[open] {
+    top: max(8px, env(safe-area-inset-top));
+    max-height: calc(var(--keyboard-safe-height, 100dvh) - max(8px, env(safe-area-inset-top)) - 8px);
+  }
+
   .entry-dialog form {
     gap: 14px;
     padding: 22px 18px 18px;

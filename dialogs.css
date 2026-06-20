@@ -107,6 +107,15 @@
   gap: 12px;
 }
 
+.entry-actions-dialog form::before {
+  justify-self: center;
+  width: 42px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+  content: "";
+}
+
 .entry-actions-preview {
   color: var(--muted);
   font-size: 14px;
@@ -125,7 +134,7 @@
   grid-template-columns: 32px minmax(0, 1fr);
   align-items: center;
   gap: 12px;
-  min-height: 46px;
+  min-height: 52px;
   padding: 0;
   border: 0;
   border-bottom: 1px solid var(--line-soft);
@@ -155,6 +164,8 @@
 }
 
 .entry-actions-list button.danger {
+  margin-top: 8px;
+  border-top: 1px solid var(--line-soft);
   color: var(--warning);
 }
 

@@ -3,6 +3,7 @@ const ENTRY_SWIPE_START_WIDTH = 332;
 const ENTRY_SWIPE_END_WIDTH = 94;
 const ENTRY_SWIPE_ACTIVATE_THRESHOLD = 14;
 const ENTRY_SWIPE_OPEN_THRESHOLD = 54;
+const ENTRY_SWIPE_ENABLED = false;
 
 function startEntrySwipe(event) {
   if (!canSwipeEntry()) return;
@@ -137,5 +138,5 @@ function clampSwipeOffset(offset) {
 }
 
 function canSwipeEntry() {
-  return state.view === "daily" && !state.search && !state.sortMode && !state.dragSort?.dragging;
+  return ENTRY_SWIPE_ENABLED && state.view === "daily" && !state.search && !state.sortMode && !state.dragSort?.dragging;
 }
