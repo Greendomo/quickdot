@@ -41,5 +41,6 @@ const state = {
   noteKunToastTimer: null,
   normalizedSyncAvailable: null,
   renderedStaticLanguage: null,
+  renderedSymbolSignature: null,
   suppressDirty: false,
 };

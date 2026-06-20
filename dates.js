@@ -1,4 +1,6 @@
 // QuickDot dates module. Loaded by index.html.
+const dateFormatterCache = new Map();
+
 function toDateKey(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -71,20 +73,33 @@ function addDays(date, amount) {
   return next;
 }
 
+function getDateFormatter(options) {
+  const locale = getLanguageLocale();
+  const key = `${locale}:${JSON.stringify(options)}`;
+  if (!dateFormatterCache.has(key)) {
+    dateFormatterCache.set(key, new Intl.DateTimeFormat(locale, options));
+  }
+  return dateFormatterCache.get(key);
+}
+
+function formatDateWithOptions(date, options) {
+  return getDateFormatter(options).format(date);
+}
+
 function formatDateLong(date) {
-  return new Intl.DateTimeFormat(getLanguageLocale(), {
+  return formatDateWithOptions(date, {
     year: "numeric",
     month: "long",
     day: "numeric",
     weekday: "long",
-  }).format(date);
+  });
 }
 
 function formatMonth(date) {
-  return new Intl.DateTimeFormat(getLanguageLocale(), {
+  return formatDateWithOptions(date, {
     year: "numeric",
     month: "long",
-  }).format(date);
+  });
 }
 
 function formatWeekRange(date) {
@@ -94,15 +109,15 @@ function formatWeekRange(date) {
 }
 
 function formatShortDate(date) {
-  return new Intl.DateTimeFormat(getLanguageLocale(), {
+  return formatDateWithOptions(date, {
     month: "short",
     day: "numeric",
-  }).format(date);
+  });
 }
 
 function formatTime(value) {
-  return new Intl.DateTimeFormat(getLanguageLocale(), {
+  return formatDateWithOptions(new Date(value), {
     hour: "2-digit",
     minute: "2-digit",
-  }).format(new Date(value));
+  });
 }

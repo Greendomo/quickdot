@@ -13,8 +13,8 @@ function renderStaticText() {
   setText(".skip-link", t("skipMain"));
   document.querySelector(".month-panel")?.setAttribute("aria-label", t("calendar"));
   setText(".month-panel .collapsible-header span:first-child", t("calendar"));
-  els.prevMonth.setAttribute("aria-label", state.language === "en" ? "Previous month" : state.language === "zh-Hans" ? "上个月" : "上個月");
-  els.nextMonth.setAttribute("aria-label", state.language === "en" ? "Next month" : state.language === "zh-Hans" ? "下个月" : "下個月");
+  els.prevMonth.setAttribute("aria-label", t("previousMonth"));
+  els.nextMonth.setAttribute("aria-label", t("nextMonth"));
   els.calendar.setAttribute("aria-label", t("viewCalendar"));
   els.legendButton.setAttribute("aria-label", t("legendSettings"));
   els.legendButton.title = t("legendSettings");
@@ -23,7 +23,7 @@ function renderStaticText() {
   els.addEntryButton.setAttribute("aria-label", t("addRecord"));
   els.desktopAddEntryButton.textContent = `＋ ${t("addRecord")}`;
   els.desktopAddEntryButton.setAttribute("aria-label", t("addRecord"));
-  document.querySelector(".log-switch")?.setAttribute("aria-label", state.language === "en" ? "Journal views" : state.language === "zh-Hans" ? "笔记视图" : "筆記視圖");
+  document.querySelector(".log-switch")?.setAttribute("aria-label", t("journalViews"));
   setText('.log-switch button[data-view="daily"] .nav-icon', t("todayIcon"));
   setText('.log-switch button[data-view="daily"] .nav-label', t("navDaily"));
   setText('.log-switch button[data-view="weekly"] .nav-label', t("navWeekly"));
@@ -33,7 +33,7 @@ function renderStaticText() {
   els.searchInput.setAttribute("aria-label", t("search"));
   updatePeriodNavLabels();
 
-  setText('[data-view-panel="daily"] .section-heading h3', state.language === "en" ? "Daily Entries" : state.language === "zh-Hans" ? "每日记录" : "每日記錄");
+  setText('[data-view-panel="daily"] .section-heading h3', t("dailyEntries"));
   setText("#emptyState strong", t("emptyDailyTitle"));
   setText("#emptyState p", t("emptyDailyBody"));
   setText("#emptyState .empty-action", t("addFirst"));
@@ -66,19 +66,19 @@ function renderStaticText() {
   setText("#symbolDescriptionLabel", t("symbolDescription"));
   setText("#symbolQuickAddLabel", t("symbolQuickAdd"));
   setText("#symbolSaveButton", t("save"));
-  setText("#symbolCancelButton", state.language === "en" ? "Cancel" : "取消");
+  setText("#symbolCancelButton", t("cancel"));
   setText("#symbolDeleteButton", t("symbolDelete"));
   setText("#entryDialogTitle", t("addRecord"));
   els.entryClose.setAttribute("aria-label", t("close"));
   els.entryTypeTabs?.setAttribute("aria-label", t("entryType"));
-  els.entryText.placeholder = state.language === "en" ? "What's on your mind?" : state.language === "zh-Hans" ? "写下任务、事件或想法..." : "寫下任務、事件或想法...";
+  els.entryText.placeholder = t("entryPlaceholder");
   els.entryDate.setAttribute("aria-label", t("dateField"));
   setText("#entryDialog .primary-button", t("saveEntry"));
-  setText("#entryCancel", state.language === "en" ? "Cancel" : "取消");
+  setText("#entryCancel", t("cancel"));
 
   setDialogText("migration", "migrationTitle", "migrationClose", "migrationCancel", "migrateTo", "confirmMigration");
   setDialogText("copy", "copyTitle", "copyClose", "copyCancel", "copyDate", "confirmCopy");
-  setText("#migrationTitle", state.language === "en" ? "Choose Migration Date" : state.language === "zh-Hans" ? "选择迁移日期" : "選擇遷移日期");
+  setText("#migrationTitle", t("chooseMigrationDate"));
   setText("#copyTitle", t("copyToDate"));
   setText("#yesterdayTitle", t("yesterdayTitle"));
   els.yesterdayClose.setAttribute("aria-label", t("close"));
@@ -87,16 +87,16 @@ function renderStaticText() {
   setText("#subitemTitle", t("subitemAdd"));
   els.subitemClose.setAttribute("aria-label", t("close"));
   setFieldLabel("#subitemDialog .date-field", t("subitemContent"));
-  setText("#subitemCancel", state.language === "en" ? "Cancel" : "取消");
+  setText("#subitemCancel", t("cancel"));
   setText("#subitemDialog .primary-button", t("subitemAdd"));
   setText("#deleteTitle", t("confirmDelete"));
   els.deleteClose.setAttribute("aria-label", t("close"));
-  setText("#deleteCancel", state.language === "en" ? "Cancel" : "取消");
+  setText("#deleteCancel", t("cancel"));
   setText("#deleteDialog .danger-button", t("delete"));
   setText("#editTitle", t("editRecord"));
   els.editClose.setAttribute("aria-label", t("close"));
   setFieldLabel("#editDialog .date-field", t("entryContent"));
-  setText("#editCancel", state.language === "en" ? "Cancel" : "取消");
+  setText("#editCancel", t("cancel"));
   setText("#editDialog .primary-button", t("save"));
   setText("#entryActionsTitle", t("moreActions"));
   els.entryActionsClose?.setAttribute("aria-label", t("close"));
@@ -131,7 +131,7 @@ function renderStaticText() {
   els.passwordResetClose.setAttribute("aria-label", t("close"));
   setText("#passwordResetDescription", t("passwordResetDescription"));
   setFieldLabel("#passwordResetDialog .date-field", t("newPassword"));
-  setText("#passwordResetCancel", state.language === "en" ? "Cancel" : "取消");
+  setText("#passwordResetCancel", t("cancel"));
   setText("#passwordResetDialog .primary-button", t("passwordResetSubmit"));
   const template = els.entryTemplate.content;
   template.querySelector(".entry-symbol")?.setAttribute("aria-label", t("doneToggle"));
@@ -158,7 +158,7 @@ function setEntryMenuActionText(action, icon, label) {
 
 function setDialogText(prefix, titleId, closeId, cancelId, labelKey, submitKey) {
   document.querySelector(`#${prefix}Close`)?.setAttribute("aria-label", t("close"));
-  setText(`#${prefix}Cancel`, state.language === "en" ? "Cancel" : "取消");
+  setText(`#${prefix}Cancel`, t("cancel"));
   setFieldLabel(`#${prefix}Dialog .date-field`, t(labelKey));
   setText(`#${prefix}Dialog .primary-button`, t(submitKey));
 }

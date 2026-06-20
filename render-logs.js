@@ -51,12 +51,12 @@ function renderMonthlyLog() {
   );
   els.monthlyTaskCount.textContent = t("entriesCount", { count: taskEntries.length });
 
+  const importantEntries = entries.filter((entry) => entry.important);
   renderCompactEntries(
     els.monthlyImportant,
-    entries.filter((entry) => entry.important),
+    importantEntries,
     t("noMonthImportant"),
   );
-  const importantEntries = entries.filter((entry) => entry.important);
   els.monthlyImportantCount.textContent = t("entriesCount", { count: importantEntries.length });
 }
 
@@ -85,7 +85,7 @@ function makeDateCard(dateObject, items) {
     item.className = "more-count";
     more.type = "button";
     more.dataset.expandDate = date;
-    more.textContent = isExpanded ? (state.language === "en" ? "SHOW LESS" : state.language === "zh-Hans" ? "收合" : "收合") : `+ ${items.length - 2} MORE`;
+    more.textContent = isExpanded ? t("showLess") : t("showMoreEntries", { count: items.length - 2 });
     item.append(more);
     list.append(item);
   }
@@ -95,7 +95,7 @@ function makeDateCard(dateObject, items) {
 }
 
 function formatDateCardTitle(dateObject) {
-  const weekday = dateObject.toLocaleDateString(getLanguageLocale(), { weekday: "short" });
+  const weekday = formatDateWithOptions(dateObject, { weekday: "short" });
   return `${weekday} ${dateObject.getDate()}`;
 }
 
@@ -122,7 +122,7 @@ function renderFutureLog() {
     const heading = document.createElement("div");
     heading.className = "group-heading";
     const headingStrong = document.createElement("strong");
-    headingStrong.textContent = parseMonthKey(month).toLocaleDateString(getLanguageLocale(), { month: "long" });
+    headingStrong.textContent = formatDateWithOptions(parseMonthKey(month), { month: "long" });
     heading.append(headingStrong);
 
     const list = document.createElement("ul");

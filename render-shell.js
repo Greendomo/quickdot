@@ -16,10 +16,26 @@ function renderCollapseState() {
 }
 
 function renderSymbolMeanings() {
-  syncSymbolMeaningsFromDefinitions();
+  const signature = makeSymbolRenderSignature();
+  if (state.renderedSymbolSignature === signature) return;
+  state.renderedSymbolSignature = signature;
   renderSymbolSettings();
   renderEntryTypeTabs();
   els.priorityLabel.textContent = getMeaning("important");
+}
+
+function makeSymbolRenderSignature() {
+  return JSON.stringify({
+    language: state.language,
+    definitions: getSymbolDefinitions().map((definition) => ({
+      id: definition.id,
+      symbol: definition.symbol,
+      label: definition.label,
+      description: definition.description || "",
+      role: definition.role,
+      quickAdd: definition.quickAdd !== false,
+    })),
+  });
 }
 
 function renderSearchPanel() {
@@ -37,14 +53,7 @@ function renderViewShell() {
   if (state.view !== "daily" || state.search) state.sortMode = false;
   document.body.dataset.view = state.view;
   document.body.classList.toggle("sort-mode-active", state.sortMode);
-  
-  const navTitles = {
-    daily: t("navDaily"),
-    weekly: t("navWeekly"),
-    monthly: t("navMonthly"),
-    future: t("navFuture")
-  };
-  els.viewEyebrow.textContent = navTitles[state.view] || t("navDaily");
+  els.viewEyebrow.textContent = t("navDaily");
 
   els.viewButtons.forEach((button) => {
     button.classList.toggle("active", button.dataset.view === state.view);
@@ -65,12 +74,12 @@ function renderViewShell() {
   }
 
   if (state.view === "monthly") {
-    els.viewTitle.textContent = state.calendarMonth.toLocaleDateString(getLanguageLocale(), { month: "long" });
+    els.viewTitle.textContent = formatDateWithOptions(state.calendarMonth, { month: "long" });
     els.entryDate.value = state.selectedDate;
   }
 
   if (state.view === "future") {
-    els.viewTitle.textContent = state.language === "en" ? "Future Log" : t("futureLog");
+    els.viewTitle.textContent = t("futureLog");
     els.entryDate.value = getDefaultEntryDate();
   }
 
@@ -98,7 +107,7 @@ function updatePeriodNavLabels() {
 }
 
 function formatV0DayTitle(date) {
-  return date.toLocaleDateString(getLanguageLocale(), { month: "short", day: "numeric" });
+  return formatDateWithOptions(date, { month: "short", day: "numeric" });
 }
 
 function formatWeekTitle(date) {
@@ -106,16 +115,16 @@ function formatWeekTitle(date) {
   const end = endOfWeek(date);
   const sameMonth = start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth();
   if (state.language === "en") {
-    const startLabel = start.toLocaleDateString(getLanguageLocale(), { month: "short", day: "numeric" });
+    const startLabel = formatDateWithOptions(start, { month: "short", day: "numeric" });
     const endLabel = sameMonth
-      ? end.toLocaleDateString(getLanguageLocale(), { day: "numeric" })
-      : end.toLocaleDateString(getLanguageLocale(), { month: "short", day: "numeric" });
+      ? formatDateWithOptions(end, { day: "numeric" })
+      : formatDateWithOptions(end, { month: "short", day: "numeric" });
     return `${startLabel} - ${endLabel}`;
   }
 
-  const startLabel = start.toLocaleDateString(getLanguageLocale(), { month: "numeric", day: "numeric" });
+  const startLabel = formatDateWithOptions(start, { month: "numeric", day: "numeric" });
   const endLabel = sameMonth
     ? String(end.getDate())
-    : end.toLocaleDateString(getLanguageLocale(), { month: "numeric", day: "numeric" });
+    : formatDateWithOptions(end, { month: "numeric", day: "numeric" });
   return `${startLabel} - ${endLabel}`;
 }

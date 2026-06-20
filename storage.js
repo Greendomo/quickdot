@@ -5,24 +5,29 @@ function mergeEntries(current, incoming) {
   return Array.from(byId.values());
 }
 
-function loadEntries() {
+function readStoredEntriesPayload() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
-    const payload = saved ? JSON.parse(saved) : [];
-    return normalizeEntries(migratePayload(payload).entries);
+    return migratePayload(saved ? JSON.parse(saved) : []);
   } catch {
-    return [];
+    return { entries: [], deletedEntries: [] };
   }
 }
 
+function loadEntriesPayload() {
+  const payload = readStoredEntriesPayload();
+  return {
+    entries: normalizeEntries(payload.entries),
+    deletedEntries: normalizeDeletedEntries(payload.deletedEntries),
+  };
+}
+
+function loadEntries() {
+  return loadEntriesPayload().entries;
+}
+
 function loadDeletedEntries() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
-    const payload = saved ? JSON.parse(saved) : [];
-    return normalizeDeletedEntries(migratePayload(payload).deletedEntries);
-  } catch {
-    return [];
-  }
+  return loadEntriesPayload().deletedEntries;
 }
 
 function hasStoredEntriesPayload() {

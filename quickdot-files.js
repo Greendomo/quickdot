@@ -20,7 +20,7 @@ const QUICKDOT_SCRIPT_GROUPS = {
   sync: ["sync-ui.js", "sync-auth.js", "sync-diagnostics.js", "sync-payload.js", "sync-normalized.js", "sync.js"],
   entries: ["entry-store.js", "entry-swipe.js", "entry-drag.js", "entries.js"],
   render: ["render-static.js", "render-shell.js", "render-entries.js", "render-logs.js", "render-calendar.js", "render.js"],
-  events: ["navigation-events.js", "entry-events.js", "app-events.js", "app.js"],
+  events: ["navigation-events.js", "entry-events.js", "symbol-settings.js", "app-events.js", "app.js"],
 };
 
 const QUICKDOT_BROWSER_SCRIPTS = Object.values(QUICKDOT_SCRIPT_GROUPS).flat();
@@ -50,9 +50,11 @@ const QUICKDOT_CHECK_JS = [
 
 const QUICKDOT_TEST_FILES = [
   "tests/smoke-test.js",
+  "tests/app-shell-manifest-test.js",
   "tests/data-logic-test.js",
   "tests/seed-cleanup-test.js",
   "tests/symbol-definitions-test.js",
+  "tests/symbol-settings-actions-test.js",
   "tests/persistence-lifecycle-test.js",
   "tests/entry-actions-test.js",
   "tests/entry-swipe-test.js",

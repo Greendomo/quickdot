@@ -96,8 +96,9 @@ function migrateMeaningsToSymbolDefinitions(meanings, language = getActiveSymbol
 }
 
 function getSymbolDefinitions() {
-  state.symbolDefinitions = filterDeletedSymbolDefinitions(state.symbolDefinitions, state.deletedSymbolDefinitions);
-  return state.symbolDefinitions;
+  return Array.isArray(state.symbolDefinitions) && state.symbolDefinitions.length
+    ? state.symbolDefinitions
+    : getDefaultSymbolDefinitions();
 }
 
 function getSymbolDefinition(id) {
