@@ -386,18 +386,56 @@
   }
 
   .sidebar {
-    padding: 18px var(--page-gutter);
+    padding: 16px var(--page-gutter) 12px;
+  }
+
+  .brand {
+    min-height: 34px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .brand p {
+    margin-top: 1px;
+    font-size: 11px;
+  }
+
+  .topbar-actions {
+    gap: 10px;
+  }
+
+  .search-button,
+  .info-button,
+  .brand-sync-button {
+    width: 36px;
+    min-height: 36px;
+  }
+
+  .brand-sync-button svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .month-panel {
+    width: 100%;
+  }
+
+  .collapsible-header {
+    min-height: 40px;
+    font-size: 16px;
   }
 
   .main {
-    padding: 18px var(--page-gutter) 126px;
+    padding: 12px var(--page-gutter) 152px;
   }
 
   .topbar {
-    min-height: 68px;
-    margin-bottom: 14px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    min-height: 58px;
+    margin-bottom: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .view-title-row {
@@ -405,19 +443,19 @@
   }
 
   .topbar h2 {
-    font-size: 30px;
+    font-size: 27px;
     line-height: 1.05;
   }
 
   .period-date-nav {
-    width: 30px;
-    min-height: 30px;
-    font-size: 22px;
+    width: 32px;
+    min-height: 32px;
+    font-size: 21px;
   }
 
   .sort-mode-button {
     min-height: 28px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .composer-row {
@@ -464,16 +502,16 @@
     left: 12px;
     width: auto;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    padding: 9px 14px calc(9px + env(safe-area-inset-bottom));
   }
 
   .log-switch .add-entry-button {
-    right: 24px;
-    bottom: calc(96px + env(safe-area-inset-bottom));
+    right: 26px;
+    bottom: calc(82px + env(safe-area-inset-bottom));
   }
 
   .log-switch button {
-    min-height: 52px;
+    min-height: 50px;
     padding: 0 8px;
     border-right: 0;
     border-bottom: 0;

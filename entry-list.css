@@ -24,11 +24,11 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 0 44px minmax(0, 1fr) 44px;
-  gap: 8px;
+  grid-template-columns: 0 40px minmax(0, 1fr) 42px;
+  gap: 6px;
   align-items: start;
   min-width: 0;
-  padding: 26px 0;
+  padding: 22px 0;
   border-radius: 0;
   background: transparent;
   user-select: none;
@@ -61,8 +61,8 @@
 
 body.sort-mode-active #entryList .entry-swipe-content,
 .entry-list.sort-mode .entry-swipe-content {
-  grid-template-columns: 28px 44px minmax(0, 1fr) 44px;
-  gap: 8px;
+  grid-template-columns: 28px 40px minmax(0, 1fr) 42px;
+  gap: 6px;
 }
 
 body.sort-mode-active #entryList .entry-drag-handle,
@@ -220,36 +220,36 @@ body.sort-mode-active #entryList .entry-item,
 .entry-symbol {
   align-self: start;
   display: grid;
-  width: 44px;
+  width: 40px;
   min-height: 44px;
-  margin-top: -10px;
+  margin-top: -9px;
   place-items: center;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--ink);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 800;
   line-height: 1;
-  opacity: 0.66;
+  opacity: 0.58;
   touch-action: manipulation;
 }
 
 .entry-menu-button {
   display: grid;
-  width: 44px;
+  width: 42px;
   min-height: 44px;
-  margin-top: -10px;
+  margin-top: -9px;
   padding: 0;
   place-items: center;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
   line-height: 1;
-  opacity: 0.58;
+  opacity: 0.48;
   touch-action: manipulation;
 }
 
@@ -269,8 +269,8 @@ body.sort-mode-active #entryList .entry-item,
 .entry-text {
   min-width: 0;
   overflow-wrap: anywhere;
-  line-height: 1.55;
-  font-size: 18px;
+  line-height: 1.5;
+  font-size: 17px;
   letter-spacing: 0;
   user-select: none;
   -webkit-user-select: none;

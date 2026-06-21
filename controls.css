@@ -1,7 +1,7 @@
 /* Top controls and composer */
 .main {
   min-width: 0;
-  padding: 0 var(--page-gutter) 136px;
+  padding: 0 var(--page-gutter) 156px;
   background: var(--surface);
   background-size: 100% 100%;
   background-position: 0 0;
@@ -13,11 +13,11 @@
   z-index: 10;
   display: flex;
   gap: 16px;
-  min-height: 108px;
+  min-height: 92px;
   align-items: center;
   justify-content: center;
-  margin: 0 calc(var(--page-gutter) * -1) 42px;
-  padding: 34px var(--page-gutter) 26px;
+  margin: 0 calc(var(--page-gutter) * -1) 30px;
+  padding: 26px var(--page-gutter) 22px;
   border-bottom: 1px solid var(--line);
   background: rgba(251, 249, 244, 0.96);
   backdrop-filter: blur(10px);
@@ -40,7 +40,7 @@
 
 .topbar h2 {
   font-family: var(--display-font);
-  font-size: clamp(32px, 5vw, 44px);
+  font-size: clamp(29px, 4.4vw, 40px);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
@@ -61,12 +61,12 @@
 .period-date-nav {
   flex: 0 0 auto;
   display: none;
-  width: 38px;
-  min-height: 38px;
+  width: 36px;
+  min-height: 36px;
   border: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 28px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -94,14 +94,14 @@ body[data-view="monthly"] .period-date-nav {
 }
 
 .sort-mode-button {
-  min-height: 32px;
+  min-height: 30px;
   padding: 0 2px;
   border: 0;
   border-bottom: 1px solid transparent;
   border-radius: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -183,25 +183,48 @@ body[data-view="monthly"] .period-date-nav {
 }
 
 .info-button {
-  width: 34px;
-  min-height: 34px;
-  font-size: 18px;
-  opacity: 0.42;
+  width: 38px;
+  min-height: 38px;
+  opacity: 0.58;
 }
 
 .brand-sync-button {
-  width: 46px;
-  min-height: 46px;
+  width: 38px;
+  min-height: 38px;
   border: 0;
   background: transparent;
-  font-size: 33px;
+  font-size: 0;
   line-height: 1;
-  opacity: 0.72;
+  opacity: 0.62;
 }
 
 .brand-sync-button span {
-  display: block;
-  transform: translateY(-1px);
+  display: grid;
+  place-items: center;
+}
+
+.brand-sync-button svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 1.8;
+}
+
+.info-glyph {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.topbar-actions .icon-button:hover,
+.topbar-actions .icon-button:focus-visible {
+  color: var(--view-accent-strong);
+  opacity: 1;
 }
 
 .log-switch {
@@ -219,7 +242,7 @@ body[data-view="monthly"] .period-date-nav {
   border: 0;
   border-top: 1px solid rgba(44, 44, 44, 0.08);
   border-radius: 0;
-  background: rgba(251, 249, 244, 0.78);
+  background: rgba(251, 249, 244, 0.72);
   box-shadow: none;
   backdrop-filter: blur(8px) saturate(112%);
   -webkit-backdrop-filter: blur(8px) saturate(112%);
@@ -232,7 +255,7 @@ body[data-view="monthly"] .period-date-nav {
   border: 0;
   background: transparent;
   color: var(--ink);
-  opacity: 0.44;
+  opacity: 0.54;
   place-items: center;
   transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
 }
@@ -269,24 +292,24 @@ body[data-view="monthly"] .period-date-nav {
 .nav-label {
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .log-switch .add-entry-button {
   display: grid;
   position: fixed;
-  right: 24px;
-  bottom: calc(96px + env(safe-area-inset-bottom));
+  right: 28px;
+  bottom: calc(82px + env(safe-area-inset-bottom));
   z-index: 99;
-  width: 56px;
-  min-height: 56px;
+  width: 52px;
+  min-height: 52px;
   padding: 0;
   border: 1px solid var(--accent);
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   opacity: 1;
   box-shadow: none;

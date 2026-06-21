@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=130" />
+    <link rel="stylesheet" href="./styles.css?v=131" />
   </head>
   <body>
     <svg class="notekun-symbols" aria-hidden="true" focusable="false">
@@ -55,9 +55,16 @@
           <button class="icon-button search-button" id="searchButton" type="button" aria-label="開啟搜尋" title="搜尋筆記" aria-expanded="false" aria-controls="searchPanel">
             <span class="search-glyph" aria-hidden="true"></span>
           </button>
-          <button class="icon-button info-button" id="legendButton" type="button" aria-label="開啟符號說明" title="符號說明">ⓘ</button>
+          <button class="icon-button info-button" id="legendButton" type="button" aria-label="開啟符號說明" title="符號說明">
+            <span class="info-glyph" aria-hidden="true">i</span>
+          </button>
           <button class="icon-button brand-sync-button" id="syncButton" type="button" aria-label="開啟同步設定" title="同步設定">
-            <span aria-hidden="true">⚙</span>
+            <span aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 15.4a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8Z" />
+                <path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a1.9 1.9 0 0 1-2.7 2.7l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a1.9 1.9 0 0 1-3.8 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a1.9 1.9 0 0 1-2.7-2.7l.1-.1A1.6 1.6 0 0 0 4.6 15a1.6 1.6 0 0 0-1.5-1H3a1.9 1.9 0 0 1 0-3.8h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a1.9 1.9 0 0 1 2.7-2.7l.1.1a1.6 1.6 0 0 0 1.8.3 1.6 1.6 0 0 0 1-1.5V3a1.9 1.9 0 0 1 3.8 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a1.9 1.9 0 0 1 2.7 2.7l-.1.1a1.6 1.6 0 0 0-.3 1.8 1.6 1.6 0 0 0 1.5 1h.2a1.9 1.9 0 0 1 0 3.8h-.2a1.6 1.6 0 0 0-1.5 1Z" />
+              </svg>
+            </span>
           </button>
         </div>
 
@@ -560,39 +567,39 @@
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./supabase-config.js?v=130"></script>
-    <script src="./constants.js?v=130"></script>
-    <script src="./dates.js?v=130"></script>
-    <script src="./i18n.js?v=130"></script>
-    <script src="./symbols.js?v=130"></script>
-    <script src="./migrations.js?v=130"></script>
-    <script src="./state.js?v=130"></script>
-    <script src="./dom.js?v=130"></script>
-    <script src="./core.js?v=130"></script>
-    <script src="./entry-normalize.js?v=130"></script>
-    <script src="./sync-store.js?v=130"></script>
-    <script src="./storage.js?v=130"></script>
-    <script src="./preferences-store.js?v=130"></script>
-    <script src="./sync-ui.js?v=130"></script>
-    <script src="./sync-auth.js?v=130"></script>
-    <script src="./sync-diagnostics.js?v=130"></script>
-    <script src="./sync-payload.js?v=130"></script>
-    <script src="./sync-normalized.js?v=130"></script>
-    <script src="./sync.js?v=130"></script>
-    <script src="./entry-store.js?v=130"></script>
-    <script src="./entry-swipe.js?v=130"></script>
-    <script src="./entry-drag.js?v=130"></script>
-    <script src="./entries.js?v=130"></script>
-    <script src="./render-static.js?v=130"></script>
-    <script src="./render-shell.js?v=130"></script>
-    <script src="./render-entries.js?v=130"></script>
-    <script src="./render-logs.js?v=130"></script>
-    <script src="./render-calendar.js?v=130"></script>
-    <script src="./render.js?v=130"></script>
-    <script src="./navigation-events.js?v=130"></script>
-    <script src="./entry-events.js?v=130"></script>
-    <script src="./symbol-settings.js?v=130"></script>
-    <script src="./app-events.js?v=130"></script>
-    <script src="./app.js?v=130"></script>
+    <script src="./supabase-config.js?v=131"></script>
+    <script src="./constants.js?v=131"></script>
+    <script src="./dates.js?v=131"></script>
+    <script src="./i18n.js?v=131"></script>
+    <script src="./symbols.js?v=131"></script>
+    <script src="./migrations.js?v=131"></script>
+    <script src="./state.js?v=131"></script>
+    <script src="./dom.js?v=131"></script>
+    <script src="./core.js?v=131"></script>
+    <script src="./entry-normalize.js?v=131"></script>
+    <script src="./sync-store.js?v=131"></script>
+    <script src="./storage.js?v=131"></script>
+    <script src="./preferences-store.js?v=131"></script>
+    <script src="./sync-ui.js?v=131"></script>
+    <script src="./sync-auth.js?v=131"></script>
+    <script src="./sync-diagnostics.js?v=131"></script>
+    <script src="./sync-payload.js?v=131"></script>
+    <script src="./sync-normalized.js?v=131"></script>
+    <script src="./sync.js?v=131"></script>
+    <script src="./entry-store.js?v=131"></script>
+    <script src="./entry-swipe.js?v=131"></script>
+    <script src="./entry-drag.js?v=131"></script>
+    <script src="./entries.js?v=131"></script>
+    <script src="./render-static.js?v=131"></script>
+    <script src="./render-shell.js?v=131"></script>
+    <script src="./render-entries.js?v=131"></script>
+    <script src="./render-logs.js?v=131"></script>
+    <script src="./render-calendar.js?v=131"></script>
+    <script src="./render.js?v=131"></script>
+    <script src="./navigation-events.js?v=131"></script>
+    <script src="./entry-events.js?v=131"></script>
+    <script src="./symbol-settings.js?v=131"></script>
+    <script src="./app-events.js?v=131"></script>
+    <script src="./app.js?v=131"></script>
   </body>
 </html>

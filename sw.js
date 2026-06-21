@@ -1,6 +1,6 @@
 importScripts("./quickdot-files.js");
 
-const CACHE_NAME = "quickdot-cache-v130";
+const CACHE_NAME = "quickdot-cache-v131";
 const APP_SHELL = self.QUICKDOT_APP_SHELL;
 
 self.addEventListener("install", (event) => {
